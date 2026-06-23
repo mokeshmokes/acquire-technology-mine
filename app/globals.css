@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #080B0D;
+    --surface: #12080C;
+    --surface-elevated: #1E0F11;
+    --primary: #7A0019;
+    --primary-hover: #C21838;
+    --primary-secondary: #A10E26;
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #FFFFFF;
+    --muted: #B8B8B8;
+    --glow: rgba(194, 24, 56, 0.30);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-white antialiased;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .glass-effect {
+    background: rgba(30, 15, 17, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .border-glass {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .shadow-premium {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .glow-effect {
+    box-shadow: 0 0 30px rgba(194, 24, 56, 0.30);
+  }
+}

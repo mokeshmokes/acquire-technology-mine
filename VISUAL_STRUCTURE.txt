@@ -1,0 +1,326 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║                    ACQUIRING TECHNOLOGY - VISUAL STRUCTURE                   ║
+║                     Premium Navigation System Layout                         ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                           DESKTOP LAYOUT (1024px+)
+═══════════════════════════════════════════════════════════════════════════════
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│                              HEADER (80px)                                  │
+│ ┌─────────────────┬────────────────────────────────┬──────────────────────┐│
+│ │                 │                                │                      ││
+│ │  [AT Logo]      │  Home About Courses Admissions │  [Search] [Call]     ││
+│ │  Acquiring      │  Placements Faculty Student    │  [Apply] [Portal]    ││
+│ │  Technology     │  Life Events Resources More    │                      ││
+│ │                 │  Contact                       │                      ││
+│ └─────────────────┴────────────────────────────────┴──────────────────────┘│
+└────────────────────────────────────────────────────────────────────────────┘
+        ▼
+        │ (On hover "Courses")
+        ▼
+┌────────────────────────────────────────────────────────────────────────────┐
+│                         COURSES MEGA MENU                                   │
+│ ╔══════════════════╦══════════════════╦══════════════════╗                 │
+│ ║  DEVELOPMENT     ║  INFRASTRUCTURE  ║  BUSINESS        ║                 │
+│ ╠══════════════════╬══════════════════╬══════════════════╣                 │
+│ ║ [Icon] Software  ║ [Icon] Cloud     ║ [Icon] Business  ║                 │
+│ ║        Dev       ║        Computing ║        Analytics ║                 │
+│ ║ Description...   ║ Description...   ║ Description...   ║                 │
+│ ║                  ║                  ║                  ║                 │
+│ ║ [Icon] AI/ML     ║ [Icon] DevOps    ║                  ║                 │
+│ ║ Description...   ║ Description...   ║                  ║                 │
+│ ║                  ║                  ║                  ║                 │
+│ ║ [Icon] Data      ║ [Icon] UI/UX     ║                  ║                 │
+│ ║        Science   ║        Design    ║                  ║                 │
+│ ║                  ║                  ║                  ║                 │
+│ ║ [Icon] Cyber     ║ [Icon] Digital   ║                  ║                 │
+│ ║        Security  ║        Marketing ║                  ║                 │
+│ ╚══════════════════╩══════════════════╩══════════════════╝                 │
+└────────────────────────────────────────────────────────────────────────────┘
+
+        ▼
+        │ (On hover "More")
+        ▼
+┌──────────────────────────────┐
+│     MORE DROPDOWN             │
+│ ┌──────────────────────────┐ │
+│ │ ABOUT                    │ │
+│ │ ▸ Gallery                │ │
+│ │ ▸ Achievements           │ │
+│ │ ▸ Partners               │ │
+│ │ ▸ CSR                    │ │
+│ ├──────────────────────────┤ │
+│ │ MEDIA                    │ │
+│ │ ▸ News                   │ │
+│ │ ▸ Media                  │ │
+│ │ ▸ Support                │ │
+│ ├──────────────────────────┤ │
+│ │ LEGAL                    │ │
+│ │ ▸ Privacy Policy         │ │
+│ │ ▸ Terms & Conditions     │ │
+│ └──────────────────────────┘ │
+└──────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                          MOBILE LAYOUT (< 1024px)
+═══════════════════════════════════════════════════════════════════════════════
+
+┌────────────────────────────────┐
+│         HEADER (80px)          │
+│ ┌────────────────────────────┐ │
+│ │ [AT Logo]          [Menu] │ │
+│ │ Acquiring Technology       │ │
+│ └────────────────────────────┘ │
+└────────────────────────────────┘
+                    │
+                    │ (On click hamburger)
+                    ▼
+┌────────────────────────────────┐◄─── BACKDROP OVERLAY
+│  MOBILE SIDEBAR                │
+│ ┌────────────────────────────┐ │
+│ │ Menu                  [X] │ │
+│ ├────────────────────────────┤ │
+│ │                            │ │
+│ │ ▸ Home                     │ │
+│ │ ▸ About Us                 │ │
+│ │ ▾ Courses ▼                │ │
+│ │   ├─ DEVELOPMENT           │ │
+│ │   │  ├─ Software Dev       │ │
+│ │   │  ├─ AI/ML              │ │
+│ │   │  └─ Data Science       │ │
+│ │   └─ INFRASTRUCTURE        │ │
+│ │      ├─ Cloud Computing    │ │
+│ │      └─ DevOps             │ │
+│ │ ▸ Admissions               │ │
+│ │ ▸ Placements               │ │
+│ │ ▸ Faculty                  │ │
+│ │ ▸ Student Life             │ │
+│ │ ▸ Events                   │ │
+│ │ ▾ Resources ▼              │ │
+│ │ ▾ More ▼                   │ │
+│ │ ▸ Contact                  │ │
+│ │                            │ │
+│ ├────────────────────────────┤ │
+│ │ [    Apply Now    ]       │ │
+│ │ [ Book Counselling ]      │ │
+│ │ [  Student Portal  ]      │ │
+│ └────────────────────────────┘ │
+└────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                            SEARCH MODAL (Full Screen)
+═══════════════════════════════════════════════════════════════════════════════
+
+                    ┌───────────────────────────────────┐
+                    │  [🔍] Search...           [X]    │
+                    ├───────────────────────────────────┤
+                    │                                   │
+                    │  Search results appear here...    │
+                    │                                   │
+                    └───────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                          COMPONENT HIERARCHY TREE
+═══════════════════════════════════════════════════════════════════════════════
+
+<Header>
+├── <Logo>
+│   ├── Link (/)
+│   ├── SVG Icon
+│   ├── Wordmark
+│   └── Subtitle
+│
+├── <DesktopNavigation> (hidden on mobile)
+│   ├── <NavigationItem> × 11
+│   │   ├── Home
+│   │   ├── About Us
+│   │   ├── Courses (triggers mega menu)
+│   │   ├── Admissions
+│   │   ├── Placements
+│   │   ├── Faculty
+│   │   ├── Student Life
+│   │   ├── Events
+│   │   ├── Resources (triggers mega menu)
+│   │   ├── More (triggers dropdown)
+│   │   └── Contact
+│   │
+│   ├── <MegaMenu type="courses">
+│   │   └── Grid of course categories
+│   │
+│   ├── <MegaMenu type="resources">
+│   │   └── Grid of resource sections
+│   │
+│   └── <DropdownMenu>
+│       └── List of more items
+│
+├── <ActionButtons> (hidden on mobile)
+│   ├── <SearchBar>
+│   │   └── Search Modal
+│   ├── <NavigationButton> Phone
+│   ├── <NavigationButton> WhatsApp
+│   ├── <NavigationButton> Apply Now
+│   ├── <NavigationButton> Book Counselling
+│   └── <NavigationButton> Student Portal
+│
+└── <MobileNavigation> (hidden on desktop)
+    ├── Hamburger Button
+    └── Sidebar (when open)
+        ├── Close Button
+        ├── Accordion Menu
+        │   ├── Simple Links
+        │   └── Expandable Menus
+        └── CTA Buttons
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                             ANIMATION FLOW
+═══════════════════════════════════════════════════════════════════════════════
+
+SCROLL DOWN
+    │
+    ├─► Header: Transparent → Glass Effect
+    ├─► Background: rgba(30,15,17,0) → rgba(30,15,17,0.7)
+    ├─► Border: Hidden → Visible
+    └─► Shadow: None → Premium Shadow
+    
+HOVER MENU ITEM
+    │
+    ├─► Underline: scaleX(0) → scaleX(1)
+    ├─► Color: White → Red
+    ├─► Chevron: rotate(0deg) → rotate(180deg)
+    └─► Glow: opacity(0) → opacity(1)
+
+OPEN MEGA MENU
+    │
+    ├─► Container: opacity(0), y(10) → opacity(1), y(0)
+    ├─► Category 1: delay(0ms)
+    ├─► Category 2: delay(100ms)
+    └─► Category 3: delay(200ms)
+
+HOVER MENU CARD
+    │
+    ├─► Background: Transparent → Surface Elevated
+    ├─► Icon: Primary/10 → Primary
+    ├─► Arrow: opacity(0), x(0) → opacity(1), x(4px)
+    └─► Text: White → Primary Hover
+
+BUTTON INTERACTION
+    │
+    ├─► Hover: scale(1.0) → scale(1.05)
+    ├─► Click: scale(1.05) → scale(0.95)
+    └─► Release: scale(0.95) → scale(1.0)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                            STATE MANAGEMENT
+═══════════════════════════════════════════════════════════════════════════════
+
+useScrollHeader()
+├─► isScrolled: boolean      (> 50px from top)
+└─► isVisible: boolean       (scroll direction up)
+
+useMegaMenu()
+├─► activeMenu: string | null    (which menu is open)
+├─► isOpen: boolean              (is any menu open)
+├─► menuRef: RefObject          (click outside detection)
+├─► openMenu()                  (open handler)
+├─► closeMenu()                 (close with delay)
+└─► closeMenuImmediately()      (instant close)
+
+SearchBar State
+├─► isOpen: boolean             (modal visibility)
+├─► searchQuery: string         (user input)
+└─► inputRef: RefObject        (auto-focus)
+
+MobileNav State
+├─► isOpen: boolean             (sidebar visibility)
+├─► expandedMenu: string | null (current accordion)
+└─► Body scroll lock           (prevent scroll)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                              DATA FLOW
+═══════════════════════════════════════════════════════════════════════════════
+
+data/navigation.ts (Single Source of Truth)
+        │
+        ├─► mainNavigation[]
+        │   └─► Used by: DesktopNavigation, MobileNavigation
+        │
+        ├─► coursesMegaMenu[]
+        │   └─► Used by: MegaMenu (type="courses")
+        │
+        ├─► resourcesMegaMenu[]
+        │   └─► Used by: MegaMenu (type="resources")
+        │
+        ├─► moreMenu[]
+        │   └─► Used by: DropdownMenu
+        │
+        └─► actionButtons[]
+            └─► Used by: ActionButtons
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                          RESPONSIVE BREAKPOINTS
+═══════════════════════════════════════════════════════════════════════════════
+
+Mobile          Tablet           Desktop         Large           Ultra-wide
+< 640px        640-1023px       1024-1279px    1280-1535px      1536px+
+   │               │                 │              │               │
+   ├─ Mobile Nav   ├─ Mobile Nav    ├─ Desktop     ├─ Desktop      ├─ Desktop
+   ├─ Sidebar      ├─ Sidebar       ├─ Mega Menus  ├─ Mega Menus   ├─ Mega Menus
+   ├─ Stack CTA    ├─ Stack CTA     ├─ All Buttons ├─ All Buttons  ├─ All Buttons
+   └─ Full Width   └─ Full Width    └─ Container   └─ Container    └─ Max Width
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                         FILE DEPENDENCIES
+═══════════════════════════════════════════════════════════════════════════════
+
+Header.tsx
+├── Import: Logo
+├── Import: DesktopNavigation
+├── Import: MobileNavigation
+├── Import: ActionButtons
+├── Hook: useScrollHeader
+└── Util: cn
+
+DesktopNavigation.tsx
+├── Import: NavigationItem
+├── Import: MegaMenu
+├── Import: DropdownMenu
+├── Hook: useMegaMenu
+└── Data: mainNavigation
+
+MegaMenu.tsx
+├── Data: coursesMegaMenu
+├── Data: resourcesMegaMenu
+└── Library: framer-motion
+
+ActionButtons.tsx
+├── Import: NavigationButton
+├── Import: SearchBar
+└── Icons: Phone, MessageCircle
+
+MobileNavigation.tsx
+├── Data: mainNavigation
+├── Data: coursesMegaMenu
+├── Data: resourcesMegaMenu
+├── Data: moreMenu
+└── Library: framer-motion
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+                    PRODUCTION-READY NAVIGATION SYSTEM
+                           Built for Excellence
+
+═══════════════════════════════════════════════════════════════════════════════

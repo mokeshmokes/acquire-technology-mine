@@ -1,0 +1,137 @@
+╔════════════════════════════════════════════════════════════════╗
+║                                                                ║
+║        ACQUIRING TECHNOLOGY - INSTALLATION INSTRUCTIONS        ║
+║              Premium Header & Navigation System                ║
+║                                                                ║
+╚════════════════════════════════════════════════════════════════╝
+
+📦 STEP 1: Install Dependencies
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Open Command Prompt (CMD) or PowerShell in the project folder and run:
+
+    npm install
+
+If you get a PowerShell execution policy error, run:
+
+    Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+
+Then run npm install again.
+
+
+🚀 STEP 2: Start Development Server
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Run:
+
+    npm run dev
+
+Then open your browser to:
+
+    http://localhost:3000
+
+
+✅ STEP 3: Verify Everything Works
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Check that you see:
+  ✓ Acquiring Technology logo and branding
+  ✓ Navigation menu (Home, About, Courses, etc.)
+  ✓ Hover effects on menu items
+  ✓ Mega menus for Courses and Resources
+  ✓ Mobile hamburger menu (resize browser)
+  ✓ Smooth animations
+
+
+🏗️ STEP 4: Build for Production
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+When ready to deploy:
+
+    npm run build
+    npm start
+
+
+📁 PROJECT STRUCTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+acquiring-technology/
+├── app/                         # Next.js App Router
+│   ├── layout.tsx               # Root layout
+│   ├── page.tsx                 # Homepage
+│   └── globals.css              # Global styles
+├── components/
+│   └── navigation/              # All navigation components
+│       ├── Header.tsx           # Main header
+│       ├── DesktopNavigation.tsx
+│       ├── MobileNavigation.tsx
+│       ├── MegaMenu.tsx
+│       ├── DropdownMenu.tsx
+│       └── ... (more)
+├── data/
+│   └── navigation.ts            # All menu data
+├── hooks/
+│   ├── useScrollHeader.ts
+│   └── useMegaMenu.ts
+├── types/
+│   └── navigation.ts            # TypeScript types
+└── lib/
+    └── utils.ts                 # Utility functions
+
+
+🎨 CUSTOMIZATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Want to customize?
+
+1. COLORS: Edit tailwind.config.ts
+2. MENU ITEMS: Edit data/navigation.ts
+3. LOGO: Edit components/navigation/Logo.tsx
+4. CONTENT: All in data/navigation.ts
+
+
+📚 DOCUMENTATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- README.md          → Project overview & tech stack
+- SETUP.md           → Detailed setup guide
+- FEATURES.md        → Complete feature documentation
+
+
+🐛 TROUBLESHOOTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Problem: Port 3000 in use
+Solution: npm run dev -- -p 3001
+
+Problem: Module errors
+Solution: Delete node_modules, run npm install again
+
+Problem: TypeScript errors
+Solution: npm run lint
+
+
+💡 TECH STACK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ Next.js 16 (App Router)
+✓ React 19
+✓ TypeScript
+✓ Tailwind CSS
+✓ Framer Motion
+✓ GSAP
+✓ Lucide React Icons
+
+
+📞 SUPPORT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Email: support@acquiringtech.com
+Phone: +1-555-0123
+
+
+═══════════════════════════════════════════════════════════════
+
+            Built with ❤️ by Acquiring Technology Team
+
+═══════════════════════════════════════════════════════════════

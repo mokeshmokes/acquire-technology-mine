@@ -1,0 +1,400 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║                    HERO SECTION - VISUAL STRUCTURE GUIDE                     ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                          DESKTOP LAYOUT (1024px+)
+═══════════════════════════════════════════════════════════════════════════════
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│                      CINEMATIC ANIMATED BACKGROUND                          │
+│  (Radial gradients + Particle system + Noise texture)                      │
+│                                                                             │
+│  ┌────────────────────────────────┬──────────────────────────────────────┐ │
+│  │                                │                                      │ │
+│  │        VIDEO SHOWCASE          │         CONTENT SECTION              │ │
+│  │           (60%)                │            (40%)                     │ │
+│  │                                │                                      │ │
+│  │  ┌──────────────────────────┐  │  Transform Your Future              │ │
+│  │  │                          │  │  With Industry-Ready                │ │
+│  │  │    Auto-playing Video    │  │  Technology Education               │ │
+│  │  │                          │  │                                      │ │
+│  │  │    [Classroom scene]     │  │  Learn from experts, build          │ │
+│  │  │                          │  │  real-world projects...             │ │
+│  │  │    • Rounded corners     │  │                                      │ │
+│  │  │    • Glass border        │  │  ✓ Live Industry Projects           │ │
+│  │  │    • Dark overlay        │  │  ✓ Placement Assistance             │ │
+│  │  │    • Glow effect         │  │  ✓ Expert Mentors                   │ │
+│  │  │    • Floating animation  │  │  ✓ Global Certifications            │ │
+│  │  │                          │  │  ✓ Flexible Learning                │ │
+│  │  └──────────────────────────┘  │                                      │ │
+│  │         ▲                       │  ┌────────────┬──────────────┐      │ │
+│  │  [Live Learning]                │  │ 20+        │ 25000+       │      │ │
+│  │      Badge                      │  │ Years      │ Students     │      │ │
+│  │                                 │  ├────────────┼──────────────┤      │ │
+│  │  [🔵 Floating Icons]           │  │ 500+       │ 98%          │      │ │
+│  │                                 │  │ Partners   │ Placement    │      │ │
+│  │                                 │  └────────────┴──────────────┘      │ │
+│  │                                 │                                      │ │
+│  │                                 │  [Explore Courses →]                │ │
+│  │                                 │  [Book Free Counselling]            │ │
+│  │                                 │                                      │ │
+│  └────────────────────────────────┴──────────────────────────────────────┘ │
+│                                                                             │
+│                        [Scroll Indicator ↓]                                 │
+│                                                                             │
+│         [Mouse Follower Glow Effect - Follows cursor]                      │
+└────────────────────────────────────────────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                           TABLET LAYOUT (640-1023px)
+═══════════════════════════════════════════════════════════════════════════════
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│                                                                             │
+│  ┌─────────────────────────────┬─────────────────────────────────────────┐ │
+│  │                             │                                         │ │
+│  │       VIDEO (50%)           │         CONTENT (50%)                   │ │
+│  │                             │                                         │ │
+│  │  ┌───────────────────────┐  │  Transform Your Future                 │ │
+│  │  │                       │  │  With Industry-Ready                   │ │
+│  │  │   Auto-play Video     │  │                                         │ │
+│  │  │                       │  │  Learn from experts...                 │ │
+│  │  │                       │  │                                         │ │
+│  │  │                       │  │  ✓ Live Industry Projects              │ │
+│  │  │                       │  │  ✓ Placement Assistance                │ │
+│  │  │                       │  │  ✓ Expert Mentors                      │ │
+│  │  │                       │  │                                         │ │
+│  │  └───────────────────────┘  │  20+ | 25000+ | 500+ | 98%            │ │
+│  │                             │                                         │ │
+│  │                             │  [Explore] [Book Now]                  │ │
+│  └─────────────────────────────┴─────────────────────────────────────────┘ │
+│                                                                             │
+└────────────────────────────────────────────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                           MOBILE LAYOUT (< 640px)
+═══════════════════════════════════════════════════════════════════════════════
+
+┌──────────────────────────────────┐
+│                                  │
+│      CONTENT FIRST (Top)         │
+│                                  │
+│  Transform Your Future           │
+│  With Industry-Ready             │
+│  Technology Education            │
+│                                  │
+│  Learn from experts, build       │
+│  real-world projects...          │
+│                                  │
+│  ✓ Live Industry Projects        │
+│  ✓ Placement Assistance          │
+│  ✓ Expert Mentors                │
+│  ✓ Global Certifications         │
+│  ✓ Flexible Learning             │
+│                                  │
+│  ┌──────────┬──────────┐         │
+│  │ 20+      │ 25000+   │         │
+│  │ Years    │ Students │         │
+│  ├──────────┼──────────┤         │
+│  │ 500+     │ 98%      │         │
+│  │ Partners │ Support  │         │
+│  └──────────┴──────────┘         │
+│                                  │
+│  [  Explore Courses  ]           │
+│  [Book Free Counselling]         │
+│                                  │
+├──────────────────────────────────┤
+│                                  │
+│      VIDEO SECOND (Bottom)       │
+│                                  │
+│  ┌────────────────────────────┐  │
+│  │                            │  │
+│  │     Auto-playing Video     │  │
+│  │                            │  │
+│  │     Full-width display     │  │
+│  │                            │  │
+│  │     Touch-optimized        │  │
+│  │                            │  │
+│  └────────────────────────────┘  │
+│                                  │
+│      [Live Learning Badge]       │
+│                                  │
+└──────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                          COMPONENT HIERARCHY TREE
+═══════════════════════════════════════════════════════════════════════════════
+
+<HeroSection>
+│
+├─ <HeroBackground> (z-index: 0)
+│  ├─ Base background (#080B0D)
+│  ├─ Noise texture (SVG)
+│  ├─ Radial gradient 1 (Top-left, 800px, 8s cycle)
+│  ├─ Radial gradient 2 (Bottom-right, 1000px, 10s cycle)
+│  ├─ Radial gradient 3 (Center, 600px, 15s cycle, moving)
+│  ├─ Canvas particle system
+│  │  ├─ 50 particles
+│  │  └─ Connection lines
+│  ├─ Vignette overlay
+│  └─ Top gradient blend
+│
+├─ <FloatingElements> (z-index: 5)
+│  ├─ Code2 icon (10%, 20%) → Float animation
+│  ├─ Brain icon (80%, 15%) → Float animation
+│  ├─ Cloud icon (15%, 70%) → Float animation
+│  ├─ Shield icon (85%, 75%) → Float animation
+│  ├─ Zap icon (50%, 10%) → Float animation
+│  └─ Award icon (90%, 45%) → Float animation
+│
+├─ <MouseFollower> (z-index: 50, fixed)
+│  ├─ Main glow (64px, primary, 10% opacity)
+│  └─ Secondary glow (32px, hover, 5% opacity, pulsing)
+│
+├─ Main Content Container (z-index: 10)
+│  │
+│  ├─ Grid Layout (5 columns on lg+)
+│  │
+│  ├─ <HeroVideo> (3 columns - 60%)
+│  │  ├─ Container with float animation
+│  │  ├─ Glow effect background
+│  │  ├─ Glass border
+│  │  ├─ Dark overlay
+│  │  ├─ Gradient overlay
+│  │  ├─ Video element
+│  │  │  ├─ autoPlay, muted, loop, playsInline
+│  │  │  └─ Filter: brightness(0.9) contrast(1.1)
+│  │  ├─ Loading placeholder
+│  │  ├─ Bottom gradient
+│  │  ├─ Corner decorations (top-left, bottom-right)
+│  │  └─ Floating badge
+│  │     └─ "Live Learning Environment" + pulse dot
+│  │
+│  └─ <HeroContent> (2 columns - 40%)
+│     │
+│     ├─ Heading (Stagger animation)
+│     │  ├─ "Transform Your"
+│     │  ├─ "Future With"
+│     │  ├─ "Industry-Ready" (Gradient text)
+│     │  └─ "Technology Education"
+│     │
+│     ├─ Subheading
+│     │  └─ "Learn from experts..."
+│     │
+│     ├─ Feature List (5 items, stagger)
+│     │  ├─ [✓] Live Industry Projects
+│     │  ├─ [✓] Placement Assistance
+│     │  ├─ [✓] Expert Mentors
+│     │  ├─ [✓] Global Certifications
+│     │  └─ [✓] Flexible Learning
+│     │
+│     ├─ Statistics Grid (2x2)
+│     │  ├─ <AnimatedCounter value={20} /> + "Years"
+│     │  ├─ <AnimatedCounter value={25000} /> + "Students"
+│     │  ├─ <AnimatedCounter value={500} /> + "Partners"
+│     │  └─ <AnimatedCounter value={98} /> + "Placement"
+│     │
+│     └─ CTA Buttons
+│        ├─ "Explore Courses" (Primary, red, glow)
+│        └─ "Book Free Counselling" (Secondary, glass)
+│
+├─ <ScrollIndicator> (z-index: 20, bottom-center)
+│  ├─ "Scroll to explore" text
+│  ├─ Mouse scroll icon
+│  │  └─ Animated dot
+│  └─ ChevronDown icon
+│
+└─ Bottom Gradient Fade (z-index: 10)
+   └─ 32px height, gradient to background
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                          ANIMATION FLOW DIAGRAM
+═══════════════════════════════════════════════════════════════════════════════
+
+TIME: 0.0s ──────────────────────────────────────────────────────────────────►
+     │
+     ├─► Background starts continuous animations
+     │   ├─ Radial gradient 1 (scale, opacity)
+     │   ├─ Radial gradient 2 (scale, opacity)
+     │   ├─ Radial gradient 3 (scale, position)
+     │   └─ Particles moving
+     │
+TIME: 0.2s ─────────────────────────────────────────────────────────────────►
+     │
+     ├─► Video container appears
+     │   ├─ Opacity: 0 → 1
+     │   ├─ X: -50px → 0
+     │   └─ Duration: 0.8s
+     │
+TIME: 0.3s ─────────────────────────────────────────────────────────────────►
+     │
+     ├─► Heading container starts stagger
+     │
+TIME: 0.4s ─────────────────────────────────────────────────────────────────►
+     │
+     ├─► Content section appears
+     │   ├─ Opacity: 0 → 1
+     │   ├─ X: +50px → 0
+     │   └─ Duration: 0.8s
+     │
+TIME: 0.6s ─────────────────────────────────────────────────────────────────►
+     │
+     ├─► Heading words reveal (stagger: 0.1s)
+     ├─► Feature list starts appearing
+     │   └─ Each item: delay + (index × 0.1s)
+     │
+TIME: 1.0s ─────────────────────────────────────────────────────────────────►
+     │
+     ├─► Counter 1 starts (20 → 20+ over 2s)
+     │
+TIME: 1.2s ─────────────────────────────────────────────────────────────────►
+     │
+     ├─► Counter 2 starts (25000+)
+     │
+TIME: 1.4s ─────────────────────────────────────────────────────────────────►
+     │
+     ├─► Counter 3 starts (500+)
+     │
+TIME: 1.6s ─────────────────────────────────────────────────────────────────►
+     │
+     ├─► Counter 4 starts (98%)
+     │
+TIME: 2.0s ─────────────────────────────────────────────────────────────────►
+     │
+     ├─► Scroll indicator appears
+     │   ├─ Opacity: 0 → 1
+     │   ├─ Y: -20px → 0
+     │   └─ Duration: 0.6s
+     │
+TIME: ∞ ────────────────────────────────────────────────────────────────────►
+     │
+     ├─► Continuous animations
+     │   ├─ Video floating (6s cycle)
+     │   ├─ Background gradients (8-15s cycles)
+     │   ├─ Floating icons (6s cycles each)
+     │   ├─ Mouse follower tracking
+     │   ├─ Scroll indicator bounce
+     │   └─ Particles moving
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                          INTERACTIVE STATES
+═══════════════════════════════════════════════════════════════════════════════
+
+BUTTON HOVER
+    Default     →  Hover
+    scale(1)    →  scale(1.05)
+    duration: 0.3s
+
+BUTTON CLICK
+    Hover       →  Active        →  Release
+    scale(1.05) →  scale(0.95)   →  scale(1.05)
+    duration: 0.15s
+
+FEATURE ITEM HOVER
+    Default     →  Hover
+    scale(1)    →  scale(1.1) (icon only)
+    duration: 0.2s
+
+VIDEO CONTAINER HOVER
+    Default           →  Hover
+    glow opacity 20%  →  glow opacity 30%
+    duration: 0.5s
+
+SCROLL INDICATOR HOVER
+    Default     →  Hover
+    scale(1)    →  scale(1.1)
+    border: default → primary color
+    duration: 0.2s
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                          Z-INDEX LAYERING
+═══════════════════════════════════════════════════════════════════════════════
+
+Layer 0:    HeroBackground (base)
+Layer 5:    FloatingElements
+Layer 10:   Main Content Container
+Layer 10:   Bottom Gradient Fade
+Layer 20:   ScrollIndicator
+Layer 50:   MouseFollower (fixed)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                          COLOR USAGE MAP
+═══════════════════════════════════════════════════════════════════════════════
+
+#080B0D (Background)
+├─ Base background layer
+├─ Bottom gradient fade
+└─ Top gradient blend
+
+#7A0019 (Primary)
+├─ Gradient text highlight
+├─ Primary CTA button
+├─ Feature checkmark icons
+├─ Statistics numbers
+├─ Floating icon glows
+├─ Border decorations
+├─ Particle colors
+└─ Mouse follower main glow
+
+#C21838 (Primary Hover)
+├─ Button hover states
+├─ Gradient text (via)
+├─ Secondary gradient layer
+└─ Mouse follower secondary glow
+
+#A10E26 (Secondary)
+├─ Tertiary gradient layer
+└─ Accent details
+
+#FFFFFF (Text)
+├─ Heading text
+├─ Body text
+├─ Button text
+├─ Feature text
+└─ Statistics labels
+
+#B8B8B8 (Muted)
+├─ Subheading text
+├─ Statistics labels
+└─ Scroll indicator text
+
+rgba(255,255,255,0.08) (Border)
+├─ Video glass border
+├─ Statistics border separator
+├─ Badge border
+└─ Scroll indicator border
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                          FILE SIZE & PERFORMANCE
+═══════════════════════════════════════════════════════════════════════════════
+
+HeroSection.tsx          ~2KB   (Main orchestrator)
+HeroBackground.tsx       ~6KB   (Largest - canvas particle system)
+HeroVideo.tsx           ~5KB   (Video player + effects)
+HeroContent.tsx         ~5KB   (Content + animations)
+AnimatedCounter.tsx     ~2KB   (Counter logic)
+FloatingElements.tsx    ~3KB   (Icon animations)
+MouseFollower.tsx       ~2KB   (Cursor tracking)
+ScrollIndicator.tsx     ~2KB   (Scroll prompt)
+ParallaxContainer.tsx   ~2KB   (Utility)
+
+TOTAL:                  ~29KB  (Component code)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+                    VISUAL GUIDE COMPLETE - READY TO BUILD! 🚀
+
+═══════════════════════════════════════════════════════════════════════════════
