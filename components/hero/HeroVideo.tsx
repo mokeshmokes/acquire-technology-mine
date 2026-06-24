@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Play,
@@ -29,7 +29,8 @@ export default function HeroVideo() {
     const [playbackRate, setPlaybackRate] = useState(1);
     const [isDragging, setIsDragging] = useState(false);
 
-    const playbackRates = [0.5, 0.75, 1, 1.25, 1.5, 2];
+    // Stable array reference
+    const playbackRates = useMemo(() => [0.5, 0.75, 1, 1.25, 1.5, 2], []);
 
     // Format time (seconds to mm:ss)
     const formatTime = (time: number): string => {

@@ -52,4 +52,67 @@
   .glow-effect {
     box-shadow: 0 0 30px rgba(194, 24, 56, 0.30);
   }
+
+  /* Scroll Animation Utility Classes */
+
+  /* 1. Hero Word Reveal */
+  .hero-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  /* 3. Reveal Section */
+  .reveal-section {
+    opacity: 0;
+    transform: translateY(40px);
+    will-change: transform, opacity;
+  }
+
+  .reveal-section.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* 4. Stagger Grid Container */
+  .stagger-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .stagger-card {
+    opacity: 0;
+    transform: scale(0.94);
+    will-change: transform, opacity;
+  }
+
+  /* 5. Parallax Background */
+  .parallax-bg {
+    will-change: transform;
+  }
+
+  /* 6. Count Up */
+  .count-up {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+
+  /* 8. Magnetic Button */
+  .magnetic-btn {
+    cursor: pointer;
+    will-change: transform;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+
+    .hero-word,
+    .reveal-section,
+    .stagger-card,
+    .parallax-bg,
+    .magnetic-btn {
+      transform: none !important;
+      transition: opacity 0.3s ease !important;
+    }
+  }
 }

@@ -35,6 +35,10 @@ const config: Config = {
                 '100': '100',
                 '90': '90',
             },
+            perspective: {
+                '2000': '2000px',
+                '3000': '3000px',
+            },
             animation: {
                 'fade-in': 'fadeIn 0.3s ease-in-out',
                 'slide-down': 'slideDown 0.3s ease-out',

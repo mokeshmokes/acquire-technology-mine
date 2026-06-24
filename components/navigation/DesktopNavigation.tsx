@@ -15,7 +15,9 @@ export default function DesktopNavigation() {
             <ul className="flex items-center gap-1">
                 {mainNavigation.map((item) => {
                     const isActiveMenu = activeMenu === item.label;
-                    const isActivePage = pathname === item.href;
+                    // Check if current page or if it's an anchor link on the home page
+                    const isActivePage = pathname === item.href ||
+                        (item.href.startsWith('#') && pathname === '/');
 
                     return (
                         <li key={item.label} className="relative">

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -23,147 +23,190 @@ export default function LiveCourses() {
     const heading1Ref = useRef<HTMLHeadingElement>(null);
     const heading2Ref = useRef<HTMLDivElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
-    const featuresRef = useRef<HTMLDivElement>(null);
+    const featuresContainerRef = useRef<HTMLDivElement>(null);
+    const row1Ref = useRef<HTMLDivElement>(null);
+    const row2Ref = useRef<HTMLDivElement>(null);
+    const [mounted, setMounted] = useState(false);
+    const [hasAnimated, setHasAnimated] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    useEffect(() => {
+        if (typeof window === 'undefined' || !mounted) return;
+        if (hasAnimated) return;
+
         const ctx = gsap.context(() => {
-            // Section parallax effect
-            if (sectionRef.current) {
-                gsap.to(sectionRef.current, {
-                    y: -50,
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: 1,
+            // ONE-TIME Section Animation
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: 'top 75%',
+                    once: true, // Animation happens only once
+                    onEnter: () => {
+                        setHasAnimated(true);
                     },
-                });
-            }
+                },
+            });
 
             // Badge animation
             if (badgeRef.current) {
-                gsap.from(badgeRef.current, {
-                    y: -30,
-                    opacity: 0,
-                    duration: 0.8,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: badgeRef.current,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none',
+                tl.from(
+                    badgeRef.current,
+                    {
+                        y: -30,
+                        opacity: 0,
+                        scale: 0.8,
+                        duration: 0.8,
+                        ease: 'back.out(1.7)',
                     },
-                });
+                    0
+                );
             }
 
-            // Heading word-by-word reveal
+            // Heading animations
             if (heading1Ref.current) {
-                gsap.from(heading1Ref.current, {
-                    y: 40,
-                    opacity: 0,
-                    duration: 0.8,
-                    ease: 'power4.out',
-                    scrollTrigger: {
-                        trigger: heading1Ref.current,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none',
+                tl.from(
+                    heading1Ref.current,
+                    {
+                        y: 40,
+                        opacity: 0,
+                        filter: 'blur(8px)',
+                        duration: 0.9,
+                        ease: 'power3.out',
                     },
-                });
+                    0.2
+                );
             }
 
             if (heading2Ref.current) {
-                gsap.from(heading2Ref.current, {
-                    y: 40,
-                    opacity: 0,
-                    duration: 0.8,
-                    delay: 0.2,
-                    ease: 'power4.out',
-                    scrollTrigger: {
-                        trigger: heading2Ref.current,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none',
+                tl.from(
+                    heading2Ref.current,
+                    {
+                        y: 40,
+                        opacity: 0,
+                        filter: 'blur(8px)',
+                        duration: 0.9,
+                        ease: 'power3.out',
                     },
-                });
+                    0.3
+                );
             }
 
-            // Subtitle fade up
+            // Subtitle
             if (subtitleRef.current) {
-                gsap.from(subtitleRef.current, {
-                    y: 30,
-                    opacity: 0,
-                    duration: 0.8,
-                    delay: 0.4,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: subtitleRef.current,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none',
+                tl.from(
+                    subtitleRef.current,
+                    {
+                        y: 30,
+                        opacity: 0,
+                        filter: 'blur(6px)',
+                        duration: 0.8,
+                        ease: 'power3.out',
                     },
-                });
+                    0.4
+                );
             }
 
-            // Feature icons stagger
-            if (featuresRef.current) {
-                const featureItems = featuresRef.current.querySelectorAll('.feature-item');
-                gsap.from(featureItems, {
-                    y: 30,
-                    opacity: 0,
-                    scale: 0.8,
-                    duration: 0.6,
-                    stagger: 0.1,
-                    ease: 'back.out(1.7)',
-                    scrollTrigger: {
-                        trigger: featuresRef.current,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none',
+            // Features
+            if (featuresContainerRef.current) {
+                const featureItems = featuresContainerRef.current.querySelectorAll('.feature-item');
+                tl.from(
+                    featureItems,
+                    {
+                        y: 20,
+                        opacity: 0,
+                        scale: 0.9,
+                        duration: 0.6,
+                        stagger: 0.08,
+                        ease: 'power2.out',
                     },
-                });
+                    0.5
+                );
+            }
+
+            // ROW EXPANSION ANIMATION - Both rows animate together
+            if (row1Ref.current && row2Ref.current) {
+                const cards1 = row1Ref.current.querySelectorAll('.course-card');
+                const cards2 = row2Ref.current.querySelectorAll('.course-card');
+
+                // Initial state: rows overlap with small gap
+                gsap.set(row1Ref.current, { y: 40, willChange: 'transform' });
+                gsap.set(row2Ref.current, { y: -40, willChange: 'transform' });
+                gsap.set([cards1, cards2], { opacity: 0, y: 30, scale: 0.95, willChange: 'transform, opacity' });
+
+                // Animate rows expanding apart simultaneously
+                tl.to(
+                    row1Ref.current,
+                    {
+                        y: 0,
+                        duration: 1.1,
+                        ease: 'expo.out',
+                    },
+                    0.7
+                );
+
+                tl.to(
+                    row2Ref.current,
+                    {
+                        y: 0,
+                        duration: 1.1,
+                        ease: 'expo.out',
+                    },
+                    0.7 // Same time as row1
+                );
+
+                // Cards in Row 1 - subtle stagger
+                tl.to(
+                    cards1,
+                    {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 0.9,
+                        stagger: 0.04,
+                        ease: 'power3.out',
+                        clearProps: 'willChange',
+                    },
+                    0.8
+                );
+
+                // Cards in Row 2 - subtle stagger
+                tl.to(
+                    cards2,
+                    {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 0.9,
+                        stagger: 0.04,
+                        ease: 'power3.out',
+                        clearProps: 'willChange',
+                    },
+                    0.82 // Slight delay after row1 cards
+                );
+
+                // Clean up willChange on rows
+                tl.set([row1Ref.current, row2Ref.current], { clearProps: 'willChange' });
             }
         });
 
         return () => ctx.revert();
-    }, []);
+    }, [mounted, hasAnimated]);
 
     return (
-        <section ref={sectionRef} className="relative py-32 px-6 overflow-hidden">
+        <section
+            id="live-courses"
+            ref={sectionRef}
+            className="relative py-32 px-6 overflow-hidden"
+            style={{ willChange: hasAnimated ? 'auto' : 'transform' }}
+        >
             {/* Animated Background */}
-            <div className="absolute inset-0 opacity-30">
+            <div className="absolute inset-0 opacity-30 pointer-events-none">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(122,0,25,0.15)_0%,transparent_50%)]" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(122,0,25,0.1)_0%,transparent_50%)]" />
             </div>
-
-            {/* Floating Particles */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {[...Array(20)].map((_, i) => (
-                    <div
-                        key={i}
-                        className="absolute w-1 h-1 bg-primary/20 rounded-full"
-                        style={{
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
-                            animation: `float ${10 + Math.random() * 20}s linear infinite`,
-                            animationDelay: `${Math.random() * 10}s`,
-                        }}
-                    />
-                ))}
-            </div>
-
-            <style jsx>{`
-                @keyframes float {
-                    0%, 100% {
-                        transform: translate(0, 0);
-                    }
-                    25% {
-                        transform: translate(20px, -20px);
-                    }
-                    50% {
-                        transform: translate(-10px, 10px);
-                    }
-                    75% {
-                        transform: translate(10px, 20px);
-                    }
-                }
-            `}</style>
 
             {/* Container */}
             <div className="relative max-w-7xl mx-auto">
@@ -207,7 +250,7 @@ export default function LiveCourses() {
                         </p>
 
                         {/* Feature Highlights */}
-                        <div ref={featuresRef} className="flex flex-wrap gap-4 pt-4">
+                        <div ref={featuresContainerRef} className="flex flex-wrap gap-4 pt-4">
                             {features.map((feature) => {
                                 const Icon = feature.icon;
                                 return (
@@ -249,15 +292,21 @@ export default function LiveCourses() {
                     </div>
                 </div>
 
-                {/* Perfect Grid - 4 Columns × 2 Rows */}
-                <div
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16"
-                    style={{
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                    }}
-                >
-                    {courses.map((course, index) => (
-                        <LiveCourseCard key={course.id} course={course} index={index} />
+                {/* ROW 1 - First 4 courses */}
+                <div ref={row1Ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                    {courses.slice(0, 4).map((course, index) => (
+                        <div key={course.id} className="course-card">
+                            <LiveCourseCard course={course} index={index} />
+                        </div>
+                    ))}
+                </div>
+
+                {/* ROW 2 - Last 4 courses */}
+                <div ref={row2Ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                    {courses.slice(4, 8).map((course, index) => (
+                        <div key={course.id} className="course-card">
+                            <LiveCourseCard course={course} index={index + 4} />
+                        </div>
                     ))}
                 </div>
 

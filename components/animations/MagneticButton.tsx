@@ -1,52 +1,82 @@
 'use client';
 
-import { useRef, useState, ReactNode } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 interface MagneticButtonProps {
-    children: ReactNode;
-    strength?: number;
+    children: React.ReactNode;
     className?: string;
+    maxOffset?: number;
+    disabled?: boolean;
 }
 
 export default function MagneticButton({
     children,
-    strength = 0.3,
-    className,
+    className = '',
+    maxOffset = 8,
+    disabled = false,
 }: MagneticButtonProps) {
-    const ref = useRef<HTMLDivElement>(null);
-    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const buttonRef = useRef<HTMLDivElement>(null);
+    const [isHovered, setIsHovered] = useState(false);
 
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!ref.current) return;
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
 
-        const rect = ref.current.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
+    const springConfig = { damping: 20, stiffness: 300 };
+    const xSpring = useSpring(x, springConfig);
+    const ySpring = useSpring(y, springConfig);
 
-        const deltaX = (e.clientX - centerX) * strength;
-        const deltaY = (e.clientY - centerY) * strength;
+    useEffect(() => {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion || disabled) return;
 
-        setPosition({ x: deltaX, y: deltaY });
-    };
+        const button = buttonRef.current;
+        if (!button) return;
 
-    const handleMouseLeave = () => {
-        setPosition({ x: 0, y: 0 });
-    };
+        const handleMouseMove = (e: MouseEvent) => {
+            if (!isHovered) return;
+
+            const rect = button.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const distanceX = e.clientX - centerX;
+            const distanceY = e.clientY - centerY;
+
+            // Calculate magnetic pull (max 8px)
+            const pullX = Math.max(-maxOffset, Math.min(maxOffset, distanceX * 0.3));
+            const pullY = Math.max(-maxOffset, Math.min(maxOffset, distanceY * 0.3));
+
+            x.set(pullX);
+            y.set(pullY);
+        };
+
+        const handleMouseLeave = () => {
+            setIsHovered(false);
+            x.set(0);
+            y.set(0);
+        };
+
+        const handleMouseEnter = () => {
+            setIsHovered(true);
+        };
+
+        button.addEventListener('mousemove', handleMouseMove);
+        button.addEventListener('mouseleave', handleMouseLeave);
+        button.addEventListener('mouseenter', handleMouseEnter);
+
+        return () => {
+            button.removeEventListener('mousemove', handleMouseMove);
+            button.removeEventListener('mouseleave', handleMouseLeave);
+            button.removeEventListener('mouseenter', handleMouseEnter);
+        };
+    }, [x, y, isHovered, maxOffset, disabled]);
 
     return (
         <motion.div
-            ref={ref}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            animate={{ x: position.x, y: position.y }}
-            transition={{
-                type: 'spring',
-                stiffness: 150,
-                damping: 15,
-                mass: 0.1,
-            }}
-            className={className}
+            ref={buttonRef}
+            className={`magnetic-btn ${className}`}
+            style={{ x: xSpring, y: ySpring }}
         >
             {children}
         </motion.div>

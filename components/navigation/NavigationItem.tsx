@@ -25,6 +25,36 @@ export default function NavigationItem({
     onMouseLeave,
 }: NavigationItemProps) {
     const hasMenu = hasMegaMenu || hasDropdown;
+    const isAnchorLink = href.startsWith('#');
+
+    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        if (isAnchorLink) {
+            e.preventDefault();
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                // Get Lenis instance from window
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                const lenis = (window as any).lenis;
+
+                if (lenis) {
+                    // Use Lenis smooth scroll
+                    lenis.scrollTo(targetElement, {
+                        offset: -100, // Account for header height
+                        duration: 1.5,
+                        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                    });
+                } else {
+                    // Fallback to native smooth scroll
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                    });
+                }
+            }
+        }
+    };
 
     return (
         <div
@@ -34,6 +64,7 @@ export default function NavigationItem({
         >
             <Link
                 href={href}
+                onClick={handleClick}
                 className={cn(
                     'relative flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-lg',
                     isActive

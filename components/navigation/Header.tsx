@@ -9,19 +9,23 @@ import MobileNavigation from './MobileNavigation';
 import ActionButtons from './ActionButtons';
 
 export default function Header() {
-    const { isScrolled, isVisible } = useScrollHeader();
+    const { isScrolled } = useScrollHeader();
 
     return (
         <motion.header
-            initial={{ y: 0 }}
-            animate={{ y: isVisible ? 0 : -100 }}
-            transition={{ duration: 0.3 }}
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
             className={cn(
-                'fixed top-0 left-0 right-0 z-[90] transition-all duration-300',
+                'fixed top-0 left-0 right-0 w-full transition-all duration-300',
+                'z-[99999]',
                 isScrolled
-                    ? 'glass-effect backdrop-blur-xl border-b border-glass shadow-premium'
+                    ? 'bg-[rgba(8,8,12,0.70)] backdrop-blur-[22px] border-b border-white/[0.08] shadow-[0_10px_35px_rgba(0,0,0,0.35)]'
                     : 'bg-transparent backdrop-blur-sm'
             )}
+            style={{
+                WebkitBackdropFilter: isScrolled ? 'blur(22px)' : 'blur(4px)',
+            }}
         >
             <div className="container mx-auto px-6">
                 <div className="flex items-center justify-between h-20">

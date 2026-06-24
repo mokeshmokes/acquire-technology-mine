@@ -40,7 +40,7 @@ import type {
 
 export const mainNavigation: NavigationItem[] = [
     { label: 'Home', href: '/' },
-    { label: 'Live course', href: '/live-course' },
+    { label: 'Live course', href: '#live-courses' },
     { label: 'Course', href: '/course', hasMegaMenu: true },
     { label: 'About us', href: '/about-us' },
     { label: 'Contact', href: '/contact' },

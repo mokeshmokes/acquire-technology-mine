@@ -26,6 +26,35 @@ export default function MobileNavigation() {
         setExpandedMenu(expandedMenu === label ? null : label);
     };
 
+    const handleLinkClick = (href: string) => {
+        setIsOpen(false);
+
+        if (href.startsWith('#')) {
+            setTimeout(() => {
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    const lenis = (window as any).lenis;
+
+                    if (lenis) {
+                        lenis.scrollTo(targetElement, {
+                            offset: -100,
+                            duration: 1.5,
+                            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                        });
+                    } else {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start',
+                        });
+                    }
+                }
+            }, 100);
+        }
+    };
+
     return (
         <div className="lg:hidden">
             <motion.button
@@ -168,7 +197,7 @@ export default function MobileNavigation() {
                                             ) : (
                                                 <Link
                                                     href={item.href}
-                                                    onClick={() => setIsOpen(false)}
+                                                    onClick={() => handleLinkClick(item.href)}
                                                     className="block p-3 rounded-lg hover:bg-surface-elevated transition-colors font-medium"
                                                 >
                                                     {item.label}

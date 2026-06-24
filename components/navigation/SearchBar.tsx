@@ -90,7 +90,7 @@ export default function SearchBar() {
                                         className="pt-4 border-t border-border"
                                     >
                                         <p className="text-sm text-muted">
-                                            Search results for "{searchQuery}" will appear here...
+                                            Search results for &ldquo;{searchQuery}&rdquo; will appear here...
                                         </p>
                                     </motion.div>
                                 )}

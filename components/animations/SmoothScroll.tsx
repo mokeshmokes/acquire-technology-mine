@@ -28,12 +28,17 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
             gestureOrientation: 'vertical',
             smoothWheel: true,
             wheelMultiplier: 1,
-            smoothTouch: false,
             touchMultiplier: 2,
             infinite: false,
         });
 
         lenisRef.current = lenis;
+
+        // Expose Lenis instance globally for anchor navigation
+        if (typeof window !== 'undefined') {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (window as any).lenis = lenis;
+        }
 
         // Sync Lenis with GSAP ScrollTrigger
         lenis.on('scroll', ScrollTrigger.update);
@@ -48,6 +53,10 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         return () => {
             lenis.destroy();
             gsap.ticker.remove(lenis.raf);
+            if (typeof window !== 'undefined') {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                delete (window as any).lenis;
+            }
         };
     }, []);
 

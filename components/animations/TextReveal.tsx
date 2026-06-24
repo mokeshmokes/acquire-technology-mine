@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { letterVariants, staggerContainerVariants } from '@/lib/animation-utils';
+import { letterVariants } from '@/lib/animation-utils';
 
 interface TextRevealProps {
     text: string;
