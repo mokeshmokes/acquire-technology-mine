@@ -1,10 +1,16 @@
 'use client';
 
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Clock, Users, ArrowRight, Play } from 'lucide-react';
 import CourseProgress from './CourseProgress';
 import Course3DAnimation from './Course3DAnimation';
 import { useRef, useState } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 interface LiveCourseCardProps {
     course: {
@@ -29,40 +35,8 @@ interface LiveCourseCardProps {
 
 export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
     const cardRef = useRef<HTMLDivElement>(null);
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [isHovered, setIsHovered] = useState(false);
-
-    // Mouse position tracking with MotionValues (doesn't trigger re-renders)
-    const rawX = useMotionValue(50);
-    const rawY = useMotionValue(50);
-    
-    // Spring physics configuration for silky smooth movement
-    const springConfig = { damping: 25, stiffness: 120 };
-    const mouseXSpring = useSpring(rawX, springConfig);
-    const mouseYSpring = useSpring(rawY, springConfig);
-
-    // Centered values (-50 to +50)
-    const xOffset = useTransform(mouseXSpring, [0, 100], [-50, 50]);
-    const yOffset = useTransform(mouseYSpring, [0, 100], [-50, 50]);
-
-    // 1. Tilt Transforms
-    const rotateX = useTransform(yOffset, [-50, 50], [7.5, -7.5]);
-    const rotateY = useTransform(xOffset, [-50, 50], [-7.5, 7.5]);
-
-    // 2. Illustration Parallax (shift same direction as mouse, Z-space forward)
-    const illustrationX = useTransform(xOffset, [-50, 50], [-12, 12]);
-    const illustrationY = useTransform(yOffset, [-50, 50], [-12, 12]);
-
-    // 3. Content Parallax (shift same direction, but softer)
-    const contentX = useTransform(xOffset, [-50, 50], [-5, 5]);
-    const contentY = useTransform(yOffset, [-50, 50], [-5, 5]);
-
-    // 4. Background Particles Parallax (shift opposite direction, Z-space backward)
-    const particlesX = useTransform(xOffset, [-50, 50], [15, -15]);
-    const particlesY = useTransform(yOffset, [-50, 50], [15, -15]);
-
-    // Derived percentages for CSS variables
-    const xPct = useTransform(mouseXSpring, (x) => `${x}%`);
-    const yPct = useTransform(mouseYSpring, (y) => `${y}%`);
 
     // 3D Tilt Effect with Mouse Movement
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -70,15 +44,13 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
         const rect = cardRef.current.getBoundingClientRect();
         const x = ((e.clientX - rect.left) / rect.width) * 100;
         const y = ((e.clientY - rect.top) / rect.height) * 100;
-        rawX.set(x);
-        rawY.set(y);
+        setMousePosition({ x, y });
     };
 
     const handleMouseEnter = () => setIsHovered(true);
     const handleMouseLeave = () => {
         setIsHovered(false);
-        rawX.set(50);
-        rawY.set(50);
+        setMousePosition({ x: 50, y: 50 });
     };
 
     return (
@@ -90,15 +62,13 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
             onMouseLeave={handleMouseLeave}
             style={{
                 perspective: '1000px',
-                '--mouse-x': xPct as unknown as string,
-                '--mouse-y': yPct as unknown as string,
-            } as React.CSSProperties & Record<string, string | number | undefined>}
+            }}
         >
             {/* Ambient Outer Glow */}
             <div
-                className="absolute -inset-4 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                className="absolute -inset-4 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                 style={{
-                    background: `radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(199, 24, 56, 0.35) 0%, rgba(122, 0, 25, 0.2) 40%, transparent 70%)`,
+                    background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(199, 24, 56, 0.35) 0%, rgba(122, 0, 25, 0.2) 40%, transparent 70%)`,
                 }}
             />
 
@@ -118,10 +88,10 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
                     `,
                     transformStyle: 'preserve-3d',
                     willChange: 'transform',
-                    rotateX: rotateX,
-                    rotateY: rotateY,
                 }}
                 animate={{
+                    rotateX: isHovered ? (mousePosition.y - 50) * 0.15 : 0,
+                    rotateY: isHovered ? (mousePosition.x - 50) * 0.15 : 0,
                     y: isHovered ? -10 : 0,
                     scale: isHovered ? 1.02 : 1,
                 }}
@@ -152,18 +122,12 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
                 <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[5]"
                     style={{
-                        background: `radial-gradient(circle 200px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(199, 24, 56, 0.15) 0%, transparent 70%)`,
+                        background: `radial-gradient(circle 200px at ${mousePosition.x}% ${mousePosition.y}%, rgba(199, 24, 56, 0.15) 0%, transparent 70%)`,
                     }}
                 />
 
-                {/* Floating Background Particles (Parallax Layer) */}
-                <motion.div 
-                    className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden"
-                    style={{
-                        x: particlesX,
-                        y: particlesY,
-                    }}
-                >
+                {/* Floating Background Particles */}
+                <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
                     <div
                         className="absolute w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-float-slow"
                         style={{ top: '10%', left: '20%' }}
@@ -176,7 +140,9 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
                         className="absolute w-16 h-16 bg-white/5 rounded-full blur-xl animate-float-slow"
                         style={{ bottom: '20%', left: '40%' }}
                     />
-                </motion.div>
+                </div>
+
+
 
                 {/* Holographic Top Image Panel */}
                 <div
@@ -195,6 +161,7 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
                             animation: 'gradientMove 6s ease-in-out infinite',
                         }}
                     />
+
                 </div>
 
                 {/* Glass Live Badge */}
@@ -229,26 +196,13 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
                     </div>
                 </div>
 
-                {/* 3D Animation Illustration (Parallax Layer) */}
-                <motion.div 
-                    className="relative h-[140px] z-20 flex-shrink-0"
-                    style={{
-                        x: illustrationX,
-                        y: illustrationY,
-                        transformStyle: 'preserve-3d',
-                    }}
-                >
+                {/* 3D Animation Illustration */}
+                <div className="relative h-[140px] z-20 flex-shrink-0">
                     <Course3DAnimation courseId={course.id} />
-                </motion.div>
+                </div>
 
-                {/* Content Section (Parallax Layer) */}
-                <motion.div 
-                    className="relative p-6 pt-4 flex flex-col flex-1 z-20"
-                    style={{
-                        x: contentX,
-                        y: contentY,
-                    }}
-                >
+                {/* Content Section */}
+                <div className="relative p-6 pt-4 flex flex-col flex-1 z-20">
                     {/* Title */}
                     <div className="h-[60px] mb-4 flex flex-col justify-start">
                         <h3 className="text-lg font-bold text-white leading-tight line-clamp-2">
@@ -384,7 +338,7 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
                             </div>
                         </motion.button>
                     </div>
-                </motion.div>
+                </div>
 
                 {/* Animated Corner Accents - Glass Style */}
                 <div
@@ -408,11 +362,12 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
                     style={{
                         background: 'linear-gradient(90deg, transparent 0%, rgba(199, 24, 56, 0.3) 50%, transparent 100%)',
                         animation: 'borderSweep 3s ease-in-out infinite',
-                        mask: 'linear-gradient(#fff 0 0) content-box, & content-box',
+                        mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                         maskComposite: 'exclude',
                         padding: '1px',
                     }}
                 />
+
             </motion.div>
 
             {/* Consolidated Styles */}
