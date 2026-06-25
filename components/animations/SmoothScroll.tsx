@@ -13,50 +13,53 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     const lenisRef = useRef<Lenis | null>(null);
 
     useEffect(() => {
-        // Check for reduced motion preference
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         if (prefersReducedMotion) {
-            return; // Skip smooth scroll if user prefers reduced motion
+            return;
         }
 
-        // Initialize Lenis
+        // Tuned for maximum smoothness:
+        // - duration 0.9 feels snappier and more responsive than 1.2
+        // - easing uses a smooth exponential curve
+        // - wheelMultiplier 0.85 prevents over-scrolling on fast wheels
         const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            duration: 0.9,
+            easing: (t) => 1 - Math.pow(1 - t, 4), // easeOutQuart — fast start, silky finish
             orientation: 'vertical',
             gestureOrientation: 'vertical',
             smoothWheel: true,
-            wheelMultiplier: 1,
-            touchMultiplier: 2,
+            wheelMultiplier: 0.85,
+            touchMultiplier: 1.8,
             infinite: false,
         });
 
         lenisRef.current = lenis;
 
-        // Expose Lenis instance globally for anchor navigation
-        if (typeof window !== 'undefined') {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (window as any).lenis = lenis;
-        }
+        // Expose globally for anchor navigation
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (window as any).lenis = lenis;
 
-        // Sync Lenis with GSAP ScrollTrigger
-        lenis.on('scroll', ScrollTrigger.update);
+        // Sync Lenis with GSAP ScrollTrigger — use the event, not a ticker callback
+        lenis.on('scroll', () => ScrollTrigger.update());
 
-        gsap.ticker.add((time) => {
+        // Drive Lenis from GSAP's RAF ticker for perfect frame sync
+        // This ensures animations and scroll always update on the same frame
+        const tickerFn = (time: number) => {
             lenis.raf(time * 1000);
-        });
+        };
 
-        gsap.ticker.lagSmoothing(0);
+        gsap.ticker.add(tickerFn);
 
-        // Cleanup
+        // Keep lag smoothing ON (default 200ms) — this prevents scroll stutters
+        // when the browser misses a frame (tab switch, heavy paint, etc.)
+        gsap.ticker.lagSmoothing(200, 16);
+
         return () => {
             lenis.destroy();
-            gsap.ticker.remove(lenis.raf);
-            if (typeof window !== 'undefined') {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                delete (window as any).lenis;
-            }
+            gsap.ticker.remove(tickerFn);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            delete (window as any).lenis;
         };
     }, []);
 

@@ -26,6 +26,7 @@ export const useScrollAnimations = (options: UseScrollAnimationsOptions = {}) =>
     } = options;
 
     const initialized = useRef(false);
+    const cleanupRef = useRef<(() => void) | null>(null);
 
     useEffect(() => {
         if (typeof window === 'undefined' || initialized.current) return;
@@ -36,72 +37,67 @@ export const useScrollAnimations = (options: UseScrollAnimationsOptions = {}) =>
         const heroWords = document.querySelectorAll(heroTextSelector);
         if (heroWords.length > 0) {
             gsap.from(heroWords, {
-                y: prefersReducedMotion ? 0 : 30,
+                y: prefersReducedMotion ? 0 : 25,
                 opacity: 0,
-                duration: prefersReducedMotion ? 0.3 : 0.8,
-                stagger: prefersReducedMotion ? 0 : 0.08,
+                duration: prefersReducedMotion ? 0.2 : 0.7,
+                stagger: prefersReducedMotion ? 0 : 0.07,
                 ease: 'power3.out',
-                delay: 0.2,
+                delay: 0.15,
             });
         }
 
-        // 3. SECTION FADE-SLIDE (IntersectionObserver)
+        // 2. SECTION FADE-SLIDE (IntersectionObserver — no GSAP scrub needed here)
         const revealSections = document.querySelectorAll(revealSectionSelector);
+        const observers: IntersectionObserver[] = [];
+
         if (revealSections.length > 0) {
-            const observerOptions = {
-                threshold: 0.15,
-                rootMargin: '0px',
-            };
-
-            const sectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting && !entry.target.classList.contains('revealed')) {
-                        entry.target.classList.add('revealed');
-
-                        gsap.to(entry.target, {
-                            y: prefersReducedMotion ? 0 : 0,
-                            opacity: 1,
-                            duration: prefersReducedMotion ? 0.3 : 0.9,
-                            ease: 'power2.out',
-                        });
-                    }
-                });
-            }, observerOptions);
+            const sectionObserver = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting && !entry.target.classList.contains('revealed')) {
+                            entry.target.classList.add('revealed');
+                            gsap.to(entry.target, {
+                                y: 0,
+                                opacity: 1,
+                                duration: prefersReducedMotion ? 0.2 : 0.75,
+                                ease: 'power2.out',
+                            });
+                        }
+                    });
+                },
+                { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+            );
 
             revealSections.forEach((section) => {
-                // Set initial state
                 gsap.set(section, {
-                    y: prefersReducedMotion ? 0 : 40,
+                    y: prefersReducedMotion ? 0 : 35,
                     opacity: 0,
                 });
                 sectionObserver.observe(section);
             });
 
-            // Cleanup observer
-            return () => {
-                sectionObserver.disconnect();
-            };
+            observers.push(sectionObserver);
         }
 
-        // 4. STAGGERED CARD GRID
+        // 3. STAGGERED CARD GRID
         const staggerGrids = document.querySelectorAll(staggerGridSelector);
         staggerGrids.forEach((grid) => {
             const cards = grid.querySelectorAll('.stagger-card');
             if (cards.length > 0) {
                 gsap.set(cards, {
-                    scale: prefersReducedMotion ? 1 : 0.94,
+                    scale: prefersReducedMotion ? 1 : 0.95,
                     opacity: 0,
                 });
 
                 ScrollTrigger.create({
                     trigger: grid,
-                    start: 'top 80%',
+                    start: 'top 82%',
                     onEnter: () => {
                         gsap.to(cards, {
                             scale: 1,
                             opacity: 1,
-                            duration: prefersReducedMotion ? 0.3 : 0.7,
-                            stagger: prefersReducedMotion ? 0 : 0.12,
+                            duration: prefersReducedMotion ? 0.2 : 0.65,
+                            stagger: prefersReducedMotion ? 0 : 0.1,
                             ease: 'power2.out',
                         });
                     },
@@ -110,37 +106,38 @@ export const useScrollAnimations = (options: UseScrollAnimationsOptions = {}) =>
             }
         });
 
-        // 5. PARALLAX BACKGROUND
+        // 4. PARALLAX BACKGROUND
+        // scrub: 0.5 keeps parallax responsive without the sticky "rubber band" feel
         const parallaxElements = document.querySelectorAll(parallaxSelector);
         parallaxElements.forEach((element) => {
             if (!prefersReducedMotion) {
                 gsap.to(element, {
-                    y: -100,
+                    y: -80,
                     ease: 'none',
                     scrollTrigger: {
                         trigger: element,
                         start: 'top bottom',
                         end: 'bottom top',
-                        scrub: 1.6,
+                        scrub: 0.5, // was 1.6
                     },
                 });
             }
         });
 
-        // 6. STAT COUNTER
+        // 5. STAT COUNTER
         const countUpElements = document.querySelectorAll(countUpSelector);
         countUpElements.forEach((element) => {
             const target = parseInt(element.getAttribute('data-target') || '0', 10);
-            const duration = prefersReducedMotion ? 0.5 : 1.8;
+            const duration = prefersReducedMotion ? 0.4 : 1.6;
 
             ScrollTrigger.create({
                 trigger: element,
-                start: 'top 80%',
+                start: 'top 82%',
                 onEnter: () => {
                     const obj = { value: 0 };
                     gsap.to(obj, {
                         value: target,
-                        duration: duration,
+                        duration,
                         ease: 'power2.out',
                         onUpdate: () => {
                             element.textContent = Math.round(obj.value).toString();
@@ -153,15 +150,11 @@ export const useScrollAnimations = (options: UseScrollAnimationsOptions = {}) =>
 
         initialized.current = true;
 
-        // Cleanup
-        return () => {
-            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        cleanupRef.current = () => {
+            observers.forEach((o) => o.disconnect());
+            ScrollTrigger.getAll().forEach((t) => t.kill());
         };
-    }, [
-        heroTextSelector,
-        revealSectionSelector,
-        staggerGridSelector,
-        parallaxSelector,
-        countUpSelector,
-    ]);
+
+        return () => cleanupRef.current?.();
+    }, [heroTextSelector, revealSectionSelector, staggerGridSelector, parallaxSelector, countUpSelector]);
 };

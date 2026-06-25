@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Scroll smoothness ────────────────────────────────────────────────────── */
+/* Promote html/body to their own compositor layers so the browser can        */
+/* hand off scrolling entirely to the GPU thread.                             */
+html {
+  /* Let Lenis control scroll position; native smooth-scroll conflicts with it */
+  scroll-behavior: auto !important;
+  /* Prevent elastic over-scroll bounce fighting with Lenis */
+  overscroll-behavior: none;
+}
+
+body {
+  overscroll-behavior: none;
+  /* GPU-composited layer hint */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Elements that animate on scroll get their own layer up front */
+.reveal-section,
+.stagger-card,
+.parallax-bg,
+.parallax-mid,
+.parallax-fg {
+  will-change: transform, opacity;
+}
+
+/* Once revealed, release the will-change hint to free GPU memory */
+.reveal-section.revealed {
+  will-change: auto;
+}
+/* ─────────────────────────────────────────────────────────────────────────── */
+
 @layer base {
   :root {
     --background: #080B0D;

@@ -9,26 +9,22 @@ if (typeof window !== 'undefined') {
 
 /**
  * Initialize GSAP ScrollTrigger animations for a section
+ * Removed blur filter from scrubbed animations — blur recomputed every scroll frame is expensive.
  */
 export const initSectionAnimation = (element: HTMLElement) => {
     if (!element) return;
 
     const ctx = gsap.context(() => {
-        // Section entrance animation
         gsap.from(element, {
-            y: 100,
+            y: 60,
             opacity: 0,
-            scale: 0.95,
-            rotationX: 8,
-            filter: 'blur(20px)',
-            duration: 1.2,
+            scale: 0.97,
+            duration: 1,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: element,
-                start: 'top 85%',
-                end: 'top 40%',
-                scrub: 1,
-                toggleActions: 'play none none reverse',
+                start: 'top 88%',
+                toggleActions: 'play none none none', // one-shot, no reverse
             },
         });
     });
@@ -37,7 +33,9 @@ export const initSectionAnimation = (element: HTMLElement) => {
 };
 
 /**
- * Staggered card animations with 3D depth
+ * Staggered card animations
+ * Reduced scrub values so scroll doesn't feel "sticky".
+ * Removed per-card scrubbing parallax — replaced with a single one-shot entrance.
  */
 export const initCardStagger = (container: HTMLElement, cardSelector: string) => {
     if (!container) return;
@@ -46,44 +44,18 @@ export const initCardStagger = (container: HTMLElement, cardSelector: string) =>
     if (cards.length === 0) return;
 
     const ctx = gsap.context(() => {
-        // Create staggered entrance
         gsap.from(cards, {
-            y: 120,
+            y: 60,
             opacity: 0,
-            scale: 0.92,
-            rotationX: 15,
-            rotationY: 5,
-            filter: 'blur(15px)',
-            duration: 1,
-            stagger: {
-                each: 0.15,
-                from: 'start',
-            },
-            ease: 'power4.out',
+            scale: 0.95,
+            duration: 0.8,
+            stagger: { each: 0.1, from: 'start' },
+            ease: 'power3.out',
             scrollTrigger: {
                 trigger: container,
-                start: 'top 75%',
-                end: 'top 30%',
-                scrub: 1.5,
+                start: 'top 78%',
+                toggleActions: 'play none none none',
             },
-        });
-
-        // Individual card scroll reactions
-        cards.forEach((card, index) => {
-            const depth = index % 4; // 4 depth levels for grid
-            const speed = 1 - depth * 0.1; // Varying parallax speeds
-
-            gsap.to(card, {
-                y: -50 * speed,
-                rotationX: -3,
-                scale: 1.02,
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    scrub: 2,
-                },
-            });
         });
     });
 
@@ -91,42 +63,37 @@ export const initCardStagger = (container: HTMLElement, cardSelector: string) =>
 };
 
 /**
- * Text reveal animation - line by line with character stagger
+ * Text reveal animation
  */
 export const initTextReveal = (element: HTMLElement) => {
     if (!element) return;
 
     const ctx = gsap.context(() => {
-        // Split text into lines
         const lines = element.querySelectorAll('.text-reveal-line');
 
         if (lines.length > 0) {
             gsap.from(lines, {
-                y: 60,
+                y: 40,
                 opacity: 0,
-                rotationX: 45,
-                filter: 'blur(10px)',
-                duration: 0.8,
-                stagger: 0.15,
+                duration: 0.7,
+                stagger: 0.12,
                 ease: 'power3.out',
                 scrollTrigger: {
                     trigger: element,
-                    start: 'top 80%',
-                    end: 'top 50%',
-                    scrub: 1,
+                    start: 'top 82%',
+                    toggleActions: 'play none none none',
                 },
             });
         } else {
-            // Fallback for non-split text
             gsap.from(element, {
-                y: 40,
+                y: 30,
                 opacity: 0,
-                duration: 0.8,
+                duration: 0.7,
                 ease: 'power3.out',
                 scrollTrigger: {
                     trigger: element,
-                    start: 'top 85%',
-                    toggleActions: 'play none none reverse',
+                    start: 'top 88%',
+                    toggleActions: 'play none none none',
                 },
             });
         }
@@ -137,6 +104,7 @@ export const initTextReveal = (element: HTMLElement) => {
 
 /**
  * Parallax background layers
+ * Lower scrub values = smoother feel with no sticky lag.
  */
 export const initParallaxLayers = (container: HTMLElement) => {
     if (!container) return;
@@ -148,36 +116,39 @@ export const initParallaxLayers = (container: HTMLElement) => {
 
         if (background) {
             gsap.to(background, {
-                y: -150,
+                y: -100,
+                ease: 'none',
                 scrollTrigger: {
                     trigger: container,
                     start: 'top bottom',
                     end: 'bottom top',
-                    scrub: 1.5,
+                    scrub: 0.6, // was 1.5 — lower = less sticky
                 },
             });
         }
 
         if (middle) {
             gsap.to(middle, {
-                y: -80,
+                y: -60,
+                ease: 'none',
                 scrollTrigger: {
                     trigger: container,
                     start: 'top bottom',
                     end: 'bottom top',
-                    scrub: 1,
+                    scrub: 0.4,
                 },
             });
         }
 
         if (foreground) {
             gsap.to(foreground, {
-                y: -40,
+                y: -30,
+                ease: 'none',
                 scrollTrigger: {
                     trigger: container,
                     start: 'top bottom',
                     end: 'bottom top',
-                    scrub: 0.5,
+                    scrub: 0.2,
                 },
             });
         }
@@ -187,7 +158,7 @@ export const initParallaxLayers = (container: HTMLElement) => {
 };
 
 /**
- * Progress ring animation tied to scroll
+ * Progress ring animation
  */
 export const initProgressAnimation = (element: HTMLElement, targetValue: number) => {
     if (!element) return;
@@ -197,39 +168,36 @@ export const initProgressAnimation = (element: HTMLElement, targetValue: number)
         const numberElement = element.querySelector('.progress-number');
 
         if (progressCircle && numberElement) {
-            const circumference = 2 * Math.PI * 45; // Adjust based on your circle radius
+            const circumference = 2 * Math.PI * 45;
             const offset = circumference - (targetValue / 100) * circumference;
 
             gsap.fromTo(
                 progressCircle,
-                {
-                    strokeDashoffset: circumference,
-                },
+                { strokeDashoffset: circumference },
                 {
                     strokeDashoffset: offset,
-                    duration: 1.5,
+                    duration: 1.4,
                     ease: 'power2.out',
                     scrollTrigger: {
                         trigger: element,
-                        start: 'top 70%',
-                        toggleActions: 'play none none reverse',
+                        start: 'top 72%',
+                        toggleActions: 'play none none none',
                     },
                 }
             );
 
-            // Animate number counting
             gsap.fromTo(
                 numberElement,
                 { textContent: 0 },
                 {
                     textContent: targetValue,
-                    duration: 1.5,
+                    duration: 1.4,
                     ease: 'power2.out',
                     snap: { textContent: 1 },
                     scrollTrigger: {
                         trigger: element,
-                        start: 'top 70%',
-                        toggleActions: 'play none none reverse',
+                        start: 'top 72%',
+                        toggleActions: 'play none none none',
                     },
                 }
             );
@@ -240,40 +208,24 @@ export const initProgressAnimation = (element: HTMLElement, targetValue: number)
 };
 
 /**
- * Button reveal with glow and slide
+ * Button reveal
  */
 export const initButtonAnimation = (button: HTMLElement) => {
     if (!button) return;
 
     const ctx = gsap.context(() => {
         gsap.from(button, {
-            y: 30,
+            y: 20,
             opacity: 0,
-            scale: 0.95,
-            duration: 0.6,
-            ease: 'back.out(1.7)',
+            scale: 0.97,
+            duration: 0.5,
+            ease: 'back.out(1.4)',
             scrollTrigger: {
                 trigger: button,
-                start: 'top 90%',
-                toggleActions: 'play none none reverse',
+                start: 'top 92%',
+                toggleActions: 'play none none none',
             },
         });
-
-        // Glow animation
-        const glow = button.querySelector('.button-glow');
-        if (glow) {
-            gsap.to(glow, {
-                opacity: 0.8,
-                scale: 1.1,
-                duration: 0.4,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: button,
-                    start: 'top 85%',
-                    toggleActions: 'play none none reverse',
-                },
-            });
-        }
     });
 
     return ctx;
@@ -292,7 +244,7 @@ export const initPinSection = (section: HTMLElement, duration: string = '100%') 
             end: `+=${duration}`,
             pin: true,
             pinSpacing: true,
-            scrub: 1,
+            scrub: 0.5,
         });
     });
 
@@ -306,7 +258,6 @@ export const init3DFloat = (element: HTMLElement) => {
     if (!element) return;
 
     const ctx = gsap.context(() => {
-        // Continuous float
         gsap.to(element, {
             y: -20,
             rotationX: 5,
@@ -317,16 +268,15 @@ export const init3DFloat = (element: HTMLElement) => {
             ease: 'sine.inOut',
         });
 
-        // Scroll-reactive rotation and scale
         gsap.to(element, {
-            rotationY: 15,
-            rotationX: -10,
-            scale: 1.1,
+            rotationY: 12,
+            rotationX: -8,
+            scale: 1.05,
             scrollTrigger: {
                 trigger: element,
                 start: 'top 80%',
                 end: 'bottom 20%',
-                scrub: 2,
+                scrub: 0.8, // was 2
             },
         });
     });
@@ -358,14 +308,13 @@ export const initParticles = (container: HTMLElement) => {
                 ],
             });
 
-            // Scroll reaction
             gsap.to(particle, {
                 y: -150,
                 scrollTrigger: {
                     trigger: container,
                     start: 'top bottom',
                     end: 'bottom top',
-                    scrub: 1,
+                    scrub: 0.5, // was 1
                 },
             });
         });
@@ -385,19 +334,16 @@ export const initFeatureStagger = (container: HTMLElement) => {
 
     const ctx = gsap.context(() => {
         gsap.from(features, {
-            y: 50,
+            y: 35,
             opacity: 0,
-            scale: 0.8,
-            rotationY: 45,
-            filter: 'blur(8px)',
-            duration: 0.8,
-            stagger: 0.12,
+            scale: 0.88,
+            duration: 0.65,
+            stagger: 0.1,
             ease: 'back.out(1.4)',
             scrollTrigger: {
                 trigger: container,
-                start: 'top 75%',
-                end: 'top 45%',
-                scrub: 1,
+                start: 'top 78%',
+                toggleActions: 'play none none none',
             },
         });
     });
@@ -429,18 +375,25 @@ export const killAllScrollTriggers = () => {
 export const initGlobalScrollAnimations = () => {
     if (typeof window === 'undefined') return;
 
-    // Smooth scroll defaults
     ScrollTrigger.defaults({
-        toggleActions: 'play none none reverse',
-        markers: false, // Set to true for debugging
+        toggleActions: 'play none none none',
+        markers: false,
     });
 
-    // Refresh on window resize
-    let resizeTimer: NodeJS.Timeout;
-    window.addEventListener('resize', () => {
+    // Debounced resize handler — cleans up properly
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    const onResize = () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
             ScrollTrigger.refresh();
-        }, 250);
-    });
+        }, 300);
+    };
+
+    window.addEventListener('resize', onResize, { passive: true });
+
+    // Return cleanup so callers can remove the listener
+    return () => {
+        clearTimeout(resizeTimer);
+        window.removeEventListener('resize', onResize);
+    };
 };
