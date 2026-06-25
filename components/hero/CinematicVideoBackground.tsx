@@ -69,7 +69,7 @@ export default function CinematicVideoBackground() {
                 style={{ zIndex: 0, willChange: 'auto' }}
             >
                 {/* Current video (2.72 MB): */}
-                <source src="/videos/hero-video.mp4" type="video/mp4" />
+                <source src="/videos/Hero-Section-Vid.mp4" type="video/mp4" />
 
                 {/* Alternative video options: */}
                 {/* <source src="/videos/hero-video1.mp4" type="video/mp4" />  2.43 MB */}
