@@ -3,26 +3,18 @@
 @tailwind utilities;
 
 /* Custom Cursor Styles */
-* {
-  cursor: url('/images/cursor/cursor1-resized.png') 16 16, auto !important;
-}
+* {}
 
-body {
-  cursor: url('/images/cursor/cursor1-resized.png') 16 16, auto !important;
-}
+body {}
 
 a,
 button,
 [role="button"],
-.cursor-pointer {
-  cursor: url('/images/cursor/cursor1-resized.png') 16 16, pointer !important;
-}
+.cursor-pointer {}
 
 input,
 textarea,
-select {
-  cursor: url('/images/cursor/cursor1-resized.png') 16 16, text !important;
-}
+select {}
 
 /* ─── Scroll smoothness ────────────────────────────────────────────────────── */
 /* Promote html/body to their own compositor layers so the browser can        */
@@ -32,24 +24,32 @@ html {
   scroll-behavior: auto !important;
   /* Prevent elastic over-scroll bounce fighting with Lenis */
   overscroll-behavior: none;
-  /* Custom cursor — hide native arrow, show logo cursor */
-  cursor: url('/images/cursor/cursor1-resized.png') 16 16, auto;
+  /* Hardware acceleration for ultra-smooth experience */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   overscroll-behavior: none;
+  /* Ensure smooth repaints */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-/* Keep custom cursor on interactive elements too */
-a,
+/* Smooth transitions for all interactive elements */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* GPU-accelerated transforms for buttons and links */
 button,
+a,
 [role="button"],
-input,
-select,
-textarea,
-label,
-[tabindex] {
-  cursor: url('/images/cursor/cursor1-resized.png') 16 16, pointer;
+.cursor-pointer {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Elements that animate on scroll get their own layer up front */
@@ -59,11 +59,20 @@ label,
 .parallax-mid,
 .parallax-fg {
   will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* Once revealed, release the will-change hint to free GPU memory */
 .reveal-section.revealed {
   will-change: auto;
+}
+
+/* Optimize images and videos for smooth rendering */
+img,
+video {
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────── */
@@ -84,13 +93,13 @@ label,
 
   * {
     @apply border-border;
-    cursor: url('/images/cursor/cursor1-resized.png'), auto;
+
   }
 
   body {
     @apply bg-background text-white antialiased;
     font-feature-settings: 'rlig' 1, 'calt' 1;
-    cursor: url('/images/cursor/cursor1-resized.png'), auto;
+
   }
 
   html {
@@ -102,18 +111,14 @@ label,
   button,
   [role="button"],
   input[type="submit"],
-  input[type="button"] {
-    cursor: url('/images/cursor/cursor1-resized.png'), pointer;
-  }
+  input[type="button"] {}
 
   /* Custom cursor for text input fields */
   input[type="text"],
   input[type="email"],
   input[type="tel"],
   textarea,
-  select {
-    cursor: url('/images/cursor/cursor1-resized.png'), text;
-  }
+  select {}
 }
 
 @layer utilities {
