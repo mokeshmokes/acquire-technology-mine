@@ -108,16 +108,8 @@ export default function AboutHero() {
                         <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full" />
 
                         {/* Glass Card */}
-                        <motion.div
-                            animate={{
-                                y: [0, -20, 0],
-                            }}
-                            transition={{
-                                duration: 6,
-                                repeat: Infinity,
-                                ease: 'easeInOut',
-                            }}
-                            className="relative rounded-[28px] overflow-hidden"
+                        <div
+                            className="relative rounded-[28px] overflow-hidden animate-float-vertical-large"
                             style={{
                                 background: 'rgba(255, 255, 255, 0.05)',
                                 backdropFilter: 'blur(18px)',
@@ -149,7 +141,7 @@ export default function AboutHero() {
                                     </p>
                                 </div>
                             </div>
-                        </motion.div>
+                        </div>
                     </motion.div>
                 </div>
             </div>
