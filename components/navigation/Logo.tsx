@@ -16,7 +16,7 @@ export default function Logo() {
                 {/* Acquiring Technology Logo */}
                 <div className="w-12 h-12 relative">
                     <Image
-                        src="/logo.png"
+                        src="/images/logo.png"
                         alt="Acquiring Technology Logo"
                         fill
                         className="object-contain"
