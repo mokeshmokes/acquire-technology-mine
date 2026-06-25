@@ -10,10 +10,17 @@ html {
   scroll-behavior: auto !important;
   /* Prevent elastic over-scroll bounce fighting with Lenis */
   overscroll-behavior: none;
+  /* Custom cursor — hide native arrow, show logo cursor */
+  cursor: url('/images/cursor/cursor1.png') 16 16, auto;
 }
 
 body {
   overscroll-behavior: none;
+}
+
+/* Keep custom cursor on interactive elements too */
+a, button, [role="button"], input, select, textarea, label, [tabindex] {
+  cursor: url('/images/cursor/cursor1.png') 16 16, pointer;
 }
 
 /* Elements that animate on scroll get their own layer up front */
