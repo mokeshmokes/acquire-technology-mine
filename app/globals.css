@@ -367,6 +367,55 @@ body {
     animation: particle-blink ease-in-out infinite;
   }
 
+  /* Tech card float (hero) */
+  @keyframes tech-float {
+    0%, 100% { transform: translateY(0px);   }
+    50%       { transform: translateY(-10px); }
+  }
+  .animate-tech-float {
+    animation: tech-float 6s ease-in-out infinite;
+  }
+
+  /* Contact section particle drift */
+  @keyframes particle-drift {
+    0%   { transform: translate(0, 0);         opacity: 0.3; }
+    25%  { transform: translate(30px, -40px);  opacity: 0.6; }
+    50%  { transform: translate(-20px, -80px); opacity: 0.3; }
+    75%  { transform: translate(40px, -120px); opacity: 0.5; }
+    100% { transform: translate(0, -160px);    opacity: 0;   }
+  }
+  .animate-particle-drift {
+    animation: particle-drift linear infinite;
+  }
+
+  /* CourseProgress glow pulse */
+  @keyframes progress-glow {
+    0%, 100% { opacity: 0.3; transform: scale(0.92); }
+    50%       { opacity: 0.6; transform: scale(1.08); }
+  }
+  .animate-progress-glow {
+    animation: progress-glow 3s ease-in-out infinite;
+  }
+
+  /* Announcement glow */
+  @keyframes announcement-glow {
+    0%, 100% { opacity: 0.5; transform: scale(1);    }
+    50%       { opacity: 1;   transform: scale(1.08); }
+  }
+  .animate-announcement-glow {
+    animation: announcement-glow 2.5s ease-in-out infinite;
+  }
+
+  /* Announcement emoji pulse */
+  @keyframes emoji-pulse {
+    0%, 100% { transform: scale(1);    }
+    50%       { transform: scale(1.18); }
+  }
+  .animate-emoji-pulse {
+    animation: emoji-pulse 1.6s ease-in-out infinite;
+    display: inline-block;
+  }
+
   /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
 
