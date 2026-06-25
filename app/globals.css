@@ -41,15 +41,15 @@ a, button, [role="button"], input, select, textarea, label, [tabindex] {
 
 @layer base {
   :root {
-    --background: #1A1D21;
-    --surface: #242629;
-    --surface-elevated: #2D2F33;
+    --background: #080B0D;
+    --surface: #12080C;
+    --surface-elevated: #1E0F11;
     --primary: #7A0019;
     --primary-hover: #C21838;
     --primary-secondary: #A10E26;
-    --border: rgba(255, 255, 255, 0.12);
+    --border: rgba(255, 255, 255, 0.08);
     --text: #FFFFFF;
-    --muted: #C5C5C5;
+    --muted: #B8B8B8;
     --glow: rgba(194, 24, 56, 0.30);
   }
 
