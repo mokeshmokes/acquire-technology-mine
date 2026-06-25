@@ -19,19 +19,17 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
             return;
         }
 
-        // Tuned for maximum smoothness:
-        // - duration 1.0 feels extremely polished with soft deceleration
-        // - easing uses a smooth quintic curve for a silkier finish
-        // - wheelMultiplier 0.90 keeps scroll very responsive but smooth
+        // Ultra-smooth configuration for premium feel
         const lenis = new Lenis({
-            duration: 1.0,
-            easing: (t) => 1 - Math.pow(1 - t, 5), // easeOutQuint — ultimate smoothness
+            duration: 1.2, // Increased for even smoother scrolling
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo - ultra smooth
             orientation: 'vertical',
             gestureOrientation: 'vertical',
             smoothWheel: true,
-            wheelMultiplier: 0.90,
-            touchMultiplier: 1.5,
+            wheelMultiplier: 1.0, // Perfect balance
+            touchMultiplier: 2.0, // Smoother touch scrolling
             infinite: false,
+            autoResize: true,
         });
 
         lenisRef.current = lenis;
@@ -43,7 +41,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         // Sync Lenis with GSAP ScrollTrigger
         lenis.on('scroll', ScrollTrigger.update);
 
-        // Drive Lenis with native requestAnimationFrame loop for absolute performance isolation
+        // High-performance RAF loop
         let rafId: number;
         const raf = (time: number) => {
             lenis.raf(time);
@@ -51,13 +49,12 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         };
         rafId = requestAnimationFrame(raf);
 
-        // Disable GSAP lag smoothing to keep ScrollTrigger fully in-sync with scroll frame rates
+        // Disable GSAP lag smoothing for frame-perfect sync
         gsap.ticker.lagSmoothing(0);
 
         return () => {
             lenis.destroy();
             cancelAnimationFrame(rafId);
-            // Re-enable default lag smoothing for other GSAP contexts on clean up
             gsap.ticker.lagSmoothing(200, 16);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             delete (window as any).lenis;

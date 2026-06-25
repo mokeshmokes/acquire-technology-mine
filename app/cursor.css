@@ -1,13 +1,12 @@
-/* Custom Cursor - cursor1-resized.png */
-/* This file ensures the custom cursor is applied globally */
+/* Custom Cursor - cursor1.png (48x48 pixels) */
 
 * {
-    cursor: url('/images/cursor/cursor1-resized.png') 16 16, auto !important;
+    cursor: url('/images/cursor/cursor1.png') 24 24, auto !important;
 }
 
 html,
 body {
-    cursor: url('/images/cursor/cursor1-resized.png') 16 16, auto !important;
+    cursor: url('/images/cursor/cursor1.png') 24 24, auto !important;
 }
 
 /* Interactive elements */
@@ -19,7 +18,7 @@ input[type='reset'],
 [role='button'],
 [onclick],
 .cursor-pointer {
-    cursor: url('/images/cursor/cursor1-resized.png') 16 16, pointer !important;
+    cursor: url('/images/cursor/cursor1.png') 24 24, pointer !important;
 }
 
 /* Text input elements */
@@ -31,21 +30,21 @@ input[type='search'],
 input[type='password'],
 textarea,
 [contenteditable='true'] {
-    cursor: url('/images/cursor/cursor1-resized.png') 16 16, text !important;
+    cursor: url('/images/cursor/cursor1.png') 24 24, text !important;
 }
 
 /* Select elements */
 select {
-    cursor: url('/images/cursor/cursor1-resized.png') 16 16, pointer !important;
+    cursor: url('/images/cursor/cursor1.png') 24 24, pointer !important;
 }
 
 /* Disabled elements */
 [disabled],
 .disabled {
-    cursor: url('/images/cursor/cursor1-resized.png') 16 16, not-allowed !important;
+    cursor: url('/images/cursor/cursor1.png') 24 24, not-allowed !important;
 }
 
 /* Draggable elements */
 [draggable='true'] {
-    cursor: url('/images/cursor/cursor1-resized.png') 16 16, move !important;
+    cursor: url('/images/cursor/cursor1.png') 24 24, move !important;
 }
