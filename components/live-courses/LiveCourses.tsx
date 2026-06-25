@@ -9,6 +9,7 @@ import LiveCourseCard from './LiveCourseCard';
 import StudentCounter from './StudentCounter';
 import FeatureBar from './FeatureBar';
 import Announcement from './Announcement';
+import LiveCourseVideoBackground from './LiveCourseVideoBackground';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -197,19 +198,15 @@ export default function LiveCourses() {
 
     return (
         <section
-            id="live-courses"
             ref={sectionRef}
             className="relative py-32 px-6 overflow-hidden"
             style={{ willChange: hasAnimated ? 'auto' : 'transform' }}
         >
-            {/* Animated Background */}
-            <div className="absolute inset-0 opacity-30 pointer-events-none">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(122,0,25,0.15)_0%,transparent_50%)]" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(122,0,25,0.1)_0%,transparent_50%)]" />
-            </div>
+            {/* Cinematic Video Background */}
+            <LiveCourseVideoBackground />
 
             {/* Container */}
-            <div className="relative max-w-7xl mx-auto">
+            <div className="relative max-w-7xl mx-auto" style={{ zIndex: 10 }}>
                 {/* Header Section */}
                 <div className="grid lg:grid-cols-2 gap-12 mb-20">
                     {/* Left: Heading */}

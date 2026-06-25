@@ -5,6 +5,7 @@ export interface NavigationItem {
     href: string;
     hasMegaMenu?: boolean;
     hasDropdown?: boolean;
+    sectionId?: string;
 }
 
 export interface MegaMenuItem {
