@@ -49,17 +49,9 @@ export default function MentorShowcase() {
                             <div className="absolute -inset-[1px] rounded-[28px] bg-gradient-to-r from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/40 group-hover:via-primary/20 group-hover:to-primary/40 opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl -z-10" />
 
                             {/* Floating Animation */}
-                            <motion.div
-                                animate={{
-                                    y: [0, -8, 0],
-                                }}
-                                transition={{
-                                    duration: 4,
-                                    repeat: Infinity,
-                                    ease: 'easeInOut',
-                                    delay: index * 0.2,
-                                }}
-                                className="space-y-4"
+                            <div
+                                className="space-y-4 animate-float-vertical"
+                                style={{ animationDelay: `${index * 0.2}s` }}
                             >
                                 {/* Image Circle */}
                                 <div className="relative mx-auto w-32 h-32 rounded-full overflow-hidden border-4 border-primary/30 group-hover:border-primary transition-colors duration-500">
@@ -99,7 +91,7 @@ export default function MentorShowcase() {
                                         {mentor.description}
                                     </p>
                                 </div>
-                            </motion.div>
+                            </div>
 
                             {/* Border Enhancement */}
                             <div

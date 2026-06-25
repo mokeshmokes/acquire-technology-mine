@@ -16,7 +16,7 @@ export default function Logo() {
                 {/* Acquiring Technology Logo */}
                 <div className="w-12 h-12 relative">
                     <Image
-                        src="/logo.png"
+                        src="/images/logo.png"
                         alt="Acquiring Technology Logo"
                         fill
                         className="object-contain"
@@ -27,7 +27,11 @@ export default function Logo() {
 
             <div className="flex flex-col">
                 <motion.span
-                    className="text-xl font-bold tracking-tight text-primary transition-colors duration-300"
+                    className="text-xl font-bold tracking-tight transition-colors duration-300"
+                    style={{
+                        color: '#E8192C',
+                        textShadow: '0 0 20px rgba(220,25,50,0.5), 0 0 40px rgba(220,25,50,0.25)',
+                    }}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 }}

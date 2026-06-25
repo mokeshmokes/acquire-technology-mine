@@ -9,7 +9,6 @@ import LiveCourseCard from './LiveCourseCard';
 import StudentCounter from './StudentCounter';
 import FeatureBar from './FeatureBar';
 import Announcement from './Announcement';
-import LiveCourseVideoBackground from './LiveCourseVideoBackground';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -66,48 +65,25 @@ export default function LiveCourses() {
                 );
             }
 
-            // Heading animations
             if (heading1Ref.current) {
-                tl.from(
-                    heading1Ref.current,
-                    {
-                        y: 40,
-                        opacity: 0,
-                        filter: 'blur(8px)',
-                        duration: 0.9,
-                        ease: 'power3.out',
-                    },
-                    0.2
-                );
+                tl.from(heading1Ref.current, {
+                    y: 40, opacity: 0,
+                    duration: 0.8, ease: 'power3.out',
+                }, 0.2);
             }
 
             if (heading2Ref.current) {
-                tl.from(
-                    heading2Ref.current,
-                    {
-                        y: 40,
-                        opacity: 0,
-                        filter: 'blur(8px)',
-                        duration: 0.9,
-                        ease: 'power3.out',
-                    },
-                    0.3
-                );
+                tl.from(heading2Ref.current, {
+                    y: 40, opacity: 0,
+                    duration: 0.8, ease: 'power3.out',
+                }, 0.3);
             }
 
-            // Subtitle
             if (subtitleRef.current) {
-                tl.from(
-                    subtitleRef.current,
-                    {
-                        y: 30,
-                        opacity: 0,
-                        filter: 'blur(6px)',
-                        duration: 0.8,
-                        ease: 'power3.out',
-                    },
-                    0.4
-                );
+                tl.from(subtitleRef.current, {
+                    y: 25, opacity: 0,
+                    duration: 0.7, ease: 'power3.out',
+                }, 0.4);
             }
 
             // Features
@@ -199,11 +175,38 @@ export default function LiveCourses() {
     return (
         <section
             ref={sectionRef}
-            className="relative py-32 px-6 overflow-hidden"
+            className="relative py-32 px-6 overflow-hidden bg-background"
             style={{ willChange: hasAnimated ? 'auto' : 'transform' }}
         >
-            {/* Cinematic Video Background */}
-            <LiveCourseVideoBackground />
+            {/* Static Background with Gradients */}
+            <div className="absolute inset-0">
+                {/* Base Dark Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-background via-[#0A0A0A] to-background" />
+
+                {/* Animated Red Gradient Orbs */}
+                <div
+                    className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/20 blur-[120px]"
+                    style={{
+                        animation: 'pulse-glow 8s ease-in-out infinite',
+                    }}
+                />
+                <div
+                    className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-primary-hover/15 blur-[140px]"
+                    style={{
+                        animation: 'pulse-glow-delayed 10s ease-in-out infinite',
+                    }}
+                />
+
+                {/* Subtle Grid Pattern */}
+                <div
+                    className="absolute inset-0 opacity-[0.02]"
+                    style={{
+                        backgroundImage: `linear-gradient(rgba(255, 0, 60, 0.1) 1px, transparent 1px),
+                                         linear-gradient(90deg, rgba(255, 0, 60, 0.1) 1px, transparent 1px)`,
+                        backgroundSize: '50px 50px',
+                    }}
+                />
+            </div>
 
             {/* Container */}
             <div className="relative max-w-7xl mx-auto" style={{ zIndex: 10 }}>

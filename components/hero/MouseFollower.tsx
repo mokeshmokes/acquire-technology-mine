@@ -1,67 +1,67 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { motion, useSpring } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { useMotionValue, useSpring, motion } from 'framer-motion';
 
 export default function MouseFollower() {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-    const springConfig = { damping: 25, stiffness: 150 };
-    const x = useSpring(0, springConfig);
-    const y = useSpring(0, springConfig);
+    const rawX = useMotionValue(-500); // start off-screen
+    const rawY = useMotionValue(-500);
+    // Softer spring = fewer frames needed to settle, less CPU
+    const x = useSpring(rawX, { damping: 35, stiffness: 100 });
+    const y = useSpring(rawY, { damping: 35, stiffness: 100 });
+    const rafRef = useRef<number | null>(null);
 
     useEffect(() => {
+        let pendingX = -500;
+        let pendingY = -500;
+
         const handleMouseMove = (e: MouseEvent) => {
-            setMousePosition({ x: e.clientX, y: e.clientY });
+            pendingX = e.clientX;
+            pendingY = e.clientY;
+            if (rafRef.current === null) {
+                rafRef.current = requestAnimationFrame(() => {
+                    rawX.set(pendingX);
+                    rawY.set(pendingY);
+                    rafRef.current = null;
+                });
+            }
         };
 
-        window.addEventListener('mousemove', handleMouseMove);
-
+        window.addEventListener('mousemove', handleMouseMove, { passive: true });
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
+            if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
         };
-    }, []);
-
-    useEffect(() => {
-        x.set(mousePosition.x);
-        y.set(mousePosition.y);
-    }, [mousePosition, x, y]);
+    }, [rawX, rawY]);
 
     return (
-        <>
-            {/* Main cursor glow */}
-            <motion.div
-                className="fixed pointer-events-none z-50 mix-blend-screen"
+        <motion.div
+            className="fixed pointer-events-none z-50"
+            style={{
+                x,
+                y,
+                translateX: '-50%',
+                translateY: '-50%',
+                // Isolate to own GPU layer — no mix-blend-screen which
+                // forces the browser to re-composite the entire page stack
+                // on every mouse move.
+                willChange: 'transform',
+            }}
+        >
+            {/*
+             * Reduced from w-64/h-64 + blur-3xl + mix-blend-screen.
+             * mix-blend-screen is the main offender — it disables GPU fast-
+             * path compositing and falls back to software blending.
+             * Now: smaller, opacity-only, no blend mode.
+             */}
+            <div
+                className="w-48 h-48 rounded-full"
                 style={{
-                    x: x,
-                    y: y,
-                    translateX: '-50%',
-                    translateY: '-50%',
+                    background:
+                        'radial-gradient(circle, rgba(139,0,0,0.12) 0%, transparent 70%)',
+                    filter: 'blur(40px)',
                 }}
-            >
-                <div className="w-64 h-64 rounded-full bg-primary opacity-10 blur-3xl" />
-            </motion.div>
-
-            {/* Secondary glow */}
-            <motion.div
-                className="fixed pointer-events-none z-50 mix-blend-screen"
-                style={{
-                    x: x,
-                    y: y,
-                    translateX: '-50%',
-                    translateY: '-50%',
-                }}
-                animate={{
-                    scale: [1, 1.2, 1],
-                }}
-                transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                }}
-            >
-                <div className="w-32 h-32 rounded-full bg-primary-hover opacity-5 blur-2xl" />
-            </motion.div>
-        </>
+            />
+        </motion.div>
     );
 }

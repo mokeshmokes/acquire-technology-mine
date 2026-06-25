@@ -2,238 +2,164 @@
 
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import FreeCourseVideoBackground from './FreeCourseVideoBackground';
 import FreeCourseCard from './FreeCourseCard';
 import { freeCoursesData } from '@/data/freeCourses';
 
 export default function FreeCoursesBackground() {
     const sectionRef = useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = useState(false);
-    const [isMounted, setIsMounted] = useState(false);
     const { courses } = freeCoursesData;
 
-    // Only generate particles on client-side after mount
-    const [particlePositions] = useState(() => ({
-        large: Array.from({ length: 8 }, () => ({
-            left: Math.random() * 100,
-            top: Math.random() * 100,
-            x: Math.random() * 20 - 10,
-            duration: 5 + Math.random() * 3,
-            delay: Math.random() * 2,
-        })),
-        small: Array.from({ length: 15 }, () => ({
-            left: Math.random() * 100,
-            top: Math.random() * 100,
-            duration: 3 + Math.random() * 2,
-            delay: Math.random() * 2,
-        })),
-    }));
-
     useEffect(() => {
-        setIsMounted(true);
-    }, []);
-
-    useEffect(() => {
-        const currentSection = sectionRef.current;
-
+        const section = sectionRef.current;
+        if (!section) return;
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if (entry.isIntersecting && !isVisible) {
+                if (entry.isIntersecting) {
                     setIsVisible(true);
+                    observer.disconnect();
                 }
             },
-            { threshold: 0.2 }
+            { threshold: 0.1 }
         );
-
-        if (currentSection) {
-            observer.observe(currentSection);
-        }
-
-        return () => {
-            if (currentSection) {
-                observer.unobserve(currentSection);
-            }
-        };
-    }, [isVisible]);
+        observer.observe(section);
+        return () => observer.disconnect();
+    }, []);
 
     return (
         <section
             ref={sectionRef}
-            className="relative min-h-screen w-full overflow-hidden py-32"
+            className="relative min-h-screen w-full overflow-hidden py-32 bg-background"
         >
-            {/* Video Background */}
-            <FreeCourseVideoBackground />
+            {/* Static Background with Gradients */}
+            <div className="absolute inset-0">
+                {/* Base Dark Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-background via-[#0A0A0A] to-background" />
 
-            {/* Floating Particles */}
-            {isMounted && (
-                <div className="absolute inset-0 z-[2] opacity-20 pointer-events-none">
-                    {/* Large Particles */}
-                    {particlePositions.large.map((particle, i) => (
-                        <motion.div
-                            key={`particle-${i}`}
-                            className="absolute w-2 h-2 bg-primary rounded-full"
-                            style={{
-                                left: `${particle.left}%`,
-                                top: `${particle.top}%`,
-                                filter: 'blur(1px)',
-                            }}
-                            animate={isVisible ? {
-                                y: [0, -30, 0],
-                                x: [0, particle.x, 0],
-                                opacity: [0.3, 0.6, 0.3],
-                            } : {}}
-                            transition={{
-                                duration: particle.duration,
-                                repeat: Infinity,
-                                delay: particle.delay,
-                                ease: 'easeInOut',
-                            }}
-                        />
-                    ))}
+                {/* Animated Red Gradient Orbs */}
+                <div
+                    className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/20 blur-[120px]"
+                    style={{
+                        animation: 'pulse-glow 8s ease-in-out infinite',
+                    }}
+                />
+                <div
+                    className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-primary-hover/15 blur-[140px]"
+                    style={{
+                        animation: 'pulse-glow-delayed 10s ease-in-out infinite',
+                    }}
+                />
 
-                    {/* Small Glowing Dots */}
-                    {particlePositions.small.map((dot, i) => (
-                        <motion.div
-                            key={`dot-${i}`}
-                            className="absolute w-1 h-1 bg-primary rounded-full"
-                            style={{
-                                left: `${dot.left}%`,
-                                top: `${dot.top}%`,
-                                boxShadow: '0 0 10px rgba(199, 24, 56, 0.8)',
-                            }}
-                            animate={isVisible ? {
-                                opacity: [0.2, 0.8, 0.2],
-                                scale: [1, 1.5, 1],
-                            } : {}}
-                            transition={{
-                                duration: dot.duration,
-                                repeat: Infinity,
-                                delay: dot.delay,
-                                ease: 'easeInOut',
-                            }}
-                        />
-                    ))}
-                </div>
-            )}
+                {/* Subtle Grid Pattern */}
+                <div
+                    className="absolute inset-0 opacity-[0.02]"
+                    style={{
+                        backgroundImage: `linear-gradient(rgba(255, 0, 60, 0.1) 1px, transparent 1px),
+                                         linear-gradient(90deg, rgba(255, 0, 60, 0.1) 1px, transparent 1px)`,
+                        backgroundSize: '50px 50px',
+                    }}
+                />
+            </div>
+
+            {/* Floating Particles — pure CSS, zero JS per frame */}
+            <div className="absolute inset-0 z-[2] pointer-events-none overflow-hidden">
+                {Array.from({ length: 10 }).map((_, i) => (
+                    <div
+                        key={i}
+                        className="absolute rounded-full bg-primary particle-float"
+                        style={{
+                            width: i % 3 === 0 ? '6px' : '3px',
+                            height: i % 3 === 0 ? '6px' : '3px',
+                            left: `${(i * 10 + 5) % 100}%`,
+                            top: `${(i * 13 + 8) % 90}%`,
+                            opacity: 0.18,
+                            animationDuration: `${5 + (i % 4)}s`,
+                            animationDelay: `${(i * 0.5) % 3}s`,
+                        }}
+                    />
+                ))}
+            </div>
 
             {/* Digital Grid */}
             <div
-                className="absolute inset-0 z-[2] opacity-5 pointer-events-none"
+                className="absolute inset-0 z-[2] opacity-[0.04] pointer-events-none"
                 style={{
                     backgroundImage: `
-                        linear-gradient(rgba(199, 24, 56, 0.3) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(199, 24, 56, 0.3) 1px, transparent 1px)
+                        linear-gradient(rgba(199,24,56,0.3) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(199,24,56,0.3) 1px, transparent 1px)
                     `,
                     backgroundSize: '50px 50px',
                 }}
             />
 
-            {/* Animated Connection Lines */}
-            <svg
-                className="absolute inset-0 w-full h-full z-[2] opacity-10 pointer-events-none"
-                style={{ willChange: 'opacity' }}
-            >
+            {/* Connection Lines — draw once on enter, no looping */}
+            <svg className="absolute inset-0 w-full h-full z-[2] opacity-10 pointer-events-none">
                 <motion.line
-                    x1="10%"
-                    y1="20%"
-                    x2="90%"
-                    y2="80%"
-                    stroke="rgba(199, 24, 56, 0.5)"
-                    strokeWidth="1"
+                    x1="10%" y1="20%" x2="90%" y2="80%"
+                    stroke="rgba(199,24,56,0.5)" strokeWidth="1"
                     initial={{ pathLength: 0, opacity: 0 }}
                     animate={isVisible ? { pathLength: 1, opacity: 0.3 } : {}}
                     transition={{ duration: 2, delay: 0.5 }}
                 />
                 <motion.line
-                    x1="80%"
-                    y1="30%"
-                    x2="20%"
-                    y2="70%"
-                    stroke="rgba(199, 24, 56, 0.5)"
-                    strokeWidth="1"
+                    x1="80%" y1="30%" x2="20%" y2="70%"
+                    stroke="rgba(199,24,56,0.5)" strokeWidth="1"
                     initial={{ pathLength: 0, opacity: 0 }}
                     animate={isVisible ? { pathLength: 1, opacity: 0.3 } : {}}
                     transition={{ duration: 2, delay: 0.8 }}
                 />
                 <motion.circle
-                    cx="50%"
-                    cy="50%"
-                    r="30"
-                    fill="none"
-                    stroke="rgba(199, 24, 56, 0.3)"
-                    strokeWidth="1"
+                    cx="50%" cy="50%" r="30"
+                    fill="none" stroke="rgba(199,24,56,0.3)" strokeWidth="1"
                     initial={{ scale: 0, opacity: 0 }}
                     animate={isVisible ? { scale: 1, opacity: 0.2 } : {}}
                     transition={{ duration: 1.5, delay: 1 }}
                 />
             </svg>
 
-            {/* Moving Gradients */}
-            <motion.div
-                className="absolute inset-0 z-[2] pointer-events-none"
+            {/*
+             * Ambient gradient blobs — CSS keyframes only.
+             * No Framer x/y which would trigger layout calculations per frame.
+             */}
+            <div
+                className="absolute inset-0 z-[2] pointer-events-none animate-blob-1"
                 style={{
-                    background: 'radial-gradient(circle at 30% 40%, rgba(199, 24, 56, 0.15) 0%, transparent 50%)',
-                }}
-                animate={isVisible ? {
-                    x: [0, 50, 0],
-                    y: [0, -30, 0],
-                } : {}}
-                transition={{
-                    duration: 15,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
+                    background:
+                        'radial-gradient(circle at 30% 40%, rgba(199,24,56,0.13) 0%, transparent 50%)',
+                    willChange: 'transform',
                 }}
             />
-
-            <motion.div
-                className="absolute inset-0 z-[2] pointer-events-none"
+            <div
+                className="absolute inset-0 z-[2] pointer-events-none animate-blob-2"
                 style={{
-                    background: 'radial-gradient(circle at 70% 60%, rgba(122, 0, 25, 0.12) 0%, transparent 50%)',
-                }}
-                animate={isVisible ? {
-                    x: [0, -50, 0],
-                    y: [0, 40, 0],
-                } : {}}
-                transition={{
-                    duration: 18,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
+                    background:
+                        'radial-gradient(circle at 70% 60%, rgba(122,0,25,0.1) 0%, transparent 50%)',
+                    willChange: 'transform',
                 }}
             />
 
             {/* Section Content */}
             <div className="relative z-[10] container mx-auto px-6">
+
                 {/* Badge */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 25 }}
                     animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.8, delay: 0.2 }}
+                    transition={{ duration: 0.6, delay: 0.15 }}
                     className="text-center mb-6"
                 >
                     <div className="inline-block">
                         <div
                             className="flex items-center gap-2 px-4 py-2 rounded-full"
                             style={{
-                                background: 'rgba(199, 24, 56, 0.15)',
-                                backdropFilter: 'blur(12px)',
-                                border: '1px solid rgba(199, 24, 56, 0.3)',
-                                boxShadow: '0 0 20px rgba(199, 24, 56, 0.3)',
+                                background: 'rgba(199,24,56,0.15)',
+                                border: '1px solid rgba(199,24,56,0.3)',
+                                boxShadow: '0 0 20px rgba(199,24,56,0.25)',
                             }}
                         >
-                            <motion.div
-                                className="w-2 h-2 bg-primary rounded-full"
-                                animate={{
-                                    scale: [1, 1.5, 1],
-                                    opacity: [1, 0.5, 1],
-                                }}
-                                transition={{
-                                    duration: 2,
-                                    repeat: Infinity,
-                                    ease: 'easeInOut',
-                                }}
-                                style={{
-                                    boxShadow: '0 0 8px rgba(199, 24, 56, 0.8)',
-                                }}
+                            <div
+                                className="w-2 h-2 bg-primary rounded-full animate-dot-pulse"
+                                style={{ boxShadow: '0 0 8px rgba(199,24,56,0.8)' }}
                             />
                             <span className="text-xs font-bold text-white uppercase tracking-wider">
                                 100% Free
@@ -244,9 +170,9 @@ export default function FreeCoursesBackground() {
 
                 {/* Main Heading */}
                 <motion.div
-                    initial={{ opacity: 0, y: 40 }}
+                    initial={{ opacity: 0, y: 35 }}
                     animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.9, delay: 0.4 }}
+                    transition={{ duration: 0.7, delay: 0.3 }}
                     className="text-center mb-8"
                 >
                     <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
@@ -254,7 +180,7 @@ export default function FreeCoursesBackground() {
                         <span
                             className="bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent"
                             style={{
-                                filter: 'drop-shadow(0 0 20px rgba(199, 24, 56, 0.4))',
+                                filter: 'drop-shadow(0 0 20px rgba(199,24,56,0.4))',
                             }}
                         >
                             MASTERCLASSES
@@ -267,29 +193,21 @@ export default function FreeCoursesBackground() {
 
                 {/* Description */}
                 <motion.p
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 25 }}
                     animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.8, delay: 0.6 }}
+                    transition={{ duration: 0.6, delay: 0.45 }}
                     className="text-center text-lg text-white/70 max-w-3xl mx-auto mb-16"
                 >
                     Upgrade your career with free technology masterclasses conducted by industry experts.
                     Learn AI, Web Development, Data Science, and more—completely free.
                 </motion.p>
 
-                {/* Cards Container */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={isVisible ? { opacity: 1 } : {}}
-                    transition={{ duration: 1, delay: 0.8 }}
-                    className="relative z-[10]"
-                >
-                    {/* Cards Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {courses.map((course) => (
-                            <FreeCourseCard key={course.id} course={course} />
-                        ))}
-                    </div>
-                </motion.div>
+                {/* Cards Grid — no wrapper motion.div, cards animate themselves */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {courses.map((course, i) => (
+                        <FreeCourseCard key={course.id} course={course} index={i} />
+                    ))}
+                </div>
             </div>
         </section>
     );

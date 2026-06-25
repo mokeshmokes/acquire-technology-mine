@@ -61,23 +61,21 @@ export default function CinematicVideoBackground() {
                 muted
                 loop
                 playsInline
-                preload="auto"
+                preload="metadata"
                 disablePictureInPicture
                 controlsList="nodownload noplaybackrate noremoteplayback"
                 aria-hidden="true"
                 className="absolute inset-0 w-full h-full object-cover"
-                style={{
-                    zIndex: 0
-                }}
+                style={{ zIndex: 0, willChange: 'auto' }}
             >
                 {/* Current video (2.72 MB): */}
-                <source src="/videos/hero-video.mp4" type="video/mp4" />
+                <source src="/videos/Hero-Section-Vid.mp4" type="video/mp4" />
 
                 {/* Alternative video options: */}
                 {/* <source src="/videos/hero-video1.mp4" type="video/mp4" />  2.43 MB */}
                 {/* <source src="/herovedio.mp4" type="video/mp4" /> */}  {/* 69.38 MB - Large file */}
 
-                Your browser does not support the video tag.
+                 Your browser does not support the video tag.
             </video>
 
             {/* Error Fallback - Premium gradient background if video fails */}

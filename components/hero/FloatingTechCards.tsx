@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import {
     Brain,
@@ -26,199 +26,68 @@ interface TechCard {
     icon: any;
     angle: number;
     radius: number;
-    depth: number;
-    floatDuration: number;
     floatDelay: number;
 }
 
 const techCards: TechCard[] = [
-    {
-        id: 'ai-engineer',
-        title: 'AI Engineer Program',
-        description: 'Master Gen AI, AI Agents & LLMs',
-        duration: '6 Months',
-        icon: Brain,
-        angle: 0,
-        radius: 320,
-        depth: -100,
-        floatDuration: 6,
-        floatDelay: 0,
-    },
-    {
-        id: 'data-science',
-        title: 'Data Science',
-        description: 'Python, ML & Analytics',
-        duration: '5 Months',
-        icon: Database,
-        angle: 30,
-        radius: 300,
-        depth: -80,
-        floatDuration: 5.5,
-        floatDelay: 0.3,
-    },
-    {
-        id: 'machine-learning',
-        title: 'Machine Learning',
-        description: 'Deep Learning & Neural Networks',
-        duration: '4 Months',
-        icon: Cpu,
-        angle: 60,
-        radius: 340,
-        depth: -120,
-        floatDuration: 7,
-        floatDelay: 0.6,
-    },
-    {
-        id: 'cloud',
-        title: 'Cloud Computing',
-        description: 'AWS, Azure & DevOps',
-        duration: '4 Months',
-        icon: Cloud,
-        angle: 90,
-        radius: 310,
-        depth: -90,
-        floatDuration: 6.5,
-        floatDelay: 0.9,
-    },
-    {
-        id: 'cyber-security',
-        title: 'Cyber Security',
-        description: 'Ethical Hacking & Pentesting',
-        duration: '5 Months',
-        icon: Shield,
-        angle: 120,
-        radius: 330,
-        depth: -110,
-        floatDuration: 5,
-        floatDelay: 1.2,
-    },
-    {
-        id: 'full-stack',
-        title: 'Full Stack Development',
-        description: 'React, Node.js & MongoDB',
-        duration: '6 Months',
-        icon: Code2,
-        angle: 150,
-        radius: 300,
-        depth: -85,
-        floatDuration: 6.8,
-        floatDelay: 1.5,
-    },
-    {
-        id: 'power-bi',
-        title: 'Power BI',
-        description: 'Business Intelligence & Visualization',
-        duration: '3 Months',
-        icon: BarChart3,
-        angle: 180,
-        radius: 320,
-        depth: -95,
-        floatDuration: 5.3,
-        floatDelay: 1.8,
-    },
-    {
-        id: 'devops',
-        title: 'DevOps',
-        description: 'CI/CD & Infrastructure Automation',
-        duration: '4 Months',
-        icon: Boxes,
-        angle: 210,
-        radius: 340,
-        depth: -115,
-        floatDuration: 6.2,
-        floatDelay: 2.1,
-    },
-    {
-        id: 'ai-agents',
-        title: 'AI Agents',
-        description: 'Autonomous AI & Agent Systems',
-        duration: '3 Months',
-        icon: Sparkles,
-        angle: 240,
-        radius: 305,
-        depth: -88,
-        floatDuration: 5.8,
-        floatDelay: 2.4,
-    },
-    {
-        id: 'prompt-engineering',
-        title: 'Prompt Engineering',
-        description: 'Advanced AI Prompting Techniques',
-        duration: '2 Months',
-        icon: MessageSquare,
-        angle: 270,
-        radius: 325,
-        depth: -105,
-        floatDuration: 6.5,
-        floatDelay: 2.7,
-    },
-    {
-        id: 'data-analytics',
-        title: 'Data Analytics',
-        description: 'SQL, Python & Visualization',
-        duration: '4 Months',
-        icon: TrendingUp,
-        angle: 300,
-        radius: 315,
-        depth: -92,
-        floatDuration: 5.6,
-        floatDelay: 3.0,
-    },
-    {
-        id: 'blockchain',
-        title: 'Blockchain',
-        description: 'Web3, Ethereum & Smart Contracts',
-        duration: '5 Months',
-        icon: Lock,
-        angle: 330,
-        radius: 335,
-        depth: -108,
-        floatDuration: 6.9,
-        floatDelay: 3.3,
-    },
+    { id: 'ai-engineer', title: 'AI Engineer', description: 'Master Gen AI & LLMs', duration: '6 Months', icon: Brain, angle: 0, radius: 320, floatDelay: 0 },
+    { id: 'data-science', title: 'Data Science', description: 'Python, ML & Analytics', duration: '5 Months', icon: Database, angle: 30, radius: 300, floatDelay: 0.4 },
+    { id: 'machine-learning', title: 'Machine Learning', description: 'Deep Learning & Neural Networks', duration: '4 Months', icon: Cpu, angle: 60, radius: 340, floatDelay: 0.8 },
+    { id: 'cloud', title: 'Cloud Computing', description: 'AWS, Azure & DevOps', duration: '4 Months', icon: Cloud, angle: 90, radius: 310, floatDelay: 1.2 },
+    { id: 'cyber-security', title: 'Cyber Security', description: 'Ethical Hacking & Pentesting', duration: '5 Months', icon: Shield, angle: 120, radius: 330, floatDelay: 1.6 },
+    { id: 'full-stack', title: 'Full Stack Dev', description: 'React, Node.js & MongoDB', duration: '6 Months', icon: Code2, angle: 150, radius: 300, floatDelay: 2.0 },
+    { id: 'power-bi', title: 'Power BI', description: 'BI & Visualization', duration: '3 Months', icon: BarChart3, angle: 180, radius: 320, floatDelay: 2.4 },
+    { id: 'devops', title: 'DevOps', description: 'CI/CD & Automation', duration: '4 Months', icon: Boxes, angle: 210, radius: 340, floatDelay: 2.8 },
+    { id: 'ai-agents', title: 'AI Agents', description: 'Autonomous AI Systems', duration: '3 Months', icon: Sparkles, angle: 240, radius: 305, floatDelay: 3.2 },
+    { id: 'prompt-eng', title: 'Prompt Engineering', description: 'Advanced AI Prompting', duration: '2 Months', icon: MessageSquare, angle: 270, radius: 325, floatDelay: 3.6 },
+    { id: 'data-analytics', title: 'Data Analytics', description: 'SQL, Python & Viz', duration: '4 Months', icon: TrendingUp, angle: 300, radius: 315, floatDelay: 4.0 },
+    { id: 'blockchain', title: 'Blockchain', description: 'Web3 & Smart Contracts', duration: '5 Months', icon: Lock, angle: 330, radius: 335, floatDelay: 4.4 },
 ];
 
 export default function FloatingTechCards() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const [hoveredCard, setHoveredCard] = useState<string | null>(null);
     const [mounted, setMounted] = useState(false);
 
-    // Mouse position tracking
+    // Single shared mouse tracking — motion values only, no React state
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
+    const springConfig = { damping: 35, stiffness: 120 };
+    const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), springConfig);
+    const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), springConfig);
 
-    // Smooth mouse following with spring physics
-    const springConfig = { damping: 30, stiffness: 150 };
-    const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), springConfig);
-    const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), springConfig);
+    const rafRef = useRef<number | null>(null);
 
     useEffect(() => {
         setMounted(true);
     }, []);
 
     useEffect(() => {
-        if (typeof window === 'undefined') return;
+        if (!mounted) return;
+        let pendingX = 0;
+        let pendingY = 0;
 
         const handleMouseMove = (e: MouseEvent) => {
             if (!containerRef.current) return;
-
             const rect = containerRef.current.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
+            pendingX = (e.clientX - rect.left - rect.width / 2) / rect.width;
+            pendingY = (e.clientY - rect.top - rect.height / 2) / rect.height;
 
-            // Normalize mouse position (-0.5 to 0.5)
-            const x = (e.clientX - centerX) / rect.width;
-            const y = (e.clientY - centerY) / rect.height;
-
-            mouseX.set(x);
-            mouseY.set(y);
+            if (rafRef.current === null) {
+                rafRef.current = requestAnimationFrame(() => {
+                    mouseX.set(pendingX);
+                    mouseY.set(pendingY);
+                    rafRef.current = null;
+                });
+            }
         };
 
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
-    }, [mouseX, mouseY]);
+        window.addEventListener('mousemove', handleMouseMove, { passive: true });
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+        };
+    }, [mounted, mouseX, mouseY]);
 
-    // Check for reduced motion preference
     const prefersReducedMotion =
         typeof window !== 'undefined' &&
         window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -226,10 +95,10 @@ export default function FloatingTechCards() {
     return (
         <div
             ref={containerRef}
-            className="relative w-full h-full flex items-center justify-center perspective-[2000px]"
+            className="relative w-full h-full flex items-center justify-center"
             style={{ perspective: '2000px' }}
         >
-            {/* 3D Container with Mouse Interaction */}
+            {/* 3D Container — single motion element handles all tilt */}
             <motion.div
                 style={{
                     rotateX: prefersReducedMotion ? 0 : rotateX,
@@ -238,114 +107,27 @@ export default function FloatingTechCards() {
                 }}
                 className="relative w-full h-full"
             >
-                {/* Center Hub - Technology Core */}
-                <motion.div
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={mounted ? { scale: 1, opacity: 1 } : {}}
-                    transition={{
-                        duration: 1,
-                        ease: [0.23, 1, 0.32, 1],
-                    }}
-                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                    style={{ transformStyle: 'preserve-3d' }}
-                >
-                    {/* Holographic Core */}
-                    <div className="relative">
-                        {/* Ambient Glow */}
-                        <motion.div
-                            animate={{
-                                opacity: [0.3, 0.6, 0.3],
-                                scale: [1, 1.2, 1],
-                            }}
-                            transition={{
-                                duration: 4,
-                                repeat: Infinity,
-                                ease: 'easeInOut',
-                            }}
-                            className="absolute inset-0 bg-primary/30 blur-[80px] rounded-full w-64 h-64 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2"
-                        />
-
-                        {/* Central Chip */}
-                        <motion.div
-                            animate={
-                                prefersReducedMotion
-                                    ? {}
-                                    : {
-                                        rotateZ: 360,
-                                    }
-                            }
-                            transition={{
-                                duration: 20,
-                                repeat: Infinity,
-                                ease: 'linear',
-                            }}
-                            className="relative"
-                        >
-                            <div className="w-32 h-32 bg-gradient-to-br from-primary/20 via-surface to-primary/20 rounded-2xl border-2 border-primary/40 backdrop-blur-xl shadow-2xl flex items-center justify-center">
-                                {/* Inner Glow */}
-                                <motion.div
-                                    animate={{
-                                        opacity: [0.5, 1, 0.5],
-                                    }}
-                                    transition={{
-                                        duration: 2,
-                                        repeat: Infinity,
-                                        ease: 'easeInOut',
-                                    }}
-                                    className="absolute inset-2 bg-primary/20 rounded-xl blur-md"
-                                />
-
-                                {/* Brain Icon */}
-                                <Brain className="w-16 h-16 text-primary relative z-10" strokeWidth={1.5} />
-
-                                {/* Corner Circuits */}
-                                <div className="absolute top-2 left-2 w-3 h-3 border-l-2 border-t-2 border-primary/60 rounded-tl" />
-                                <div className="absolute top-2 right-2 w-3 h-3 border-r-2 border-t-2 border-primary/60 rounded-tr" />
-                                <div className="absolute bottom-2 left-2 w-3 h-3 border-l-2 border-b-2 border-primary/60 rounded-bl" />
-                                <div className="absolute bottom-2 right-2 w-3 h-3 border-r-2 border-b-2 border-primary/60 rounded-br" />
+                {/* Center Hub */}
+                {mounted && (
+                    <motion.div
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+                        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                    >
+                        <div className="relative">
+                            <div className="absolute inset-0 bg-primary/20 blur-[60px] rounded-full w-48 h-48 -translate-x-1/4 -translate-y-1/4" />
+                            <div className="w-24 h-24 bg-gradient-to-br from-primary/20 via-surface to-primary/20 rounded-2xl border-2 border-primary/40 backdrop-blur-xl shadow-2xl flex items-center justify-center">
+                                <Brain className="w-12 h-12 text-primary" strokeWidth={1.5} />
                             </div>
-                        </motion.div>
+                        </div>
+                    </motion.div>
+                )}
 
-                        {/* Orbiting Rings */}
-                        {[1, 2].map((ring) => (
-                            <motion.div
-                                key={ring}
-                                animate={
-                                    prefersReducedMotion
-                                        ? {}
-                                        : {
-                                            rotateZ: ring % 2 === 0 ? 360 : -360,
-                                        }
-                                }
-                                transition={{
-                                    duration: 15 + ring * 5,
-                                    repeat: Infinity,
-                                    ease: 'linear',
-                                }}
-                                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                                style={{
-                                    width: `${160 + ring * 40}px`,
-                                    height: `${160 + ring * 40}px`,
-                                }}
-                            >
-                                <div
-                                    className="w-full h-full rounded-full border border-primary/20"
-                                    style={{
-                                        background: `conic-gradient(from 0deg, transparent 0%, rgba(122, 0, 25, 0.3) 50%, transparent 100%)`,
-                                    }}
-                                />
-                            </motion.div>
-                        ))}
-                    </div>
-                </motion.div>
-
-                {/* Floating Course Cards */}
-                <div className="absolute inset-0">
+                {/* Floating Cards — CSS float animation, no per-card framer loops */}
+                <div className="absolute inset-0 hidden lg:block">
                     {techCards.map((card, index) => {
                         const Icon = card.icon;
-                        const isHovered = hoveredCard === card.id;
-
-                        // Calculate 3D position
                         const angleRad = (card.angle * Math.PI) / 180;
                         const x = Math.cos(angleRad) * card.radius;
                         const y = Math.sin(angleRad) * card.radius;
@@ -353,186 +135,80 @@ export default function FloatingTechCards() {
                         return (
                             <motion.div
                                 key={card.id}
-                                initial={{
-                                    opacity: 0,
-                                    scale: 0.8,
-                                    y: 80,
-                                    rotateX: 20,
-                                    filter: 'blur(20px)',
-                                }}
-                                animate={
-                                    mounted
-                                        ? {
-                                            opacity: hoveredCard && !isHovered ? 0.3 : 1,
-                                            scale: 1,
-                                            y: 0,
-                                            rotateX: 0,
-                                            filter: hoveredCard && !isHovered ? 'blur(4px)' : 'blur(0px)',
-                                        }
-                                        : {}
-                                }
-                                transition={{
-                                    duration: 1,
-                                    delay: index * 0.12,
-                                    ease: [0.23, 1, 0.32, 1],
-                                }}
-                                className="absolute left-1/2 top-1/2 hidden lg:block"
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={mounted ? { opacity: 1, scale: 1 } : {}}
+                                transition={{ duration: 0.6, delay: index * 0.06, ease: [0.23, 1, 0.32, 1] }}
+                                className="absolute left-1/2 top-1/2 tech-card-float"
                                 style={{
-                                    transform: `translate(${x}px, ${y}px) translateZ(${card.depth}px)`,
-                                    transformStyle: 'preserve-3d',
+                                    marginLeft: `${x - 96}px`,
+                                    marginTop: `${y - 60}px`,
+                                    animationDelay: `${card.floatDelay}s`,
+                                    width: '192px',
                                 }}
-                                onMouseEnter={() => setHoveredCard(card.id)}
-                                onMouseLeave={() => setHoveredCard(null)}
                             >
-                                {/* Floating Animation */}
-                                <motion.div
-                                    animate={
-                                        prefersReducedMotion || isHovered
-                                            ? {}
-                                            : {
-                                                y: [-15, 15, -15],
-                                                rotateZ: [-5, 5, -5],
-                                            }
-                                    }
-                                    transition={{
-                                        duration: card.floatDuration,
-                                        delay: card.floatDelay,
-                                        repeat: Infinity,
-                                        ease: 'easeInOut',
-                                    }}
-                                >
-                                    {/* Card */}
-                                    <motion.div
-                                        whileHover={{
-                                            scale: 1.08,
-                                            z: 50,
-                                        }}
-                                        className="relative group cursor-pointer"
-                                        style={{ transformStyle: 'preserve-3d' }}
-                                    >
-                                        {/* Card Glow */}
-                                        <motion.div
-                                            animate={{
-                                                opacity: isHovered ? 0.8 : 0.3,
-                                                scale: isHovered ? 1.2 : 1,
-                                            }}
-                                            className="absolute -inset-4 bg-primary/40 blur-xl rounded-2xl"
-                                        />
-
-                                        {/* Card Content */}
-                                        <div className="relative w-48 bg-gradient-to-br from-surface/90 via-surface/80 to-surface/90 backdrop-blur-xl border border-primary/30 rounded-2xl p-4 shadow-2xl">
-                                            {/* Glass Reflection */}
-                                            <div
-                                                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-                                                style={{
-                                                    background:
-                                                        'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%)',
-                                                }}
-                                            />
-
-                                            {/* Icon */}
-                                            <div className="mb-3">
-                                                <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all">
-                                                    <Icon className="w-6 h-6 text-primary group-hover:text-white transition-colors" />
-                                                </div>
-                                            </div>
-
-                                            {/* Title */}
-                                            <h3 className="text-sm font-bold text-white mb-1 line-clamp-2">
-                                                {card.title}
-                                            </h3>
-
-                                            {/* Description */}
-                                            <p className="text-xs text-muted mb-2 line-clamp-2">
-                                                {card.description}
-                                            </p>
-
-                                            {/* Duration */}
-                                            <div className="flex items-center justify-between">
-                                                <span className="text-xs text-primary font-semibold">
-                                                    {card.duration}
-                                                </span>
-                                                <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                                            </div>
-
-                                            {/* Corner Accents */}
-                                            <div className="absolute top-2 right-2 w-2 h-2 border-t border-r border-primary/40 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                            <div className="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-primary/40 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <div className="group relative w-48 bg-gradient-to-br from-surface/90 via-surface/80 to-surface/90 backdrop-blur-lg border border-primary/20 rounded-2xl p-4 shadow-xl cursor-pointer hover:border-primary/50 transition-colors duration-300">
+                                    {/* Icon */}
+                                    <div className="mb-3">
+                                        <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all duration-300">
+                                            <Icon className="w-5 h-5 text-primary group-hover:text-white transition-colors duration-300" />
                                         </div>
+                                    </div>
 
-                                        {/* Tooltip */}
-                                        {isHovered && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: 10 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-64 bg-surface/95 backdrop-blur-xl border border-primary/30 rounded-xl p-4 shadow-2xl z-50"
-                                            >
-                                                <h4 className="text-sm font-bold text-white mb-2">
-                                                    {card.title}
-                                                </h4>
-                                                <p className="text-xs text-muted mb-3">{card.description}</p>
-                                                <div className="flex items-center justify-between">
-                                                    <span className="text-xs text-primary">
-                                                        Duration: {card.duration}
-                                                    </span>
-                                                    <button className="text-xs text-primary hover:text-primary-hover font-semibold flex items-center gap-1">
-                                                        Explore →
-                                                    </button>
-                                                </div>
-                                            </motion.div>
-                                        )}
-                                    </motion.div>
-                                </motion.div>
+                                    <h3 className="text-sm font-bold text-white mb-1 line-clamp-1">
+                                        {card.title}
+                                    </h3>
+                                    <p className="text-xs text-muted mb-2 line-clamp-1">
+                                        {card.description}
+                                    </p>
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-xs text-primary font-semibold">
+                                            {card.duration}
+                                        </span>
+                                        <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                                    </div>
+                                </div>
                             </motion.div>
                         );
                     })}
                 </div>
 
-                {/* Mobile Carousel - Hidden on Desktop */}
+                {/* Mobile fallback */}
                 <div className="lg:hidden absolute inset-0 flex items-center justify-center px-6">
-                    <div className="w-full max-w-sm">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={mounted ? { opacity: 1, y: 0 } : {}}
-                            transition={{ duration: 0.8, delay: 0.5 }}
-                            className="text-center"
-                        >
-                            <div className="bg-gradient-to-br from-surface/90 via-surface/80 to-surface/90 backdrop-blur-xl border border-primary/30 rounded-2xl p-6 shadow-2xl">
-                                <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-                                    <Brain className="w-8 h-8 text-primary" />
-                                </div>
-                                <h3 className="text-lg font-bold text-white mb-2">
-                                    Premium Tech Courses
-                                </h3>
-                                <p className="text-sm text-muted mb-4">
-                                    Master cutting-edge technologies with industry experts
-                                </p>
-                                <button className="w-full px-6 py-3 bg-primary hover:bg-primary-hover text-white font-semibold rounded-xl transition-colors">
-                                    View All Courses
-                                </button>
-                            </div>
-                        </motion.div>
+                    <div className="bg-gradient-to-br from-surface/90 via-surface/80 to-surface/90 backdrop-blur-xl border border-primary/30 rounded-2xl p-6 shadow-2xl text-center">
+                        <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+                            <Brain className="w-8 h-8 text-primary" />
+                        </div>
+                        <h3 className="text-lg font-bold text-white mb-2">Premium Tech Courses</h3>
+                        <p className="text-sm text-muted mb-4">Master cutting-edge technologies with industry experts</p>
+                        <button className="w-full px-6 py-3 bg-primary hover:bg-primary-hover text-white font-semibold rounded-xl transition-colors">
+                            View All Courses
+                        </button>
                     </div>
                 </div>
             </motion.div>
 
             {/* Background Effects */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                {/* Animated Grid */}
                 <div
-                    className="absolute inset-0 opacity-20"
+                    className="absolute inset-0 opacity-15"
                     style={{
                         backgroundImage: `linear-gradient(rgba(122, 0, 25, 0.1) 1px, transparent 1px),
                                          linear-gradient(90deg, rgba(122, 0, 25, 0.1) 1px, transparent 1px)`,
                         backgroundSize: '50px 50px',
                     }}
                 />
-
-                {/* Radial Gradients */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
             </div>
+
+            <style jsx>{`
+                @keyframes techCardFloat {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(-12px); }
+                }
+                .tech-card-float {
+                    animation: techCardFloat 6s ease-in-out infinite;
+                }
+            `}</style>
         </div>
     );
 }

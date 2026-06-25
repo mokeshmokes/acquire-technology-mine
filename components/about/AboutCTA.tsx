@@ -19,31 +19,14 @@ export default function AboutCTA() {
                             'linear-gradient(135deg, rgba(122, 0, 25, 0.4), rgba(45, 0, 0, 0.6), rgba(196, 0, 47, 0.4))',
                     }}
                 />
-                {/* Animated Gradient Orbs */}
-                <motion.div
-                    animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.3, 0.5, 0.3],
-                    }}
-                    transition={{
-                        duration: 8,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                    }}
-                    className="absolute top-0 left-1/4 w-96 h-96 bg-primary/30 blur-[120px] rounded-full"
+                {/* Gradient Orbs — CSS keyframes keep these off the JS thread */}
+                <div
+                    className="absolute top-0 left-1/4 w-96 h-96 bg-primary/30 blur-[120px] rounded-full animate-orb-1"
+                    style={{ willChange: 'transform, opacity' }}
                 />
-                <motion.div
-                    animate={{
-                        scale: [1, 1.3, 1],
-                        opacity: [0.2, 0.4, 0.2],
-                    }}
-                    transition={{
-                        duration: 10,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                        delay: 1,
-                    }}
-                    className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-primary-hover/20 blur-[140px] rounded-full"
+                <div
+                    className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-primary-hover/20 blur-[140px] rounded-full animate-orb-2"
+                    style={{ willChange: 'transform, opacity' }}
                 />
             </div>
 

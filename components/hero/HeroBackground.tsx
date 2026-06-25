@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 
 export default function HeroBackground() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -21,7 +20,7 @@ export default function HeroBackground() {
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        // Particle system
+        // Particle system — reduced to 25 particles, no connection drawing
         const particles: Array<{
             x: number;
             y: number;
@@ -31,59 +30,36 @@ export default function HeroBackground() {
             opacity: number;
         }> = [];
 
-        // Create particles
-        const particleCount = 50;
+        const particleCount = 25;
         for (let i = 0; i < particleCount; i++) {
             particles.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                size: Math.random() * 2 + 1,
-                opacity: Math.random() * 0.5 + 0.2,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4,
+                size: Math.random() * 1.5 + 0.5,
+                opacity: Math.random() * 0.4 + 0.1,
             });
         }
 
-        // Animation loop
+        // Animation loop — particles only, no O(n²) connection drawing
         let animationFrameId: number;
         const animate = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Draw particles
             particles.forEach((particle) => {
                 particle.x += particle.vx;
                 particle.y += particle.vy;
 
-                // Wrap around screen
                 if (particle.x < 0) particle.x = canvas.width;
                 if (particle.x > canvas.width) particle.x = 0;
                 if (particle.y < 0) particle.y = canvas.height;
                 if (particle.y > canvas.height) particle.y = 0;
 
-                // Draw particle
                 ctx.beginPath();
                 ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(194, 24, 56, ${particle.opacity})`;
                 ctx.fill();
-            });
-
-            // Draw connections
-            particles.forEach((p1, i) => {
-                particles.slice(i + 1).forEach((p2) => {
-                    const dx = p1.x - p2.x;
-                    const dy = p1.y - p2.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 150) {
-                        ctx.beginPath();
-                        ctx.moveTo(p1.x, p1.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        const opacity = (1 - distance / 150) * 0.2;
-                        ctx.strokeStyle = `rgba(194, 24, 56, ${opacity})`;
-                        ctx.lineWidth = 1;
-                        ctx.stroke();
-                    }
-                });
             });
 
             animationFrameId = requestAnimationFrame(animate);
@@ -110,57 +86,31 @@ export default function HeroBackground() {
                 }}
             />
 
-            {/* Radial Gradients - Multiple Layers */}
-            <motion.div
-                animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.5, 0.3],
-                }}
-                transition={{
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                }}
+            {/* Radial Gradients - Static layers (no repeat: Infinity animations) */}
+            <div
                 className="absolute top-0 left-0 w-[800px] h-[800px] rounded-full"
                 style={{
-                    background: 'radial-gradient(circle, rgba(122,0,25,0.4) 0%, transparent 70%)',
+                    background: 'radial-gradient(circle, rgba(122,0,25,0.35) 0%, transparent 70%)',
                     filter: 'blur(80px)',
+                    opacity: 0.4,
                 }}
             />
 
-            <motion.div
-                animate={{
-                    scale: [1, 1.1, 1],
-                    opacity: [0.2, 0.4, 0.2],
-                }}
-                transition={{
-                    duration: 10,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                    delay: 1,
-                }}
+            <div
                 className="absolute bottom-0 right-0 w-[1000px] h-[1000px] rounded-full"
                 style={{
-                    background: 'radial-gradient(circle, rgba(194,24,56,0.3) 0%, transparent 70%)',
+                    background: 'radial-gradient(circle, rgba(194,24,56,0.25) 0%, transparent 70%)',
                     filter: 'blur(100px)',
+                    opacity: 0.3,
                 }}
             />
 
-            <motion.div
-                animate={{
-                    scale: [1, 1.15, 1],
-                    x: [0, 50, 0],
-                    y: [0, -30, 0],
-                }}
-                transition={{
-                    duration: 15,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                }}
+            <div
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
                 style={{
-                    background: 'radial-gradient(circle, rgba(161,14,38,0.25) 0%, transparent 70%)',
+                    background: 'radial-gradient(circle, rgba(161,14,38,0.2) 0%, transparent 70%)',
                     filter: 'blur(90px)',
+                    opacity: 0.3,
                 }}
             />
 

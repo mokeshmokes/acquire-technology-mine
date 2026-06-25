@@ -13,50 +13,51 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     const lenisRef = useRef<Lenis | null>(null);
 
     useEffect(() => {
-        // Check for reduced motion preference
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         if (prefersReducedMotion) {
-            return; // Skip smooth scroll if user prefers reduced motion
+            return;
         }
 
-        // Initialize Lenis
+        // Ultra-smooth configuration for premium feel
         const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            duration: 1.2, // Increased for even smoother scrolling
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo - ultra smooth
             orientation: 'vertical',
             gestureOrientation: 'vertical',
             smoothWheel: true,
-            wheelMultiplier: 1,
-            touchMultiplier: 2,
+            wheelMultiplier: 1.0, // Perfect balance
+            touchMultiplier: 2.0, // Smoother touch scrolling
             infinite: false,
+            autoResize: true,
         });
 
         lenisRef.current = lenis;
 
-        // Expose Lenis instance globally for anchor navigation
-        if (typeof window !== 'undefined') {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (window as any).lenis = lenis;
-        }
+        // Expose globally for anchor navigation
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (window as any).lenis = lenis;
 
         // Sync Lenis with GSAP ScrollTrigger
         lenis.on('scroll', ScrollTrigger.update);
 
-        gsap.ticker.add((time) => {
-            lenis.raf(time * 1000);
-        });
+        // High-performance RAF loop
+        let rafId: number;
+        const raf = (time: number) => {
+            lenis.raf(time);
+            rafId = requestAnimationFrame(raf);
+        };
+        rafId = requestAnimationFrame(raf);
 
+        // Disable GSAP lag smoothing for frame-perfect sync
         gsap.ticker.lagSmoothing(0);
 
-        // Cleanup
         return () => {
             lenis.destroy();
-            gsap.ticker.remove(lenis.raf);
-            if (typeof window !== 'undefined') {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                delete (window as any).lenis;
-            }
+            cancelAnimationFrame(rafId);
+            gsap.ticker.lagSmoothing(200, 16);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            delete (window as any).lenis;
         };
     }, []);
 

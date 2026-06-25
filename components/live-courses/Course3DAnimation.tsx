@@ -167,14 +167,10 @@ export default function Course3DAnimation({ courseId }: Course3DAnimationProps) 
                 }}
             />
 
-            {/* Ambient Glow */}
-            <motion.div
-                animate={{
-                    opacity: isHovered ? 0.4 : 0.2,
-                    scale: isHovered ? 1.2 : 1,
-                }}
-                transition={{ duration: 0.5 }}
-                className="absolute inset-0 bg-primary/20 blur-3xl"
+            {/* Ambient Glow — CSS transition, no Framer loop */}
+            <div
+                className="absolute inset-0 bg-primary/20 blur-3xl pointer-events-none transition-opacity duration-500"
+                style={{ opacity: isHovered ? 0.4 : 0.2 }}
             />
 
             {/* 3D Container */}
@@ -196,21 +192,11 @@ export default function Course3DAnimation({ courseId }: Course3DAnimationProps) 
                     return (
                         <motion.div
                             key={index}
-                            initial={{
-                                opacity: 0,
-                                scale: 0.8,
-                                y: 60,
-                                filter: 'blur(20px)',
-                            }}
-                            animate={{
-                                opacity: 1,
-                                scale: 1,
-                                y: 0,
-                                filter: 'blur(0px)',
-                            }}
+                            initial={{ opacity: 0, scale: 0.85, y: 40 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
                             transition={{
-                                duration: 0.8,
-                                delay: index * 0.15,
+                                duration: 0.65,
+                                delay: index * 0.12,
                                 ease: [0.23, 1, 0.32, 1],
                             }}
                             className="absolute"
@@ -238,23 +224,10 @@ export default function Course3DAnimation({ courseId }: Course3DAnimationProps) 
                                     ease: 'easeInOut',
                                 }}
                             >
-                                {/* Glow Effect */}
-                                <motion.div
-                                    animate={{
-                                        opacity: [0.3, 0.6, 0.3],
-                                        scale: [1, 1.2, 1],
-                                    }}
-                                    transition={{
-                                        duration: 3,
-                                        delay: index * 0.5,
-                                        repeat: Infinity,
-                                        ease: 'easeInOut',
-                                    }}
-                                    className="absolute inset-0 blur-2xl"
-                                    style={{
-                                        backgroundColor: layer.color,
-                                        opacity: 0.3,
-                                    }}
+                                {/* Glow pulse — CSS keyframe, not a Framer loop */}
+                                <div
+                                    className="absolute inset-0 blur-xl rounded-xl animate-icon-glow"
+                                    style={{ backgroundColor: layer.color }}
                                 />
 
                                 {/* Icon Container */}
@@ -266,11 +239,11 @@ export default function Course3DAnimation({ courseId }: Course3DAnimationProps) 
                                         height: layer.size,
                                     }}
                                 >
-                                    {/* Background */}
+                                    {/* Icon box — no backdrop-blur (32 blur contexts = GPU killer) */}
                                     <div
-                                        className="absolute inset-0 rounded-xl backdrop-blur-sm border"
+                                        className="absolute inset-0 rounded-xl border"
                                         style={{
-                                            backgroundColor: `${layer.color}15`,
+                                            backgroundColor: `${layer.color}18`,
                                             borderColor: `${layer.color}40`,
                                         }}
                                     />
@@ -314,50 +287,26 @@ export default function Course3DAnimation({ courseId }: Course3DAnimationProps) 
                     );
                 })}
 
-                {/* Connection Lines */}
-                <svg
-                    className="absolute inset-0 w-full h-full pointer-events-none opacity-20"
-                    style={{ mixBlendMode: 'screen' }}
-                >
-                    <motion.line
-                        x1="50%"
-                        y1="50%"
-                        x2="30%"
-                        y2="30%"
-                        stroke="#C21838"
-                        strokeWidth="1"
-                        strokeDasharray="4 4"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 1.5, delay: 0.5 }}
+                {/* Connection Lines — draw once, no loop, no mix-blend-mode */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-15">
+                    <motion.line x1="50%" y1="50%" x2="30%" y2="30%"
+                        stroke="#C21838" strokeWidth="1" strokeDasharray="4 4"
+                        initial={{ pathLength: 0 }} animate={{ pathLength: 1 }}
+                        transition={{ duration: 1.2, delay: 0.4 }}
                     />
-                    <motion.line
-                        x1="50%"
-                        y1="50%"
-                        x2="70%"
-                        y2="60%"
-                        stroke="#7A0019"
-                        strokeWidth="1"
-                        strokeDasharray="4 4"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 1.5, delay: 0.5 }}
+                    <motion.line x1="50%" y1="50%" x2="70%" y2="60%"
+                        stroke="#7A0019" strokeWidth="1" strokeDasharray="4 4"
+                        initial={{ pathLength: 0 }} animate={{ pathLength: 1 }}
+                        transition={{ duration: 1.2, delay: 0.6 }}
                     />
-                    <motion.line
-                        x1="50%"
-                        y1="50%"
-                        x2="70%"
-                        y2="60%"
-                        stroke="#7A0019"
-                        strokeWidth="1"
-                        strokeDasharray="4 4"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 1.5, delay: 0.7 }}
+                    <motion.line x1="50%" y1="50%" x2="40%" y2="75%"
+                        stroke="#A10E26" strokeWidth="1" strokeDasharray="4 4"
+                        initial={{ pathLength: 0 }} animate={{ pathLength: 1 }}
+                        transition={{ duration: 1.2, delay: 0.8 }}
                     />
                 </svg>
 
-                {/* Particles - Fixed positions to avoid hydration mismatch */}
+                {/* Particles — CSS keyframes, staggered delays, zero Framer loops */}
                 {[
                     { left: 25, top: 30 },
                     { left: 75, top: 25 },
@@ -368,26 +317,15 @@ export default function Course3DAnimation({ courseId }: Course3DAnimationProps) 
                     { left: 20, top: 50 },
                     { left: 80, top: 55 },
                 ].map((pos, i) => (
-                    <motion.div
+                    <div
                         key={i}
-                        className="absolute w-1 h-1 bg-primary rounded-full"
+                        className="absolute w-1 h-1 bg-primary rounded-full animate-particle-blink"
                         style={{
                             left: `${pos.left}%`,
                             top: `${pos.top}%`,
-                        }}
-                        animate={
-                            prefersReducedMotion
-                                ? {}
-                                : {
-                                    opacity: [0, 1, 0],
-                                    scale: [0, 1, 0],
-                                }
-                        }
-                        transition={{
-                            duration: 2.5 + (i * 0.3),
-                            delay: i * 0.3,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
+                            animationDelay: `${i * 0.3}s`,
+                            animationDuration: `${2.5 + i * 0.3}s`,
+                            willChange: 'opacity, transform',
                         }}
                     />
                 ))}

@@ -2,27 +2,27 @@
 
 import { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+import Image from 'next/image';
 
 export default function CursorFollower() {
     const [mounted, setMounted] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
+    const [isHoveringClickable, setIsHoveringClickable] = useState(false);
 
-    const cursorX = useMotionValue(0);
-    const cursorY = useMotionValue(0);
+    const cursorX = useMotionValue(-100);
+    const cursorY = useMotionValue(-100);
 
-    // Smooth spring with lag
-    const springConfig = { damping: 25, stiffness: 150, mass: 0.5 };
+    // Snappy spring for the image cursor — feels responsive
+    const springConfig = { damping: 28, stiffness: 180, mass: 0.4 };
     const cursorXSpring = useSpring(cursorX, springConfig);
     const cursorYSpring = useSpring(cursorY, springConfig);
 
     useEffect(() => {
         setMounted(true);
 
-        // Check for reduced motion
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (prefersReducedMotion) return;
 
-        // Check if device has mouse
         const hasMousePointer = window.matchMedia('(pointer: fine)').matches;
         if (!hasMousePointer) return;
 
@@ -30,17 +30,21 @@ export default function CursorFollower() {
 
         const updateCursor = (e: MouseEvent) => {
             if (rafId) cancelAnimationFrame(rafId);
-
             rafId = requestAnimationFrame(() => {
                 cursorX.set(e.clientX);
                 cursorY.set(e.clientY);
+
+                // Detect if hovering a clickable element
+                const target = e.target as HTMLElement;
+                const clickable = target.closest('a, button, [role="button"], input, select, textarea, label, [tabindex]');
+                setIsHoveringClickable(!!clickable);
             });
         };
 
         const handleMouseEnter = () => setIsVisible(true);
         const handleMouseLeave = () => setIsVisible(false);
 
-        window.addEventListener('mousemove', updateCursor);
+        window.addEventListener('mousemove', updateCursor, { passive: true });
         document.addEventListener('mouseenter', handleMouseEnter);
         document.addEventListener('mouseleave', handleMouseLeave);
 
@@ -54,38 +58,54 @@ export default function CursorFollower() {
 
     if (!mounted || !isVisible) return null;
 
+    const size = isHoveringClickable ? 44 : 32;
+
     return (
         <motion.div
-            className="pointer-events-none fixed top-0 left-0 z-[9999] mix-blend-screen"
+            className="pointer-events-none fixed top-0 left-0 z-[9999]"
             style={{
                 x: cursorXSpring,
                 y: cursorYSpring,
+                willChange: 'transform',
             }}
         >
-            <div
-                className="relative -translate-x-1/2 -translate-y-1/2"
-                style={{
-                    width: '24px',
-                    height: '24px',
-                }}
+            <motion.div
+                className="relative flex items-center justify-center"
+                style={{ translateX: '-50%', translateY: '-50%' }}
+                animate={{ width: size, height: size, opacity: isVisible ? 1 : 0 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
             >
-                {/* Main dot */}
-                <div
+                {/* Glow ring — expands on clickable elements */}
+                <motion.div
                     className="absolute inset-0 rounded-full"
+                    animate={{
+                        scale: isHoveringClickable ? 1.6 : 1,
+                        opacity: isHoveringClickable ? 0.35 : 0.15,
+                    }}
+                    transition={{ duration: 0.2 }}
                     style={{
-                        background: 'radial-gradient(circle, rgba(139,0,0,0.6) 0%, rgba(139,0,0,0.3) 50%, transparent 100%)',
-                        boxShadow: '0 0 20px rgba(139,0,0,0.4)',
+                        background: 'radial-gradient(circle, rgba(220,25,50,0.8) 0%, transparent 70%)',
+                        filter: 'blur(6px)',
                     }}
                 />
-                {/* Inner bright dot */}
-                <div
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full"
+
+                {/* Logo image cursor */}
+                <Image
+                    src="/images/cursor/cursor1.png"
+                    alt=""
+                    width={size}
+                    height={size}
+                    className="relative z-10 select-none"
                     style={{
-                        background: '#8B0000',
-                        boxShadow: '0 0 10px rgba(139,0,0,0.8)',
+                        filter: isHoveringClickable
+                            ? 'brightness(1) drop-shadow(0 0 8px rgba(220,25,50,0.9))'
+                            : 'brightness(0.95) drop-shadow(0 0 4px rgba(220,25,50,0.5))',
+                        transition: 'filter 0.2s ease',
                     }}
+                    draggable={false}
+                    priority
                 />
-            </div>
+            </motion.div>
         </motion.div>
     );
 }
