@@ -1,45 +1,43 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 import { mainNavigation } from '@/data/navigation';
 import NavigationItem from './NavigationItem';
-import CompactCoursesDropdown from './CompactCoursesDropdown';
-import { useMegaMenu } from '@/hooks/useMegaMenu';
+import { useScrollSpy } from '@/hooks/useScrollSpy';
 
 export default function DesktopNavigation() {
-    const { activeMenu, isOpen, menuRef, openMenu, closeMenu } = useMegaMenu();
-    const pathname = usePathname();
+    // Extract section IDs from navigation items
+    const sectionIds = mainNavigation
+        .filter((item) => item.sectionId)
+        .map((item) => item.sectionId!);
+
+    // Use scroll spy to detect active section
+    const activeSection = useScrollSpy({
+        sectionIds,
+        threshold: 0.5,
+        rootMargin: '-10% 0px -10% 0px', // Better detection when section is in middle of viewport
+    });
+
+    // Debug: Log active section (remove in production)
+    useEffect(() => {
+        if (activeSection) {
+            console.log('Active section:', activeSection);
+        }
+    }, [activeSection]);
 
     return (
-        <nav className="hidden lg:flex items-center" ref={menuRef}>
-            <ul className="flex items-center gap-1">
+        <nav className="hidden lg:flex items-center">
+            <ul className="flex items-center gap-2">
                 {mainNavigation.map((item) => {
-                    const isActiveMenu = activeMenu === item.label;
-                    // Check if current page or if it's an anchor link on the home page
-                    const isActivePage = pathname === item.href ||
-                        (item.href.startsWith('#') && pathname === '/');
+                    const isActive = item.sectionId === activeSection;
 
                     return (
-                        <li key={item.label} className="relative">
+                        <li key={item.label}>
                             <NavigationItem
                                 label={item.label}
                                 href={item.href}
-                                hasMegaMenu={item.hasMegaMenu}
-                                hasDropdown={item.hasDropdown}
-                                isActive={isActivePage}
-                                onMouseEnter={() => {
-                                    if (item.hasMegaMenu || item.hasDropdown) {
-                                        openMenu(item.label);
-                                    }
-                                }}
-                                onMouseLeave={closeMenu}
+                                isActive={isActive}
                             />
-
-                            {item.hasMegaMenu && item.label === 'Course' && (
-                                <div onMouseEnter={() => openMenu(item.label)} onMouseLeave={closeMenu}>
-                                    <CompactCoursesDropdown isOpen={isActiveMenu && isOpen} />
-                                </div>
-                            )}
                         </li>
                     );
                 })}
