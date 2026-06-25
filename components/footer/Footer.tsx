@@ -9,7 +9,7 @@ export default function Footer() {
     const { company, quickLinks, programs, contact, legal, copyright } = footerData;
 
     return (
-        <footer className="relative bg-[#050505] border-t border-primary/20 overflow-hidden">
+        <footer className="relative bg-[#1F2226] border-t border-primary/20 overflow-hidden">
             {/* Animated Top Border */}
             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
             <motion.div
@@ -47,8 +47,12 @@ export default function Footer() {
                             }}
                             className="inline-flex items-center gap-3"
                         >
-                            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center font-bold text-white text-xl shadow-lg">
-                                {company.logo}
+                            <div className="relative w-12 h-12 rounded-xl overflow-hidden shadow-lg">
+                                <img
+                                    src="/images/logo.png"
+                                    alt="Acquiring Technology Logo"
+                                    className="w-full h-full object-contain"
+                                />
                             </div>
                             <span className="text-xl font-bold text-white">{company.name}</span>
                         </motion.div>

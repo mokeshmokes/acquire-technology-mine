@@ -28,7 +28,7 @@ export default function AboutHero() {
             {/* Static Background with Gradients */}
             <div className="absolute inset-0">
                 {/* Base Dark Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-background via-[#0A0A0A] to-background" />
+                <div className="absolute inset-0 bg-gradient-to-br from-background via-[#1E2125] to-background" />
 
                 {/* Animated Red Gradient Orbs */}
                 <motion.div

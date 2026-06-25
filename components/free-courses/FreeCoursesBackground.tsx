@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import FreeCourseVideoBackground from './FreeCourseVideoBackground';
 import FreeCourseCard from './FreeCourseCard';
 import { freeCoursesData } from '@/data/freeCourses';
 
@@ -30,10 +29,37 @@ export default function FreeCoursesBackground() {
     return (
         <section
             ref={sectionRef}
-            className="relative min-h-screen w-full overflow-hidden py-32"
+            className="relative min-h-screen w-full overflow-hidden py-32 bg-background"
         >
-            {/* Video Background */}
-            <FreeCourseVideoBackground />
+            {/* Static Background with Gradients */}
+            <div className="absolute inset-0">
+                {/* Base Dark Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-background via-[#1E2125] to-background" />
+
+                {/* Animated Red Gradient Orbs */}
+                <div
+                    className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/20 blur-[120px]"
+                    style={{
+                        animation: 'pulse-glow 8s ease-in-out infinite',
+                    }}
+                />
+                <div
+                    className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-primary-hover/15 blur-[140px]"
+                    style={{
+                        animation: 'pulse-glow-delayed 10s ease-in-out infinite',
+                    }}
+                />
+
+                {/* Subtle Grid Pattern */}
+                <div
+                    className="absolute inset-0 opacity-[0.02]"
+                    style={{
+                        backgroundImage: `linear-gradient(rgba(255, 0, 60, 0.1) 1px, transparent 1px),
+                                         linear-gradient(90deg, rgba(255, 0, 60, 0.1) 1px, transparent 1px)`,
+                        backgroundSize: '50px 50px',
+                    }}
+                />
+            </div>
 
             {/* Floating Particles — pure CSS, zero JS per frame */}
             <div className="absolute inset-0 z-[2] pointer-events-none overflow-hidden">

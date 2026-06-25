@@ -6,7 +6,7 @@ import WhyChooseUs from './WhyChooseUs';
 import LearningJourney from './LearningJourney';
 import MentorShowcase from './MentorShowcase';
 import VisionMission from './VisionMission';
-import AboutCTA from './AboutCTA';
+import TestimonialsSection from '../testimonials/TestimonialsSection';
 
 export default function AboutUs() {
     return (
@@ -29,8 +29,8 @@ export default function AboutUs() {
             {/* Vision & Mission Section */}
             <VisionMission />
 
-            {/* Call to Action Section */}
-            <AboutCTA />
+            {/* Student Success Stories Section */}
+            <TestimonialsSection />
         </div>
     );
 }
