@@ -3,6 +3,10 @@ import HeroSection from '@/components/hero/HeroSection';
 import LiveCourses from '@/components/live-courses/LiveCourses';
 import FreeCoursesBackground from '@/components/free-courses/FreeCoursesBackground';
 import AboutUs from '@/components/about/AboutUs';
+import ContactSection from '@/components/contact/ContactSection';
+import Newsletter from '@/components/footer/Newsletter';
+import Footer from '@/components/footer/Footer';
+import ScrollToTop from '@/components/footer/ScrollToTop';
 import SmoothScroll from '@/components/animations/SmoothScroll';
 import ScrollAnimationProvider from '@/components/animations/ScrollAnimationProvider';
 import ErrorBoundary from '@/components/ErrorBoundary';
@@ -26,12 +30,12 @@ export default function Home() {
                         <section id="about-us" className="min-h-screen">
                             <AboutUs />
                         </section>
-                        <section id="contact" className="min-h-screen flex items-center justify-center">
-                            <div className="text-center">
-                                <h2 className="text-4xl font-bold text-white mb-4">Contact</h2>
-                                <p className="text-white/70">Coming Soon</p>
-                            </div>
+                        <section id="contact" className="min-h-screen">
+                            <ContactSection />
                         </section>
+                        <Newsletter />
+                        <Footer />
+                        <ScrollToTop />
                     </main>
                 </ScrollAnimationProvider>
             </SmoothScroll>
