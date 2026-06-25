@@ -13,54 +13,39 @@ export default function FloatingStatsCard() {
 
     return (
         <div className="relative">
-            {/* Static glow — no animation, just a CSS layer */}
-            <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 via-primary-hover/20 to-primary/20 rounded-3xl blur-2xl opacity-50 pointer-events-none" />
+            {/* Glow */}
+            <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 via-primary-hover/20 to-primary/20 rounded-2xl blur-xl opacity-50 pointer-events-none" />
 
             {/* Card */}
-            <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-2xl">
-                {/* Subtle inner glow */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-3xl pointer-events-none" />
+            <div className="relative border border-white/15 rounded-2xl p-4 shadow-2xl"
+                style={{ background: 'rgba(18,6,10,0.75)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl pointer-events-none" />
 
-                {/* Grid of Stats */}
-                <div className="relative grid grid-cols-2 gap-4">
+                {/* 2×2 grid */}
+                <div className="relative grid grid-cols-2 gap-2">
                     {stats.map((stat, index) => (
                         <motion.div
                             key={stat.label}
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            transition={{
-                                duration: 0.5,
-                                delay: 0.8 + index * 0.1,
-                                ease: [0.25, 0.46, 0.45, 0.94],
-                            }}
-                            className="flex flex-col items-center text-center space-y-2 p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-primary/30 transition-all duration-300 group"
+                            transition={{ duration: 0.5, delay: 0.8 + index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+                            className="flex flex-col items-center text-center gap-1.5 p-3 rounded-xl bg-white/5 hover:bg-white/8 border border-white/8 hover:border-primary/30 transition-all duration-300 group"
                         >
-                            {/* Icon */}
-                            <div className="relative">
-                                <div className="relative bg-gradient-to-br from-primary/20 to-primary/10 p-2.5 rounded-full border border-primary/30">
-                                    <stat.icon className="w-5 h-5 text-primary" />
-                                </div>
+                            <div className="bg-gradient-to-br from-primary/25 to-primary/10 p-2 rounded-full border border-primary/30">
+                                <stat.icon className="w-4 h-4 text-primary" />
                             </div>
-
-                            {/* Label */}
-                            <div className="space-y-0.5">
-                                <span className="text-xl font-bold text-white block">
-                                    {stat.label}
-                                </span>
-                                <span className="text-xs font-medium text-white/70">
-                                    {stat.sublabel}
-                                </span>
-                            </div>
+                            <span className="text-lg font-bold text-white leading-none">{stat.label}</span>
+                            <span className="text-[10px] font-medium text-white/60">{stat.sublabel}</span>
                         </motion.div>
                     ))}
                 </div>
 
-                {/* Bottom Accent Line — CSS shimmer only */}
+                {/* Accent line */}
                 <motion.div
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ duration: 1, delay: 1.2 }}
-                    className="relative mt-4 h-0.5 rounded-full overflow-hidden"
+                    className="relative mt-3 h-0.5 rounded-full overflow-hidden"
                 >
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary to-transparent" />
                     <div className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-white/50 to-transparent animate-shimmer" />
