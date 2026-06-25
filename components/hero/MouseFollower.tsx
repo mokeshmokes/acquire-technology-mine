@@ -4,22 +4,20 @@ import { useEffect, useRef } from 'react';
 import { useMotionValue, useSpring, motion } from 'framer-motion';
 
 export default function MouseFollower() {
-    // Use motion values directly — no useState, no re-renders on mouse move
-    const rawX = useMotionValue(0);
-    const rawY = useMotionValue(0);
-    const springConfig = { damping: 30, stiffness: 120 };
-    const x = useSpring(rawX, springConfig);
-    const y = useSpring(rawY, springConfig);
+    const rawX = useMotionValue(-500); // start off-screen
+    const rawY = useMotionValue(-500);
+    // Softer spring = fewer frames needed to settle, less CPU
+    const x = useSpring(rawX, { damping: 35, stiffness: 100 });
+    const y = useSpring(rawY, { damping: 35, stiffness: 100 });
     const rafRef = useRef<number | null>(null);
 
     useEffect(() => {
-        let pendingX = 0;
-        let pendingY = 0;
+        let pendingX = -500;
+        let pendingY = -500;
 
         const handleMouseMove = (e: MouseEvent) => {
             pendingX = e.clientX;
             pendingY = e.clientY;
-            // Throttle updates via rAF — only update motion values once per frame
             if (rafRef.current === null) {
                 rafRef.current = requestAnimationFrame(() => {
                     rawX.set(pendingX);
@@ -38,15 +36,32 @@ export default function MouseFollower() {
 
     return (
         <motion.div
-            className="fixed pointer-events-none z-50 mix-blend-screen"
+            className="fixed pointer-events-none z-50"
             style={{
                 x,
                 y,
                 translateX: '-50%',
                 translateY: '-50%',
+                // Isolate to own GPU layer — no mix-blend-screen which
+                // forces the browser to re-composite the entire page stack
+                // on every mouse move.
+                willChange: 'transform',
             }}
         >
-            <div className="w-64 h-64 rounded-full bg-primary opacity-10 blur-3xl" />
+            {/*
+             * Reduced from w-64/h-64 + blur-3xl + mix-blend-screen.
+             * mix-blend-screen is the main offender — it disables GPU fast-
+             * path compositing and falls back to software blending.
+             * Now: smaller, opacity-only, no blend mode.
+             */}
+            <div
+                className="w-48 h-48 rounded-full"
+                style={{
+                    background:
+                        'radial-gradient(circle, rgba(139,0,0,0.12) 0%, transparent 70%)',
+                    filter: 'blur(40px)',
+                }}
+            />
         </motion.div>
     );
 }

@@ -95,6 +95,111 @@ body {
     animation: shimmer 3s linear infinite;
   }
 
+  /* ─── Free Masterclass Section Animations ─────────────────────────────── */
+
+  /* Floating particle animation - GPU-accelerated */
+  @keyframes particle-float {
+    0%, 100% {
+      transform: translate3d(0, 0, 0);
+      opacity: 0.2;
+    }
+    50% {
+      transform: translate3d(0, -20px, 0);
+      opacity: 0.4;
+    }
+  }
+
+  .particle-float {
+    animation: particle-float ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+
+  /* Moving gradient blob 1 - figure-8 motion */
+  @keyframes blob-1 {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    33% { transform: translate3d(50px, -30px, 0); }
+    66% { transform: translate3d(-30px, 20px, 0); }
+  }
+
+  .animate-blob-1 {
+    animation: blob-1 15s ease-in-out infinite;
+  }
+
+  /* Moving gradient blob 2 - opposite pattern */
+  @keyframes blob-2 {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    33% { transform: translate3d(-50px, 40px, 0); }
+    66% { transform: translate3d(30px, -20px, 0); }
+  }
+
+  .animate-blob-2 {
+    animation: blob-2 18s ease-in-out infinite;
+  }
+
+  /* Floating image animation */
+  @keyframes float-image {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, -6px, 0); }
+  }
+
+  .animate-float-image {
+    animation: float-image 4s ease-in-out infinite;
+  }
+
+  /* Badge pulse glow */
+  @keyframes badge-pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(199, 24, 56, 0.5); }
+    50% { box-shadow: 0 0 35px rgba(199, 24, 56, 0.8); }
+  }
+
+  .animate-badge-pulse {
+    animation: badge-pulse 3s ease-in-out infinite;
+  }
+
+  /* Dot pulse for "100% Free" indicator */
+  @keyframes dot-pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 0.5;
+    }
+  }
+
+  .animate-dot-pulse {
+    animation: dot-pulse 2s ease-in-out infinite;
+  }
+
+  /* Arrow bounce for button hover */
+  @keyframes arrow-bounce {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(6px); }
+  }
+
+  .animate-arrow-bounce {
+    animation: arrow-bounce 1.5s ease-in-out infinite;
+  }
+
+  /* Button shimmer effect */
+  @keyframes btn-shimmer {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 1;
+    }
+  }
+
+  .animate-btn-shimmer {
+    animation: btn-shimmer 2s ease-in-out infinite;
+  }
+
+  /* ───────────────────────────────────────────────────────────────────── */
+
   /* Scroll Animation Utility Classes */
 
   /* 1. Hero Word Reveal */
