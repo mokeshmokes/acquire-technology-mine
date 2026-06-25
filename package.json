@@ -6,7 +6,10 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "clean": "node scripts/clean-cache.js",
+        "clean:dev": "node scripts/clean-cache.js && npm run dev",
+        "clean:build": "node scripts/clean-cache.js && npm run build"
     },
     "dependencies": {
         "next": "^15.1.0",

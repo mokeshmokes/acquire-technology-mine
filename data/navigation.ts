@@ -39,11 +39,11 @@ import type {
 } from '@/types/navigation';
 
 export const mainNavigation: NavigationItem[] = [
-    { label: 'Home', href: '/' },
-    { label: 'Live course', href: '#live-courses' },
-    { label: 'Course', href: '/course', hasMegaMenu: true },
-    { label: 'About us', href: '/about-us' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'Home', href: '#home', sectionId: 'home' },
+    { label: 'Live Course', href: '#live-courses', sectionId: 'live-courses' },
+    { label: 'Course', href: '#courses', sectionId: 'courses' },
+    { label: 'About Us', href: '#about-us', sectionId: 'about-us' },
+    { label: 'Contact', href: '#contact', sectionId: 'contact' },
 ];
 
 // Compact Courses Dropdown Data
