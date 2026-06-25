@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Cursor Styles */
+* {
+  cursor: url('/images/cursor/cursor1-resized.png') 16 16, auto !important;
+}
+
+body {
+  cursor: url('/images/cursor/cursor1-resized.png') 16 16, auto !important;
+}
+
+a,
+button,
+[role="button"],
+.cursor-pointer {
+  cursor: url('/images/cursor/cursor1-resized.png') 16 16, pointer !important;
+}
+
+input,
+textarea,
+select {
+  cursor: url('/images/cursor/cursor1-resized.png') 16 16, text !important;
+}
+
 /* ─── Scroll smoothness ────────────────────────────────────────────────────── */
 /* Promote html/body to their own compositor layers so the browser can        */
 /* hand off scrolling entirely to the GPU thread.                             */
@@ -11,7 +33,7 @@ html {
   /* Prevent elastic over-scroll bounce fighting with Lenis */
   overscroll-behavior: none;
   /* Custom cursor — hide native arrow, show logo cursor */
-  cursor: url('/images/cursor/cursor1.png') 16 16, auto;
+  cursor: url('/images/cursor/cursor1-resized.png') 16 16, auto;
 }
 
 body {
@@ -19,8 +41,15 @@ body {
 }
 
 /* Keep custom cursor on interactive elements too */
-a, button, [role="button"], input, select, textarea, label, [tabindex] {
-  cursor: url('/images/cursor/cursor1.png') 16 16, pointer;
+a,
+button,
+[role="button"],
+input,
+select,
+textarea,
+label,
+[tabindex] {
+  cursor: url('/images/cursor/cursor1-resized.png') 16 16, pointer;
 }
 
 /* Elements that animate on scroll get their own layer up front */
@@ -55,15 +84,35 @@ a, button, [role="button"], input, select, textarea, label, [tabindex] {
 
   * {
     @apply border-border;
+    cursor: url('/images/cursor/cursor1-resized.png'), auto;
   }
 
   body {
     @apply bg-background text-white antialiased;
     font-feature-settings: 'rlig' 1, 'calt' 1;
+    cursor: url('/images/cursor/cursor1-resized.png'), auto;
   }
 
   html {
     scroll-behavior: smooth;
+  }
+
+  /* Custom cursor for interactive elements */
+  a,
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"] {
+    cursor: url('/images/cursor/cursor1-resized.png'), pointer;
+  }
+
+  /* Custom cursor for text input fields */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select {
+    cursor: url('/images/cursor/cursor1-resized.png'), text;
   }
 }
 
