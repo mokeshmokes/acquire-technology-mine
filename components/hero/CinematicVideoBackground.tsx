@@ -75,7 +75,7 @@ export default function CinematicVideoBackground() {
                 {/* <source src="/videos/hero-video1.mp4" type="video/mp4" />  2.43 MB */}
                 {/* <source src="/herovedio.mp4" type="video/mp4" /> */}  {/* 69.38 MB - Large file */}
 
-                Your browser does not support the video tag.
+                 Your browser does not support the video tag.
             </video>
 
             {/* Error Fallback - Premium gradient background if video fails */}
