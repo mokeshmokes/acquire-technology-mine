@@ -82,7 +82,7 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
                 {/* Feedback */}
                 <div className="relative">
                     <div className="absolute -top-2 -left-2 text-6xl text-primary/20 font-serif leading-none">
-                        "
+                        &ldquo;
                     </div>
                     <p className="text-base text-white/80 leading-relaxed relative z-10 pl-6">
                         {testimonial.feedback}

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { footerData } from '@/data/footer';
 
@@ -48,10 +49,11 @@ export default function Footer() {
                             className="inline-flex items-center gap-3"
                         >
                             <div className="relative w-12 h-12 rounded-xl overflow-hidden shadow-lg">
-                                <img
+                                <Image
                                     src="/images/logo.png"
                                     alt="Acquiring Technology Logo"
-                                    className="w-full h-full object-contain"
+                                    fill
+                                    className="object-contain"
                                 />
                             </div>
                             <span className="text-xl font-bold text-white">{company.name}</span>

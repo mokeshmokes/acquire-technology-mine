@@ -138,7 +138,7 @@ export default function AboutHero() {
                             transition={{ delay: 0.7, duration: 0.8 }}
                             className="flex flex-wrap gap-4"
                         >
-                            {buttons.map((button, index) => (
+                            {buttons.map((button) => (
                                 <button
                                     key={button.label}
                                     className={`group relative px-8 py-4 font-semibold rounded-xl shadow-2xl transition-all duration-300 overflow-hidden hover:scale-105 ${button.variant === 'primary'
@@ -348,8 +348,8 @@ export default function AboutHero() {
                                 }}
                             >
                                 <div className="flex items-center gap-2 mb-1">
-                                    {[...Array(5)].map((_, i) => (
-                                        <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                                    {[...Array(5)].map((_, starIndex) => (
+                                        <Star key={starIndex} className="w-4 h-4 fill-primary text-primary" />
                                     ))}
                                 </div>
                                 <p className="text-2xl font-bold text-white">4.9</p>
