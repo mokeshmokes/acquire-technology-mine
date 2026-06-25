@@ -10,16 +10,16 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                background: '#080B0D',
-                surface: '#12080C',
-                'surface-elevated': '#1E0F11',
+                background: '#1A1D21',
+                surface: '#242629',
+                'surface-elevated': '#2D2F33',
                 primary: {
                     DEFAULT: '#7A0019',
                     hover: '#C21838',
                     secondary: '#A10E26',
                 },
-                border: 'rgba(255, 255, 255, 0.08)',
-                muted: '#B8B8B8',
+                border: 'rgba(255, 255, 255, 0.12)',
+                muted: '#C5C5C5',
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

@@ -2,16 +2,42 @@
 
 import { motion } from 'framer-motion';
 import { contactHeroData, contactCardsData, socialLinksData } from '@/data/contact';
-import ContactVideoBackground from './ContactVideoBackground';
 import ContactForm from './ContactForm';
 
 export default function ContactSection() {
     const { badge, heading, description } = contactHeroData;
 
     return (
-        <section className="relative min-h-[900px] flex items-center overflow-hidden py-32">
-            {/* Video Background */}
-            <ContactVideoBackground />
+        <section className="relative min-h-[900px] flex items-center overflow-hidden py-32 bg-background">
+            {/* Static Background with Gradients */}
+            <div className="absolute inset-0">
+                {/* Base Dark Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-background via-[#1E2125] to-background" />
+
+                {/* Animated Red Gradient Orbs */}
+                <div
+                    className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/20 blur-[120px]"
+                    style={{
+                        animation: 'pulse-glow 8s ease-in-out infinite',
+                    }}
+                />
+                <div
+                    className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-primary-hover/15 blur-[140px]"
+                    style={{
+                        animation: 'pulse-glow-delayed 10s ease-in-out infinite',
+                    }}
+                />
+
+                {/* Subtle Grid Pattern */}
+                <div
+                    className="absolute inset-0 opacity-[0.02]"
+                    style={{
+                        backgroundImage: `linear-gradient(rgba(255, 0, 60, 0.1) 1px, transparent 1px),
+                                         linear-gradient(90deg, rgba(255, 0, 60, 0.1) 1px, transparent 1px)`,
+                        backgroundSize: '50px 50px',
+                    }}
+                />
+            </div>
 
             {/* Content */}
             <div className="relative z-10 w-full max-w-7xl mx-auto px-6">

@@ -32,7 +32,7 @@ export default function LearningJourney() {
                     <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-[2px] bg-gradient-to-r from-primary/20 via-primary to-primary/20" />
 
                     {/* Timeline Steps */}
-                    <div className="grid lg:grid-cols-5 gap-8 lg:gap-4">
+                    <div className="grid lg:grid-cols-5 gap-8 lg:gap-6">
                         {learningJourneyData.map((step, index) => {
                             const Icon = step.icon;
                             return (
@@ -41,28 +41,29 @@ export default function LearningJourney() {
                                     initial={{ opacity: 0, y: 50 }}
                                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
                                     transition={{ delay: index * 0.15 + 0.3, duration: 0.6 }}
-                                    className="relative"
+                                    className="relative flex"
                                 >
-                                    {/* Card */}
+                                    {/* Card - Fixed height for consistency */}
                                     <div
-                                        className="relative rounded-[28px] p-8 text-center space-y-4 hover:scale-105 transition-transform duration-500"
+                                        className="relative rounded-[28px] p-8 text-center hover:scale-105 transition-transform duration-500 flex flex-col items-center justify-center w-full"
                                         style={{
                                             background: 'rgba(255, 255, 255, 0.05)',
                                             backdropFilter: 'blur(18px)',
                                             border: '1px solid rgba(255, 0, 60, 0.18)',
                                             boxShadow: '0 20px 60px rgba(0, 0, 0, 0.45)',
+                                            minHeight: '280px',
                                         }}
                                     >
                                         {/* Icon Circle */}
-                                        <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center relative z-10">
+                                        <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center relative z-10 mb-4">
                                             <Icon className="w-8 h-8 text-primary" />
                                         </div>
 
                                         {/* Title */}
-                                        <h3 className="text-xl font-bold text-white">{step.title}</h3>
+                                        <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
 
                                         {/* Subtitle */}
-                                        <p className="text-sm text-muted">{step.subtitle}</p>
+                                        <p className="text-sm text-muted leading-relaxed">{step.subtitle}</p>
 
                                         {/* Step Number */}
                                         <div className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-primary text-white font-bold flex items-center justify-center text-sm shadow-lg">
@@ -72,7 +73,7 @@ export default function LearningJourney() {
 
                                     {/* Connecting Arrow - Desktop Only */}
                                     {index < learningJourneyData.length - 1 && (
-                                        <div className="hidden lg:block absolute top-1/2 -right-2 transform translate-x-1/2 -translate-y-1/2 z-20">
+                                        <div className="hidden lg:block absolute top-1/2 -right-3 transform translate-x-1/2 -translate-y-1/2 z-20">
                                             <svg
                                                 className="w-6 h-6 text-primary"
                                                 fill="currentColor"
