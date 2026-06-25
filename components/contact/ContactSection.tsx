@@ -129,7 +129,7 @@ export default function ContactSection() {
                         >
                             <span className="text-sm text-muted">Follow us:</span>
                             <div className="flex items-center gap-3">
-                                {socialLinksData.map((social, index) => {
+                                {socialLinksData.map((social) => {
                                     const Icon = social.icon;
                                     return (
                                         <motion.a

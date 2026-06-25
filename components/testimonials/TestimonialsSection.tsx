@@ -4,11 +4,9 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import {
     testimonialsData,
-    testimonialStatsData,
     testimonialSectionData,
 } from '@/data/testimonials';
 import TestimonialCarousel from './TestimonialCarousel';
-import TestimonialStats from './TestimonialStats';
 
 export default function TestimonialsSection() {
     const ref = useRef<HTMLElement>(null);
@@ -226,13 +224,9 @@ export default function TestimonialsSection() {
                     initial={{ opacity: 0, y: 50 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
                     transition={{ delay: 0.3, duration: 0.8 }}
-                    className="mb-24"
                 >
                     <TestimonialCarousel testimonials={testimonialsData} />
                 </motion.div>
-
-                {/* Statistics */}
-                <TestimonialStats stats={testimonialStatsData} />
             </div>
         </section>
     );
