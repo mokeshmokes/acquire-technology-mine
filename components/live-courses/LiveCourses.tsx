@@ -66,48 +66,25 @@ export default function LiveCourses() {
                 );
             }
 
-            // Heading animations
             if (heading1Ref.current) {
-                tl.from(
-                    heading1Ref.current,
-                    {
-                        y: 40,
-                        opacity: 0,
-                        filter: 'blur(8px)',
-                        duration: 0.9,
-                        ease: 'power3.out',
-                    },
-                    0.2
-                );
+                tl.from(heading1Ref.current, {
+                    y: 40, opacity: 0,
+                    duration: 0.8, ease: 'power3.out',
+                }, 0.2);
             }
 
             if (heading2Ref.current) {
-                tl.from(
-                    heading2Ref.current,
-                    {
-                        y: 40,
-                        opacity: 0,
-                        filter: 'blur(8px)',
-                        duration: 0.9,
-                        ease: 'power3.out',
-                    },
-                    0.3
-                );
+                tl.from(heading2Ref.current, {
+                    y: 40, opacity: 0,
+                    duration: 0.8, ease: 'power3.out',
+                }, 0.3);
             }
 
-            // Subtitle
             if (subtitleRef.current) {
-                tl.from(
-                    subtitleRef.current,
-                    {
-                        y: 30,
-                        opacity: 0,
-                        filter: 'blur(6px)',
-                        duration: 0.8,
-                        ease: 'power3.out',
-                    },
-                    0.4
-                );
+                tl.from(subtitleRef.current, {
+                    y: 25, opacity: 0,
+                    duration: 0.7, ease: 'power3.out',
+                }, 0.4);
             }
 
             // Features

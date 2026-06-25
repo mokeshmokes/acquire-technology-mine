@@ -13,13 +13,12 @@ interface ScrollRevealProps {
 
 const variants = {
     fadeInUp: {
-        hidden: { opacity: 0, y: 30, filter: 'blur(10px)' },
+        hidden: { opacity: 0, y: 25 },
         visible: (custom: number) => ({
             opacity: 1,
             y: 0,
-            filter: 'blur(0px)',
             transition: {
-                duration: custom || 0.8,
+                duration: custom || 0.7,
                 ease: [0.25, 0.46, 0.45, 0.94],
             },
         }),
@@ -35,35 +34,34 @@ const variants = {
         }),
     },
     scaleIn: {
-        hidden: { opacity: 0, scale: 0.8, filter: 'blur(10px)' },
+        hidden: { opacity: 0, scale: 0.88 },
         visible: (custom: number) => ({
             opacity: 1,
             scale: 1,
-            filter: 'blur(0px)',
             transition: {
-                duration: custom || 0.7,
+                duration: custom || 0.65,
                 ease: [0.25, 0.46, 0.45, 0.94],
             },
         }),
     },
     slideLeft: {
-        hidden: { opacity: 0, x: -100 },
+        hidden: { opacity: 0, x: -80 },
         visible: (custom: number) => ({
             opacity: 1,
             x: 0,
             transition: {
-                duration: custom || 0.8,
+                duration: custom || 0.75,
                 ease: [0.25, 0.46, 0.45, 0.94],
             },
         }),
     },
     slideRight: {
-        hidden: { opacity: 0, x: 100 },
+        hidden: { opacity: 0, x: 80 },
         visible: (custom: number) => ({
             opacity: 1,
             x: 0,
             transition: {
-                duration: custom || 0.8,
+                duration: custom || 0.75,
                 ease: [0.25, 0.46, 0.45, 0.94],
             },
         }),

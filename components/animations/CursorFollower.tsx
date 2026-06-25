@@ -56,10 +56,11 @@ export default function CursorFollower() {
 
     return (
         <motion.div
-            className="pointer-events-none fixed top-0 left-0 z-[9999] mix-blend-screen"
+            className="pointer-events-none fixed top-0 left-0 z-[9999]"
             style={{
                 x: cursorXSpring,
                 y: cursorYSpring,
+                willChange: 'transform',
             }}
         >
             <div

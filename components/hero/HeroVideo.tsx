@@ -231,31 +231,16 @@ export default function HeroVideo() {
     return (
         <motion.div
             ref={containerRef}
-            className="relative w-full h-full group"
-            animate={{
-                y: [0, -8, 0],
-            }}
-            transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: 'easeInOut',
-            }}
+            className="relative w-full h-full group animate-float-vertical"
+            style={{ willChange: 'transform' }}
             onMouseMove={resetControlsTimeout}
             onMouseEnter={() => setShowControls(true)}
             onMouseLeave={() => !isDragging && setShowControls(false)}
         >
-            {/* Animated Glow Effect */}
-            <motion.div
-                className="absolute -inset-6 bg-gradient-to-r from-primary via-primary-hover to-primary rounded-[32px] opacity-20 blur-3xl"
-                animate={{
-                    opacity: [0.15, 0.25, 0.15],
-                    scale: [1, 1.05, 1],
-                }}
-                transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                }}
+            {/* Animated Glow Effect — CSS keyframe, no Framer loop */}
+            <div
+                className="absolute -inset-6 bg-gradient-to-r from-primary via-primary-hover to-primary rounded-[32px] blur-3xl animate-glow-pulse"
+                style={{ willChange: 'opacity, transform' }}
             />
 
             {/* Premium Floating Frame Container */}
@@ -440,14 +425,9 @@ export default function HeroVideo() {
                 {!isLoaded && !hasError && (
                     <div className="absolute inset-0 flex items-center justify-center bg-surface-elevated z-40">
                         <div className="text-center space-y-4">
-                            <motion.div
-                                className="w-16 h-16 mx-auto rounded-full border-4 border-primary/20 border-t-primary"
-                                animate={{ rotate: 360 }}
-                                transition={{
-                                    duration: 1,
-                                    repeat: Infinity,
-                                    ease: 'linear',
-                                }}
+                            <div
+                                className="w-16 h-16 mx-auto rounded-full border-4 border-primary/20 border-t-primary animate-spin"
+                                style={{ animationDuration: '1s', animationTimingFunction: 'linear' }}
                             />
                             <p className="text-muted text-sm">Loading video...</p>
                         </div>
@@ -477,18 +457,7 @@ export default function HeroVideo() {
             >
                 <div className="glass-effect border border-primary/30 rounded-full px-6 py-3 backdrop-blur-xl shadow-lg">
                     <div className="flex items-center gap-2">
-                        <motion.div
-                            className="w-2 h-2 bg-primary rounded-full"
-                            animate={{
-                                scale: [1, 1.3, 1],
-                                opacity: [1, 0.6, 1],
-                            }}
-                            transition={{
-                                duration: 2,
-                                repeat: Infinity,
-                                ease: 'easeInOut',
-                            }}
-                        />
+                        <div className="w-2 h-2 bg-primary rounded-full animate-dot-pulse" />
                         <span className="text-sm font-medium text-white">Live Learning Environment</span>
                     </div>
                 </div>
