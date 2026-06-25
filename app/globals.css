@@ -53,6 +53,16 @@
     box-shadow: 0 0 30px rgba(194, 24, 56, 0.30);
   }
 
+  /* Shimmer animation for accent lines */
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(300%); }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 3s linear infinite;
+  }
+
   /* Scroll Animation Utility Classes */
 
   /* 1. Hero Word Reveal */

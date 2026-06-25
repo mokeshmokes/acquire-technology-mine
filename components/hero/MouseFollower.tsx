@@ -1,67 +1,52 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { motion, useSpring } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { useMotionValue, useSpring, motion } from 'framer-motion';
 
 export default function MouseFollower() {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-    const springConfig = { damping: 25, stiffness: 150 };
-    const x = useSpring(0, springConfig);
-    const y = useSpring(0, springConfig);
+    // Use motion values directly — no useState, no re-renders on mouse move
+    const rawX = useMotionValue(0);
+    const rawY = useMotionValue(0);
+    const springConfig = { damping: 30, stiffness: 120 };
+    const x = useSpring(rawX, springConfig);
+    const y = useSpring(rawY, springConfig);
+    const rafRef = useRef<number | null>(null);
 
     useEffect(() => {
+        let pendingX = 0;
+        let pendingY = 0;
+
         const handleMouseMove = (e: MouseEvent) => {
-            setMousePosition({ x: e.clientX, y: e.clientY });
+            pendingX = e.clientX;
+            pendingY = e.clientY;
+            // Throttle updates via rAF — only update motion values once per frame
+            if (rafRef.current === null) {
+                rafRef.current = requestAnimationFrame(() => {
+                    rawX.set(pendingX);
+                    rawY.set(pendingY);
+                    rafRef.current = null;
+                });
+            }
         };
 
-        window.addEventListener('mousemove', handleMouseMove);
-
+        window.addEventListener('mousemove', handleMouseMove, { passive: true });
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
+            if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
         };
-    }, []);
-
-    useEffect(() => {
-        x.set(mousePosition.x);
-        y.set(mousePosition.y);
-    }, [mousePosition, x, y]);
+    }, [rawX, rawY]);
 
     return (
-        <>
-            {/* Main cursor glow */}
-            <motion.div
-                className="fixed pointer-events-none z-50 mix-blend-screen"
-                style={{
-                    x: x,
-                    y: y,
-                    translateX: '-50%',
-                    translateY: '-50%',
-                }}
-            >
-                <div className="w-64 h-64 rounded-full bg-primary opacity-10 blur-3xl" />
-            </motion.div>
-
-            {/* Secondary glow */}
-            <motion.div
-                className="fixed pointer-events-none z-50 mix-blend-screen"
-                style={{
-                    x: x,
-                    y: y,
-                    translateX: '-50%',
-                    translateY: '-50%',
-                }}
-                animate={{
-                    scale: [1, 1.2, 1],
-                }}
-                transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                }}
-            >
-                <div className="w-32 h-32 rounded-full bg-primary-hover opacity-5 blur-2xl" />
-            </motion.div>
-        </>
+        <motion.div
+            className="fixed pointer-events-none z-50 mix-blend-screen"
+            style={{
+                x,
+                y,
+                translateX: '-50%',
+                translateY: '-50%',
+            }}
+        >
+            <div className="w-64 h-64 rounded-full bg-primary opacity-10 blur-3xl" />
+        </motion.div>
     );
 }

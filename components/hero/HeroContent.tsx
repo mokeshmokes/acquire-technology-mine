@@ -31,21 +31,8 @@ export default function HeroContent() {
             >
                 <span className="block text-white">Transform Your Future</span>
                 <span className="block text-white">With{' '}</span>
-                <span className="block bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent relative">
+                <span className="block bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent">
                     Industry-Ready
-                    <motion.span
-                        className="absolute inset-0 bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent blur-lg opacity-50"
-                        animate={{
-                            opacity: [0.3, 0.6, 0.3],
-                        }}
-                        transition={{
-                            duration: 3,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                        }}
-                    >
-                        Industry-Ready
-                    </motion.span>
                 </span>
                 <span className="block text-white">Technology Education</span>
             </motion.h1>
