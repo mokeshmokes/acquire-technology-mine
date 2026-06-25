@@ -4,7 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Clock, Users, ArrowRight, Play } from 'lucide-react';
 import CourseProgress from './CourseProgress';
 import Course3DAnimation from './Course3DAnimation';
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useCallback } from 'react';
 
 interface LiveCourseCardProps {
     course: {
@@ -26,7 +26,6 @@ interface LiveCourseCardProps {
 
 export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
     const cardRef = useRef<HTMLDivElement>(null);
-    const [isHovered, setIsHovered] = useState(false);
 
     /*
      * KEY FIX: use motion values + springs for the 3D tilt instead of
@@ -57,13 +56,11 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
     }, [mouseX, mouseY]);
 
     const handleMouseEnter = useCallback(() => {
-        setIsHovered(true);
         liftY.set(-8);
         cardScale.set(1.015);
     }, [liftY, cardScale]);
 
     const handleMouseLeave = useCallback(() => {
-        setIsHovered(false);
         mouseX.set(50);
         mouseY.set(50);
         liftY.set(0);
