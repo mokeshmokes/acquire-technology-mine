@@ -1,8 +1,7 @@
 'use client';
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Clock, Users, ArrowRight, Play } from 'lucide-react';
-import CourseProgress from './CourseProgress';
+import { Clock, ArrowRight, Play } from 'lucide-react';
 import Course3DAnimation from './Course3DAnimation';
 import { useRef, useCallback } from 'react';
 
@@ -84,7 +83,7 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
     return (
         <div
             ref={cardRef}
-            className="group relative h-full min-h-[520px] md:min-h-[580px] lg:min-h-[620px]"
+            className="group relative h-full min-h-[420px] md:min-h-[460px] lg:min-h-[480px]"
             onMouseMove={(e) => { handleMouseMove(e); handleLightMove(e); }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -188,12 +187,12 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
                         {course.subtitle && <p className="text-[10px] md:text-xs text-primary line-clamp-1">{course.subtitle}</p>}
                     </div>
 
-                    {/* Tags — simple hover via Tailwind, no Framer per-tag */}
-                    <div className="h-[28px] md:h-[32px] mb-3 md:mb-4 flex flex-wrap gap-1.5 overflow-hidden">
-                        {course.tags.slice(0, 3).map((tag) => (
+                    {/* Tags - Uniform height and spacing */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                        {course.tags.slice(0, 4).map((tag) => (
                             <span
                                 key={tag}
-                                className="px-2 py-0.5 md:py-1 text-[9px] md:text-[10px] font-medium text-white/80 rounded-full whitespace-nowrap cursor-pointer
+                                className="px-3 py-1.5 text-[10px] md:text-xs font-medium text-white/80 rounded-lg whitespace-nowrap cursor-pointer
                                            hover:bg-primary hover:text-white transition-colors duration-200"
                                 style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
                             >
@@ -203,7 +202,7 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
                     </div>
 
                     {/* Info */}
-                    <div className="grid grid-cols-2 gap-2 md:gap-3 text-xs mb-3 md:mb-4 h-[50px] md:h-[56px]">
+                    <div className="grid grid-cols-2 gap-3 md:gap-4 text-xs mb-4">
                         <div>
                             <div className="text-white/50 mb-1 text-[10px] md:text-xs">Mentor</div>
                             <div className="font-semibold text-white truncate text-xs md:text-sm">{course.mentor}</div>
@@ -213,23 +212,6 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
                             <div className="flex items-center gap-1 font-semibold text-white">
                                 <Clock className="w-3 h-3 text-primary flex-shrink-0" />
                                 <span className="truncate text-xs md:text-sm">{course.session.day}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Seats & Progress */}
-                    <div className="flex items-center justify-between mb-3 md:mb-4 h-[80px] md:h-[100px]">
-                        <div className="text-xs">
-                            <div className="flex items-center gap-1.5 text-white font-semibold mb-1">
-                                <Users className="w-3 h-3 text-primary" />
-                                <span className="text-xs md:text-sm">{course.seats} Seats</span>
-                            </div>
-                            <div className="text-white/50 text-[10px] md:text-xs">{course.enrolled} enrolled</div>
-                        </div>
-                        <div className="flex-shrink-0">
-                            <div className="scale-[0.65] md:scale-75 origin-center"
-                                style={{ filter: 'drop-shadow(0 0 6px rgba(199,24,56,0.25))' }}>
-                                <CourseProgress progress={course.progress} delay={index * 0.05} />
                             </div>
                         </div>
                     </div>
