@@ -10,12 +10,14 @@ import ScrollToTop from '@/components/footer/ScrollToTop';
 import SmoothScroll from '@/components/animations/SmoothScroll';
 import ScrollAnimationProvider from '@/components/animations/ScrollAnimationProvider';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import HashNavigationHandler from '@/components/HashNavigationHandler';
 
 export default function Home() {
     return (
         <ErrorBoundary>
             <SmoothScroll>
                 <ScrollAnimationProvider>
+                    <HashNavigationHandler />
                     <main className="min-h-screen bg-background">
                         <Header />
                         <section id="home" className="min-h-screen">
