@@ -1,14 +1,52 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { mainNavigation, coursesMegaMenu, resourcesMegaMenu, moreMenu } from '@/data/navigation';
+import { useScrollSpy } from '@/hooks/useScrollSpy';
 
 export default function MobileNavigation() {
+    const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
     const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
+
+    // Extract section IDs from navigation items
+    const sectionIds = mainNavigation
+        .filter((item) => item.sectionId)
+        .map((item) => item.sectionId!);
+
+    // Use scroll spy to detect active section (only on homepage)
+    const activeSection = useScrollSpy({
+        sectionIds,
+        threshold: 0.5,
+        rootMargin: '-10% 0px -10% 0px',
+    });
+
+    // Determine which nav item should be active based on current route
+    const getActiveItem = () => {
+        // If on a course detail page, activate "Course"
+        if (pathname?.startsWith('/courses/')) {
+            return 'courses';
+        }
+
+        // If on homepage, use scroll spy
+        if (pathname === '/') {
+            return activeSection;
+        }
+
+        // For other pages, match by pathname
+        if (pathname?.includes('/apply')) return null;
+        if (pathname?.includes('/counselling')) return null;
+        if (pathname?.includes('/about')) return 'about-us';
+        if (pathname?.includes('/contact')) return 'contact';
+
+        return activeSection;
+    };
+
+    const currentActive = getActiveItem();
 
     useEffect(() => {
         if (isOpen) {
@@ -97,114 +135,124 @@ export default function MobileNavigation() {
                                 </div>
 
                                 <nav className="space-y-2">
-                                    {mainNavigation.map((item) => (
-                                        <div key={item.label}>
-                                            {item.hasMegaMenu || item.hasDropdown ? (
-                                                <div>
-                                                    <button
-                                                        onClick={() => toggleMenu(item.label)}
-                                                        className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-surface-elevated transition-colors text-left"
-                                                    >
-                                                        <span className="font-medium">{item.label}</span>
-                                                        <motion.div
-                                                            animate={{ rotate: expandedMenu === item.label ? 180 : 0 }}
-                                                            transition={{ duration: 0.2 }}
+                                    {mainNavigation.map((item) => {
+                                        const isActive = item.sectionId === currentActive;
+
+                                        return (
+                                            <div key={item.label}>
+                                                {item.hasMegaMenu || item.hasDropdown ? (
+                                                    <div>
+                                                        <button
+                                                            onClick={() => toggleMenu(item.label)}
+                                                            className={`w-full flex items-center justify-between p-3 rounded-lg transition-colors text-left ${isActive
+                                                                ? 'bg-primary/20 border border-primary/30 text-white font-semibold'
+                                                                : 'hover:bg-surface-elevated'
+                                                                }`}
                                                         >
-                                                            <ChevronDown className="w-4 h-4" />
-                                                        </motion.div>
-                                                    </button>
-
-                                                    <AnimatePresence>
-                                                        {expandedMenu === item.label && (
+                                                            <span className="font-medium">{item.label}</span>
                                                             <motion.div
-                                                                initial={{ height: 0, opacity: 0 }}
-                                                                animate={{ height: 'auto', opacity: 1 }}
-                                                                exit={{ height: 0, opacity: 0 }}
+                                                                animate={{ rotate: expandedMenu === item.label ? 180 : 0 }}
                                                                 transition={{ duration: 0.2 }}
-                                                                className="overflow-hidden"
                                                             >
-                                                                <div className="pl-4 pr-2 py-2 space-y-1">
-                                                                    {item.label === 'Courses' && coursesMegaMenu.map((category) => (
-                                                                        <div key={category.category} className="mb-3">
-                                                                            <p className="text-xs text-primary-hover font-semibold mb-2 uppercase">
-                                                                                {category.category}
-                                                                            </p>
-                                                                            {category.items.map((subItem) => {
-                                                                                const Icon = subItem.icon;
-                                                                                return (
-                                                                                    <Link
-                                                                                        key={subItem.title}
-                                                                                        href={subItem.href}
-                                                                                        onClick={() => setIsOpen(false)}
-                                                                                        className="flex items-center gap-2 p-2 rounded-lg hover:bg-surface-elevated transition-colors"
-                                                                                    >
-                                                                                        <Icon className="w-4 h-4 text-primary" />
-                                                                                        <span className="text-sm">{subItem.title}</span>
-                                                                                    </Link>
-                                                                                );
-                                                                            })}
-                                                                        </div>
-                                                                    ))}
-
-                                                                    {item.label === 'Resources' && resourcesMegaMenu.map((category) => (
-                                                                        <div key={category.category} className="mb-3">
-                                                                            <p className="text-xs text-primary-hover font-semibold mb-2 uppercase">
-                                                                                {category.category}
-                                                                            </p>
-                                                                            {category.items.map((subItem) => {
-                                                                                const Icon = subItem.icon;
-                                                                                return (
-                                                                                    <Link
-                                                                                        key={subItem.title}
-                                                                                        href={subItem.href}
-                                                                                        onClick={() => setIsOpen(false)}
-                                                                                        className="flex items-center gap-2 p-2 rounded-lg hover:bg-surface-elevated transition-colors"
-                                                                                    >
-                                                                                        <Icon className="w-4 h-4 text-primary" />
-                                                                                        <span className="text-sm">{subItem.title}</span>
-                                                                                    </Link>
-                                                                                );
-                                                                            })}
-                                                                        </div>
-                                                                    ))}
-
-                                                                    {item.label === 'More' && moreMenu.map((category) => (
-                                                                        <div key={category.category} className="mb-3">
-                                                                            <p className="text-xs text-primary-hover font-semibold mb-2 uppercase">
-                                                                                {category.category}
-                                                                            </p>
-                                                                            {category.items.map((subItem) => {
-                                                                                const Icon = subItem.icon;
-                                                                                return (
-                                                                                    <Link
-                                                                                        key={subItem.title}
-                                                                                        href={subItem.href}
-                                                                                        onClick={() => setIsOpen(false)}
-                                                                                        className="flex items-center gap-2 p-2 rounded-lg hover:bg-surface-elevated transition-colors"
-                                                                                    >
-                                                                                        <Icon className="w-4 h-4 text-primary" />
-                                                                                        <span className="text-sm">{subItem.title}</span>
-                                                                                    </Link>
-                                                                                );
-                                                                            })}
-                                                                        </div>
-                                                                    ))}
-                                                                </div>
+                                                                <ChevronDown className="w-4 h-4" />
                                                             </motion.div>
-                                                        )}
-                                                    </AnimatePresence>
-                                                </div>
-                                            ) : (
-                                                <Link
-                                                    href={item.href}
-                                                    onClick={() => handleLinkClick(item.href)}
-                                                    className="block p-3 rounded-lg hover:bg-surface-elevated transition-colors font-medium"
-                                                >
-                                                    {item.label}
-                                                </Link>
-                                            )}
-                                        </div>
-                                    ))}
+                                                        </button>
+
+                                                        <AnimatePresence>
+                                                            {expandedMenu === item.label && (
+                                                                <motion.div
+                                                                    initial={{ height: 0, opacity: 0 }}
+                                                                    animate={{ height: 'auto', opacity: 1 }}
+                                                                    exit={{ height: 0, opacity: 0 }}
+                                                                    transition={{ duration: 0.2 }}
+                                                                    className="overflow-hidden"
+                                                                >
+                                                                    <div className="pl-4 pr-2 py-2 space-y-1">
+                                                                        {item.label === 'Courses' && coursesMegaMenu.map((category) => (
+                                                                            <div key={category.category} className="mb-3">
+                                                                                <p className="text-xs text-primary-hover font-semibold mb-2 uppercase">
+                                                                                    {category.category}
+                                                                                </p>
+                                                                                {category.items.map((subItem) => {
+                                                                                    const Icon = subItem.icon;
+                                                                                    return (
+                                                                                        <Link
+                                                                                            key={subItem.title}
+                                                                                            href={subItem.href}
+                                                                                            onClick={() => setIsOpen(false)}
+                                                                                            className="flex items-center gap-2 p-2 rounded-lg hover:bg-surface-elevated transition-colors"
+                                                                                        >
+                                                                                            <Icon className="w-4 h-4 text-primary" />
+                                                                                            <span className="text-sm">{subItem.title}</span>
+                                                                                        </Link>
+                                                                                    );
+                                                                                })}
+                                                                            </div>
+                                                                        ))}
+
+                                                                        {item.label === 'Resources' && resourcesMegaMenu.map((category) => (
+                                                                            <div key={category.category} className="mb-3">
+                                                                                <p className="text-xs text-primary-hover font-semibold mb-2 uppercase">
+                                                                                    {category.category}
+                                                                                </p>
+                                                                                {category.items.map((subItem) => {
+                                                                                    const Icon = subItem.icon;
+                                                                                    return (
+                                                                                        <Link
+                                                                                            key={subItem.title}
+                                                                                            href={subItem.href}
+                                                                                            onClick={() => setIsOpen(false)}
+                                                                                            className="flex items-center gap-2 p-2 rounded-lg hover:bg-surface-elevated transition-colors"
+                                                                                        >
+                                                                                            <Icon className="w-4 h-4 text-primary" />
+                                                                                            <span className="text-sm">{subItem.title}</span>
+                                                                                        </Link>
+                                                                                    );
+                                                                                })}
+                                                                            </div>
+                                                                        ))}
+
+                                                                        {item.label === 'More' && moreMenu.map((category) => (
+                                                                            <div key={category.category} className="mb-3">
+                                                                                <p className="text-xs text-primary-hover font-semibold mb-2 uppercase">
+                                                                                    {category.category}
+                                                                                </p>
+                                                                                {category.items.map((subItem) => {
+                                                                                    const Icon = subItem.icon;
+                                                                                    return (
+                                                                                        <Link
+                                                                                            key={subItem.title}
+                                                                                            href={subItem.href}
+                                                                                            onClick={() => setIsOpen(false)}
+                                                                                            className="flex items-center gap-2 p-2 rounded-lg hover:bg-surface-elevated transition-colors"
+                                                                                        >
+                                                                                            <Icon className="w-4 h-4 text-primary" />
+                                                                                            <span className="text-sm">{subItem.title}</span>
+                                                                                        </Link>
+                                                                                    );
+                                                                                })}
+                                                                            </div>
+                                                                        ))}
+                                                                    </div>
+                                                                </motion.div>
+                                                            )}
+                                                        </AnimatePresence>
+                                                    </div>
+                                                ) : (
+                                                    <Link
+                                                        href={item.href}
+                                                        onClick={() => handleLinkClick(item.href)}
+                                                        className={`block p-3 rounded-lg transition-colors font-medium ${isActive
+                                                            ? 'bg-primary/20 border border-primary/30 text-white font-semibold'
+                                                            : 'hover:bg-surface-elevated'
+                                                            }`}
+                                                    >
+                                                        {item.label}
+                                                    </Link>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
                                 </nav>
 
                                 <div className="mt-8 space-y-3 pt-8 border-t border-border">

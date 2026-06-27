@@ -1,8 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import CourseMegaMenu from './CourseMegaMenu';
+import { navigateToSection } from '@/lib/navigation';
 
 interface NavigationItemProps {
     label: string;
@@ -12,42 +14,37 @@ interface NavigationItemProps {
 
 export default function NavigationItem({ label, href, isActive }: NavigationItemProps) {
     const [isHovered, setIsHovered] = useState(false);
+    const [showMegaMenu, setShowMegaMenu] = useState(false);
     const isAnchorLink = href.startsWith('#');
+    const isCourseMenu = label === 'Course';
 
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        if (isAnchorLink) {
+        if (isAnchorLink && !isCourseMenu) {
             e.preventDefault();
-            const targetId = href.substring(1);
-            const targetElement = document.getElementById(targetId);
+            const sectionId = href.substring(1);
+            navigateToSection(sectionId);
+        }
+    };
 
-            if (targetElement) {
-                // Get Lenis instance from window
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const lenis = (window as any).lenis;
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+        if (isCourseMenu) {
+            setShowMegaMenu(true);
+        }
+    };
 
-                if (lenis) {
-                    // Use Lenis smooth scroll
-                    lenis.scrollTo(targetElement, {
-                        offset: -100,
-                        duration: 1.5,
-                        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-                    });
-                } else {
-                    // Fallback to native smooth scroll
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start',
-                    });
-                }
-            }
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+        if (isCourseMenu) {
+            setShowMegaMenu(false);
         }
     };
 
     return (
         <motion.div
             className="relative"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
             animate={{
                 y: isHovered && !isActive ? -2 : 0,
             }}
@@ -157,6 +154,13 @@ export default function NavigationItem({ label, href, isActive }: NavigationItem
                     />
                 )}
             </Link>
+
+            {/* Course Mega Menu */}
+            {isCourseMenu && (
+                <AnimatePresence>
+                    {showMegaMenu && <CourseMegaMenu />}
+                </AnimatePresence>
+            )}
         </motion.div>
     );
 }
