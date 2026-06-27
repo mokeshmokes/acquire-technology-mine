@@ -40,13 +40,13 @@ export default function AboutStatistics() {
     const isInView = useInView(ref, { once: true, margin: '-100px' });
 
     return (
-        <section ref={ref} className="relative py-20 px-6">
+        <section ref={ref} className="relative py-16 md:py-20 px-5 md:px-6">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                     transition={{ duration: 0.8 }}
-                    className="rounded-[28px] p-12"
+                    className="rounded-[20px] md:rounded-[28px] p-8 md:p-12"
                     style={{
                         background: 'rgba(255, 255, 255, 0.05)',
                         backdropFilter: 'blur(18px)',

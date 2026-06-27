@@ -1,17 +1,47 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { Menu, X, ChevronDown } from 'lucide-react';
-import { mainNavigation, coursesMegaMenu, resourcesMegaMenu, moreMenu } from '@/data/navigation';
+import { Menu, X, ChevronDown, Cpu, Database, Code2, Cloud, Shield } from 'lucide-react';
+import { mainNavigation } from '@/data/navigation';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
+
+// Mobile-only course list - simple and clean
+const mobileCourses = [
+    {
+        title: 'AI Engineer Program',
+        href: '/courses/ai-engineer',
+        icon: Cpu,
+    },
+    {
+        title: 'Data Science',
+        href: '/courses/data-science',
+        icon: Database,
+    },
+    {
+        title: 'Full Stack Development',
+        href: '/courses/full-stack',
+        icon: Code2,
+    },
+    {
+        title: 'Cloud Computing',
+        href: '/courses/cloud-computing',
+        icon: Cloud,
+    },
+    {
+        title: 'Cyber Security',
+        href: '/courses/cyber-security',
+        icon: Shield,
+    },
+];
 
 export default function MobileNavigation() {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
     const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
+    const menuRef = useRef<HTMLDivElement>(null);
 
     // Extract section IDs from navigation items
     const sectionIds = mainNavigation
@@ -48,16 +78,47 @@ export default function MobileNavigation() {
 
     const currentActive = getActiveItem();
 
+    // Close menu function
+    const closeMenu = () => {
+        setIsOpen(false);
+        setExpandedMenu(null);
+    };
+
+    // Handle body scroll lock
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
         } else {
-            document.body.style.overflow = 'unset';
+            document.body.style.overflow = '';
         }
 
         return () => {
-            document.body.style.overflow = 'unset';
+            document.body.style.overflow = '';
         };
+    }, [isOpen]);
+
+    // Handle escape key
+    useEffect(() => {
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && isOpen) {
+                closeMenu();
+            }
+        };
+
+        document.addEventListener('keydown', handleEscape);
+        return () => document.removeEventListener('keydown', handleEscape);
+    }, [isOpen]);
+
+    // Handle click outside
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (isOpen && menuRef.current && !menuRef.current.contains(e.target as Node)) {
+                closeMenu();
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
     }, [isOpen]);
 
     const toggleMenu = (label: string) => {
@@ -65,7 +126,7 @@ export default function MobileNavigation() {
     };
 
     const handleLinkClick = (href: string) => {
-        setIsOpen(false);
+        closeMenu();
 
         if (href.startsWith('#')) {
             setTimeout(() => {
@@ -95,66 +156,86 @@ export default function MobileNavigation() {
 
     return (
         <div className="lg:hidden">
-            <motion.button
-                whileTap={{ scale: 0.9 }}
-                onClick={() => setIsOpen(!isOpen)}
-                className="p-2 rounded-lg hover:bg-surface-elevated transition-colors"
-                aria-label="Toggle menu"
-            >
-                {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </motion.button>
+            {/* Hamburger Button - Hide when menu is open */}
+            {!isOpen && (
+                <motion.button
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="p-2 rounded-lg hover:bg-white/5 transition-colors relative z-50"
+                    aria-label="Toggle menu"
+                >
+                    <Menu className="w-6 h-6 text-white" />
+                </motion.button>
+            )}
 
             <AnimatePresence>
                 {isOpen && (
                     <>
+                        {/* Backdrop */}
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40"
-                            onClick={() => setIsOpen(false)}
+                            transition={{ duration: 0.35 }}
+                            className="fixed inset-0 bg-black/40 z-[99998]"
+                            onClick={closeMenu}
+                            aria-hidden="true"
                         />
 
+                        {/* Full Screen Menu Drawer - Slide from Right */}
                         <motion.div
+                            ref={menuRef}
                             initial={{ x: '100%' }}
                             animate={{ x: 0 }}
                             exit={{ x: '100%' }}
-                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                            className="fixed top-0 right-0 bottom-0 w-80 max-w-full glass-effect border-l border-glass z-50 overflow-y-auto"
+                            transition={{
+                                duration: 0.35,
+                                ease: [0.32, 0.72, 0, 1],
+                            }}
+                            className="fixed top-0 left-0 w-full z-[99999] overflow-y-auto"
+                            style={{
+                                height: '100dvh',
+                                background: 'rgba(8, 8, 8, 0.97)',
+                                backdropFilter: 'blur(20px)',
+                            }}
                         >
-                            <div className="p-6">
-                                <div className="flex items-center justify-between mb-8">
-                                    <h2 className="text-xl font-bold">Menu</h2>
+                            <div className="min-h-full p-6 flex flex-col">
+                                {/* Header */}
+                                <div className="flex items-center justify-between mb-10">
+                                    <h2 className="text-2xl font-bold text-white">Menu</h2>
                                     <button
-                                        onClick={() => setIsOpen(false)}
-                                        className="p-2 hover:bg-surface-elevated rounded-lg transition-colors"
+                                        onClick={closeMenu}
+                                        className="p-2 hover:bg-white/5 rounded-lg transition-colors"
+                                        aria-label="Close menu"
                                     >
-                                        <X className="w-5 h-5" />
+                                        <X className="w-6 h-6 text-white" />
                                     </button>
                                 </div>
 
-                                <nav className="space-y-2">
+                                {/* Navigation Links */}
+                                <nav className="space-y-1 flex-1">
                                     {mainNavigation.map((item) => {
                                         const isActive = item.sectionId === currentActive;
+                                        const isCourseMenu = item.label === 'Course';
 
                                         return (
                                             <div key={item.label}>
-                                                {item.hasMegaMenu || item.hasDropdown ? (
+                                                {isCourseMenu ? (
+                                                    /* Course Menu with Dropdown */
                                                     <div>
                                                         <button
                                                             onClick={() => toggleMenu(item.label)}
-                                                            className={`w-full flex items-center justify-between p-3 rounded-lg transition-colors text-left ${isActive
-                                                                ? 'bg-primary/20 border border-primary/30 text-white font-semibold'
-                                                                : 'hover:bg-surface-elevated'
+                                                            className={`w-full flex items-center justify-between p-4 rounded-xl transition-all text-left ${isActive
+                                                                ? 'bg-primary/20 border border-primary/40 text-white shadow-lg shadow-primary/20'
+                                                                : 'hover:bg-white/5 text-white/90'
                                                                 }`}
                                                         >
-                                                            <span className="font-medium">{item.label}</span>
+                                                            <span className="font-semibold text-lg">{item.label}</span>
                                                             <motion.div
                                                                 animate={{ rotate: expandedMenu === item.label ? 180 : 0 }}
-                                                                transition={{ duration: 0.2 }}
+                                                                transition={{ duration: 0.3 }}
                                                             >
-                                                                <ChevronDown className="w-4 h-4" />
+                                                                <ChevronDown className="w-5 h-5" />
                                                             </motion.div>
                                                         </button>
 
@@ -164,90 +245,49 @@ export default function MobileNavigation() {
                                                                     initial={{ height: 0, opacity: 0 }}
                                                                     animate={{ height: 'auto', opacity: 1 }}
                                                                     exit={{ height: 0, opacity: 0 }}
-                                                                    transition={{ duration: 0.2 }}
+                                                                    transition={{ duration: 0.3 }}
                                                                     className="overflow-hidden"
                                                                 >
-                                                                    <div className="pl-4 pr-2 py-2 space-y-1">
-                                                                        {item.label === 'Courses' && coursesMegaMenu.map((category) => (
-                                                                            <div key={category.category} className="mb-3">
-                                                                                <p className="text-xs text-primary-hover font-semibold mb-2 uppercase">
-                                                                                    {category.category}
-                                                                                </p>
-                                                                                {category.items.map((subItem) => {
-                                                                                    const Icon = subItem.icon;
-                                                                                    return (
-                                                                                        <Link
-                                                                                            key={subItem.title}
-                                                                                            href={subItem.href}
-                                                                                            onClick={() => setIsOpen(false)}
-                                                                                            className="flex items-center gap-2 p-2 rounded-lg hover:bg-surface-elevated transition-colors"
-                                                                                        >
-                                                                                            <Icon className="w-4 h-4 text-primary" />
-                                                                                            <span className="text-sm">{subItem.title}</span>
-                                                                                        </Link>
-                                                                                    );
-                                                                                })}
-                                                                            </div>
-                                                                        ))}
-
-                                                                        {item.label === 'Resources' && resourcesMegaMenu.map((category) => (
-                                                                            <div key={category.category} className="mb-3">
-                                                                                <p className="text-xs text-primary-hover font-semibold mb-2 uppercase">
-                                                                                    {category.category}
-                                                                                </p>
-                                                                                {category.items.map((subItem) => {
-                                                                                    const Icon = subItem.icon;
-                                                                                    return (
-                                                                                        <Link
-                                                                                            key={subItem.title}
-                                                                                            href={subItem.href}
-                                                                                            onClick={() => setIsOpen(false)}
-                                                                                            className="flex items-center gap-2 p-2 rounded-lg hover:bg-surface-elevated transition-colors"
-                                                                                        >
-                                                                                            <Icon className="w-4 h-4 text-primary" />
-                                                                                            <span className="text-sm">{subItem.title}</span>
-                                                                                        </Link>
-                                                                                    );
-                                                                                })}
-                                                                            </div>
-                                                                        ))}
-
-                                                                        {item.label === 'More' && moreMenu.map((category) => (
-                                                                            <div key={category.category} className="mb-3">
-                                                                                <p className="text-xs text-primary-hover font-semibold mb-2 uppercase">
-                                                                                    {category.category}
-                                                                                </p>
-                                                                                {category.items.map((subItem) => {
-                                                                                    const Icon = subItem.icon;
-                                                                                    return (
-                                                                                        <Link
-                                                                                            key={subItem.title}
-                                                                                            href={subItem.href}
-                                                                                            onClick={() => setIsOpen(false)}
-                                                                                            className="flex items-center gap-2 p-2 rounded-lg hover:bg-surface-elevated transition-colors"
-                                                                                        >
-                                                                                            <Icon className="w-4 h-4 text-primary" />
-                                                                                            <span className="text-sm">{subItem.title}</span>
-                                                                                        </Link>
-                                                                                    );
-                                                                                })}
-                                                                            </div>
-                                                                        ))}
+                                                                    <div className="py-2 space-y-1">
+                                                                        {mobileCourses.map((course) => {
+                                                                            const Icon = course.icon;
+                                                                            return (
+                                                                                <Link
+                                                                                    key={course.title}
+                                                                                    href={course.href}
+                                                                                    onClick={() => handleLinkClick(course.href)}
+                                                                                    className="flex items-center gap-3 p-3 rounded-2xl hover:bg-white/5 transition-colors group"
+                                                                                >
+                                                                                    <Icon className="w-5 h-5 text-primary flex-shrink-0" />
+                                                                                    <span className="text-sm text-white/90 group-hover:text-white font-medium">
+                                                                                        {course.title}
+                                                                                    </span>
+                                                                                </Link>
+                                                                            );
+                                                                        })}
                                                                     </div>
                                                                 </motion.div>
                                                             )}
                                                         </AnimatePresence>
                                                     </div>
                                                 ) : (
+                                                    /* Regular Menu Items */
                                                     <Link
                                                         href={item.href}
                                                         onClick={() => handleLinkClick(item.href)}
-                                                        className={`block p-3 rounded-lg transition-colors font-medium ${isActive
-                                                            ? 'bg-primary/20 border border-primary/30 text-white font-semibold'
-                                                            : 'hover:bg-surface-elevated'
+                                                        className={`flex items-center justify-between p-4 rounded-xl transition-all font-semibold text-lg ${isActive
+                                                            ? 'bg-primary/20 border border-primary/40 text-white shadow-lg shadow-primary/20'
+                                                            : 'hover:bg-white/5 text-white/90'
                                                             }`}
                                                     >
-                                                        {item.label}
+                                                        <span>{item.label}</span>
+                                                        {isActive && (
+                                                            <motion.div
+                                                                initial={{ scale: 0 }}
+                                                                animate={{ scale: 1 }}
+                                                                className="w-2 h-2 rounded-full bg-primary"
+                                                            />
+                                                        )}
                                                     </Link>
                                                 )}
                                             </div>
@@ -255,13 +295,25 @@ export default function MobileNavigation() {
                                     })}
                                 </nav>
 
-                                <div className="mt-8 space-y-3 pt-8 border-t border-border">
+                                {/* CTA Buttons */}
+                                <div className="mt-8 pt-8 border-t border-white/10 space-y-3">
                                     <Link
                                         href="/apply"
-                                        onClick={() => setIsOpen(false)}
-                                        className="block w-full text-center px-6 py-3 rounded-lg bg-primary hover:bg-primary-hover text-white font-medium transition-colors"
+                                        onClick={closeMenu}
+                                        className="block w-full text-center px-6 py-4 rounded-xl font-semibold text-white transition-all"
+                                        style={{
+                                            background: 'linear-gradient(135deg, rgba(199, 24, 56, 0.9) 0%, rgba(161, 14, 38, 1) 100%)',
+                                            boxShadow: '0 0 30px rgba(199, 24, 56, 0.4)',
+                                        }}
                                     >
                                         Apply Now
+                                    </Link>
+                                    <Link
+                                        href="/counselling"
+                                        onClick={closeMenu}
+                                        className="block w-full text-center px-6 py-4 rounded-xl font-semibold text-white/90 hover:text-white border border-primary/40 hover:border-primary/60 transition-all hover:bg-white/5"
+                                    >
+                                        Book Free Counselling
                                     </Link>
                                 </div>
                             </div>

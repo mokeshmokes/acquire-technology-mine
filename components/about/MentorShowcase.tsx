@@ -9,16 +9,16 @@ export default function MentorShowcase() {
     const isInView = useInView(ref, { once: true, margin: '-100px' });
 
     return (
-        <section ref={ref} className="relative py-32 px-6">
+        <section ref={ref} className="relative py-20 md:py-32 px-5 md:px-6">
             <div className="max-w-7xl mx-auto">
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                     transition={{ duration: 0.8 }}
-                    className="text-center mb-16 space-y-4"
+                    className="text-center mb-12 md:mb-16 space-y-4"
                 >
-                    <h2 className="text-4xl md:text-5xl font-bold text-white">
+                    <h2 className="font-bold text-white" style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)' }}>
                         Meet Our <span className="text-primary">Mentors</span>
                     </h2>
                     <p className="text-lg text-muted max-w-2xl mx-auto">
@@ -37,7 +37,7 @@ export default function MentorShowcase() {
                             whileHover={{
                                 y: -10,
                             }}
-                            className="group relative rounded-[28px] p-6 transition-all duration-500"
+                            className="group relative rounded-[20px] md:rounded-[28px] p-5 md:p-6 transition-all duration-500"
                             style={{
                                 background: 'rgba(255, 255, 255, 0.05)',
                                 backdropFilter: 'blur(18px)',

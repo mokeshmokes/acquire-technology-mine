@@ -11,7 +11,7 @@ interface ProjectsSectionProps {
 
 export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     return (
-        <section className="relative py-24 overflow-hidden">
+        <section className="relative py-16 md:py-24 overflow-hidden">
             {/* Background with animated orbs */}
             <div className="absolute inset-0">
                 <div className="absolute inset-0 bg-[#0C080A]" />
@@ -24,15 +24,16 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+            <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-6 lg:px-12">
                 <ScrollReveal>
-                    <div className="text-center mb-16">
+                    <div className="text-center mb-12 md:mb-16">
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-100px' }}
                             transition={{ duration: 0.6 }}
-                            className="text-4xl md:text-5xl font-bold text-white mb-6"
+                            className="font-bold text-white mb-4 md:mb-6 px-4"
+                            style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)' }}
                         >
                             Real-World Projects
                         </motion.h2>
@@ -41,7 +42,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-100px' }}
                             transition={{ duration: 0.6, delay: 0.2 }}
-                            className="text-lg text-white/70"
+                            className="text-base md:text-lg text-white/70 px-4"
                         >
                             Build production-ready projects for your portfolio
                         </motion.p>
@@ -50,7 +51,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
 
                 {/* Projects Grid */}
                 <ScrollReveal>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                         {projects.map((project, index) => (
                             <motion.div
                                 key={index}
@@ -59,7 +60,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                                 viewport={{ once: true, margin: '-50px' }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                                 whileHover={{ y: -10, scale: 1.02 }}
-                                className="group relative p-8 rounded-2xl"
+                                className="group relative p-6 md:p-8 rounded-xl md:rounded-2xl"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.05)',
                                     backdropFilter: 'blur(18px)',
@@ -77,22 +78,22 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                                 <div className="relative">
                                     {/* Icon */}
                                     <div
-                                        className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
+                                        className="w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl flex items-center justify-center mb-4 md:mb-6"
                                         style={{
                                             background: 'rgba(199, 24, 56, 0.15)',
                                             border: '1px solid rgba(255, 255, 255, 0.1)',
                                         }}
                                     >
-                                        <Code2 className="w-7 h-7 text-primary" />
+                                        <Code2 className="w-6 h-6 md:w-7 md:h-7 text-primary" />
                                     </div>
 
                                     {/* Title */}
-                                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors duration-200">
+                                    <h3 className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3 group-hover:text-primary transition-colors duration-200">
                                         {project.title}
                                     </h3>
 
                                     {/* Description */}
-                                    <p className="text-white/70 mb-6">{project.description}</p>
+                                    <p className="text-sm md:text-base text-white/70 mb-4 md:mb-6">{project.description}</p>
 
                                     {/* Technologies */}
                                     <div className="flex flex-wrap gap-2">

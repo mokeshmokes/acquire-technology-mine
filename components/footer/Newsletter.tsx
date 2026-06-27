@@ -26,14 +26,14 @@ export default function Newsletter() {
     };
 
     return (
-        <section className="relative py-20 px-6">
+        <section className="relative py-16 md:py-20 px-5 md:px-6">
             <div className="max-w-4xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-100px' }}
                     transition={{ duration: 0.8 }}
-                    className="rounded-[28px] p-12 text-center"
+                    className="rounded-[20px] md:rounded-[28px] p-8 md:p-12 text-center"
                     style={{
                         background: 'rgba(255, 255, 255, 0.05)',
                         backdropFilter: 'blur(18px)',
@@ -47,7 +47,7 @@ export default function Newsletter() {
                     </div>
 
                     {/* Heading */}
-                    <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                    <h3 className="font-bold text-white mb-4" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.25rem)' }}>
                         {newsletterData.heading}
                     </h3>
 

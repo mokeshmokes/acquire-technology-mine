@@ -26,8 +26,8 @@ export default function Footer() {
             />
 
             {/* Main Footer Content */}
-            <div className="max-w-7xl mx-auto px-6 py-16">
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            <div className="max-w-7xl mx-auto px-5 md:px-6 py-12 md:py-16">
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-8 md:mb-12">
                     {/* Column 1: Company */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}

@@ -11,7 +11,7 @@ interface CareerOpportunitiesProps {
 
 export default function CareerOpportunities({ careers }: CareerOpportunitiesProps) {
     return (
-        <section className="relative py-24 overflow-hidden">
+        <section className="relative py-16 md:py-24 overflow-hidden">
             {/* Background with animated orbs */}
             <div className="absolute inset-0">
                 <div className="absolute inset-0 bg-[#0C080A]" />
@@ -24,15 +24,16 @@ export default function CareerOpportunities({ careers }: CareerOpportunitiesProp
             </div>
 
             {/* Content */}
-            <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+            <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-6 lg:px-12">
                 <ScrollReveal>
-                    <div className="text-center mb-16">
+                    <div className="text-center mb-12 md:mb-16">
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-100px' }}
                             transition={{ duration: 0.6 }}
-                            className="text-4xl md:text-5xl font-bold text-white mb-6"
+                            className="font-bold text-white mb-4 md:mb-6 px-4"
+                            style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)' }}
                         >
                             Career Opportunities
                         </motion.h2>
@@ -41,7 +42,7 @@ export default function CareerOpportunities({ careers }: CareerOpportunitiesProp
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-100px' }}
                             transition={{ duration: 0.6, delay: 0.2 }}
-                            className="text-lg text-white/70"
+                            className="text-base md:text-lg text-white/70 px-4"
                         >
                             High-demand roles waiting for skilled professionals
                         </motion.p>
@@ -50,7 +51,7 @@ export default function CareerOpportunities({ careers }: CareerOpportunitiesProp
 
                 {/* Careers Grid */}
                 <ScrollReveal>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                         {careers.map((career, index) => (
                             <motion.div
                                 key={index}
@@ -59,7 +60,7 @@ export default function CareerOpportunities({ careers }: CareerOpportunitiesProp
                                 viewport={{ once: true, margin: '-50px' }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                                 whileHover={{ y: -8, scale: 1.02 }}
-                                className="group relative p-8 rounded-2xl"
+                                className="group relative p-6 md:p-8 rounded-xl md:rounded-2xl"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.05)',
                                     backdropFilter: 'blur(18px)',
@@ -76,37 +77,37 @@ export default function CareerOpportunities({ careers }: CareerOpportunitiesProp
 
                                 <div className="relative">
                                     {/* Header */}
-                                    <div className="flex items-start justify-between mb-4">
+                                    <div className="flex items-start justify-between mb-3 md:mb-4 gap-2">
                                         <div
-                                            className="w-14 h-14 rounded-xl flex items-center justify-center"
+                                            className="w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0"
                                             style={{
                                                 background: 'rgba(199, 24, 56, 0.15)',
                                                 border: '1px solid rgba(255, 255, 255, 0.1)',
                                             }}
                                         >
-                                            <Briefcase className="w-7 h-7 text-primary" />
+                                            <Briefcase className="w-6 h-6 md:w-7 md:h-7 text-primary" />
                                         </div>
                                         <div
-                                            className="px-4 py-2 rounded-lg flex items-center gap-2"
+                                            className="px-3 py-1.5 md:px-4 md:py-2 rounded-lg flex items-center gap-1.5 md:gap-2 flex-shrink-0"
                                             style={{
                                                 background: 'rgba(199, 24, 56, 0.2)',
                                                 border: '1px solid rgba(255, 255, 255, 0.1)',
                                             }}
                                         >
-                                            <DollarSign className="w-4 h-4 text-primary" />
-                                            <span className="text-sm font-semibold text-white">
+                                            <DollarSign className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
+                                            <span className="text-xs md:text-sm font-semibold text-white">
                                                 {career.salary}
                                             </span>
                                         </div>
                                     </div>
 
                                     {/* Title */}
-                                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-primary transition-colors duration-200">
+                                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3 group-hover:text-primary transition-colors duration-200">
                                         {career.title}
                                     </h3>
 
                                     {/* Description */}
-                                    <p className="text-white/70 mb-4">{career.description}</p>
+                                    <p className="text-sm md:text-base text-white/70 mb-3 md:mb-4">{career.description}</p>
 
                                     {/* Growth Indicator */}
                                     <div className="flex items-center gap-2 text-sm text-primary">
@@ -126,12 +127,12 @@ export default function CareerOpportunities({ careers }: CareerOpportunitiesProp
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: '-100px' }}
                         transition={{ duration: 0.6 }}
-                        className="text-center mt-12"
+                        className="text-center mt-8 md:mt-12 px-4"
                     >
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="group relative px-8 py-4 rounded-xl font-semibold text-white overflow-hidden"
+                            className="group relative px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-white overflow-hidden w-full sm:w-auto"
                             style={{
                                 background: 'linear-gradient(135deg, rgba(199, 24, 56, 0.9) 0%, rgba(161, 14, 38, 1) 100%)',
                                 boxShadow: '0 0 30px rgba(199, 24, 56, 0.4)',

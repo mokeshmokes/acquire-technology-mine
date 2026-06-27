@@ -8,7 +8,7 @@ export default function ContactSection() {
     const { badge, heading, description } = contactHeroData;
 
     return (
-        <section className="relative min-h-[900px] flex items-center overflow-hidden py-32 bg-background">
+        <section className="relative min-h-[900px] flex items-center overflow-hidden py-20 md:py-32 bg-background">
             {/* Static Background with Gradients */}
             <div className="absolute inset-0">
                 {/* Base Dark Background */}
@@ -40,8 +40,8 @@ export default function ContactSection() {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
-                <div className="grid lg:grid-cols-2 gap-16">
+            <div className="relative z-10 w-full max-w-7xl mx-auto px-5 md:px-6 lg:px-6">
+                <div className="grid lg:grid-cols-2 gap-12 md:gap-16">
                     {/* LEFT SIDE - Content */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
@@ -62,13 +62,13 @@ export default function ContactSection() {
 
                         {/* Heading */}
                         <div className="space-y-3">
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1]">
+                            <h2 className="font-bold text-white leading-[1.1]" style={{ fontSize: 'clamp(1.8rem, 5vw, 3.75rem)' }}>
                                 {heading.main}
                             </h2>
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent leading-[1.1]">
+                            <h2 className="font-bold bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent leading-[1.1]" style={{ fontSize: 'clamp(1.8rem, 5vw, 3.75rem)' }}>
                                 {heading.highlight}
                             </h2>
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1]">
+                            <h2 className="font-bold text-white leading-[1.1]" style={{ fontSize: 'clamp(1.8rem, 5vw, 3.75rem)' }}>
                                 {heading.suffix}
                             </h2>
                         </div>

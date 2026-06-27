@@ -175,7 +175,7 @@ export default function LiveCourses() {
     return (
         <section
             ref={sectionRef}
-            className="relative py-32 px-6 overflow-hidden bg-background"
+            className="relative py-16 md:py-24 lg:py-32 px-5 md:px-8 lg:px-6 overflow-hidden bg-background"
             style={{ willChange: hasAnimated ? 'auto' : 'transform' }}
         >
             {/* Static Background with Gradients */}
@@ -230,12 +230,13 @@ export default function LiveCourses() {
                         <div>
                             <h2
                                 ref={heading1Ref}
-                                className="text-5xl md:text-6xl font-bold text-white mb-2"
+                                className="font-bold text-white mb-2"
+                                style={{ fontSize: 'clamp(2rem, 5vw, 3.75rem)' }}
                             >
                                 {heading.main}
                             </h2>
                             <div ref={heading2Ref}>
-                                <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent">
+                                <h2 className="font-bold bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent" style={{ fontSize: 'clamp(2rem, 5vw, 3.75rem)' }}>
                                     {heading.highlight}
                                 </h2>
                             </div>

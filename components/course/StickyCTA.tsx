@@ -40,11 +40,11 @@ export default function StickyCTA({ courseTitle }: StickyCTAProps) {
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: 100, opacity: 0 }}
                     transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="fixed bottom-0 left-0 right-0 z-50 p-4"
+                    className="fixed bottom-0 left-0 right-0 z-50 p-3 md:p-4"
                 >
                     <div className="max-w-7xl mx-auto">
                         <div
-                            className="relative rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+                            className="relative rounded-xl md:rounded-2xl p-4 md:p-6 flex flex-col sm:flex-row items-center justify-between gap-3 md:gap-4"
                             style={{
                                 background: 'rgba(12, 8, 10, 0.98)',
                                 backdropFilter: 'blur(20px)',
@@ -62,10 +62,10 @@ export default function StickyCTA({ courseTitle }: StickyCTAProps) {
 
                             {/* Content */}
                             <div className="flex-1 text-center sm:text-left">
-                                <h3 className="text-xl font-bold text-white mb-1">
+                                <h3 className="text-lg md:text-xl font-bold text-white mb-1">
                                     Ready to start learning?
                                 </h3>
-                                <p className="text-sm text-white/70">
+                                <p className="text-xs md:text-sm text-white/70">
                                     Enroll in {courseTitle} and launch your career today
                                 </p>
                             </div>
@@ -75,16 +75,16 @@ export default function StickyCTA({ courseTitle }: StickyCTAProps) {
                                 <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="group relative px-8 py-3 rounded-xl font-semibold text-white overflow-hidden whitespace-nowrap"
+                                    className="group relative px-6 md:px-8 py-2.5 md:py-3 rounded-xl font-semibold text-white overflow-hidden whitespace-nowrap text-sm md:text-base w-full sm:w-auto"
                                     style={{
                                         background: 'linear-gradient(135deg, rgba(199, 24, 56, 0.9) 0%, rgba(161, 14, 38, 1) 100%)',
                                         boxShadow: '0 0 30px rgba(199, 24, 56, 0.4)',
                                     }}
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                                    <span className="relative flex items-center gap-2">
+                                    <span className="relative flex items-center justify-center gap-2">
                                         Enroll Now
-                                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                                     </span>
                                 </motion.button>
                             </Link>
@@ -92,9 +92,9 @@ export default function StickyCTA({ courseTitle }: StickyCTAProps) {
                             {/* Dismiss Button */}
                             <button
                                 onClick={handleDismiss}
-                                className="absolute top-4 right-4 w-8 h-8 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors duration-200"
+                                className="absolute top-2 right-2 md:top-4 md:right-4 w-7 h-7 md:w-8 md:h-8 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors duration-200"
                             >
-                                <X className="w-5 h-5 text-white/60 hover:text-white" />
+                                <X className="w-4 h-4 md:w-5 md:h-5 text-white/60 hover:text-white" />
                             </button>
                         </div>
                     </div>

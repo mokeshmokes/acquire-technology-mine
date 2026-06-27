@@ -17,7 +17,7 @@ export default function ScrollIndicator() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2, duration: 0.6 }}
-            className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center gap-2 group cursor-pointer"
+            className="absolute bottom-8 md:bottom-12 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center gap-2 group cursor-pointer"
             whileHover={{ scale: 1.1 }}
         >
             <span className="text-sm text-muted group-hover:text-white transition-colors">

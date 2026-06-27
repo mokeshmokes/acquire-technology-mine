@@ -69,8 +69,8 @@ export default function AboutHero() {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-32">
-                <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="relative z-10 w-full max-w-7xl mx-auto px-5 md:px-6 py-20 md:py-32">
+                <div className="grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
                     {/* Left Side - Content */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
@@ -99,7 +99,8 @@ export default function AboutHero() {
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3, duration: 0.8 }}
-                                className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1]"
+                                className="font-bold text-white leading-[1.1]"
+                                style={{ fontSize: 'clamp(2rem, 6vw, 4.5rem)' }}
                             >
                                 {heading.main}
                             </motion.h1>
@@ -107,7 +108,8 @@ export default function AboutHero() {
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4, duration: 0.8 }}
-                                className="text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent leading-[1.1]"
+                                className="font-bold bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent leading-[1.1]"
+                                style={{ fontSize: 'clamp(2rem, 6vw, 4.5rem)' }}
                             >
                                 {heading.highlight}
                             </motion.h1>
@@ -115,7 +117,8 @@ export default function AboutHero() {
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5, duration: 0.8 }}
-                                className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1]"
+                                className="font-bold text-white leading-[1.1]"
+                                style={{ fontSize: 'clamp(2rem, 6vw, 4.5rem)' }}
                             >
                                 {heading.suffix}
                             </motion.h1>

@@ -84,7 +84,7 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
     return (
         <div
             ref={cardRef}
-            className="group relative h-full min-h-[620px]"
+            className="group relative h-full min-h-[520px] md:min-h-[580px] lg:min-h-[620px]"
             onMouseMove={(e) => { handleMouseMove(e); handleLightMove(e); }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -159,9 +159,9 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
                 </div>
 
                 {/* Live Badge */}
-                <div className="relative p-4 z-20 flex-shrink-0">
+                <div className="relative p-3 md:p-4 z-20 flex-shrink-0">
                     <div
-                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full"
+                        className="inline-flex items-center gap-2 px-2.5 md:px-3 py-1 md:py-1.5 rounded-full"
                         style={{
                             background: 'rgba(199,24,56,0.22)',
                             border: '1px solid rgba(199,24,56,0.35)',
@@ -172,7 +172,7 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
                         <div className="w-2 h-2 bg-white rounded-full animate-dot-pulse"
                             style={{ boxShadow: '0 0 6px rgba(255,255,255,0.8)' }}
                         />
-                        <span className="text-xs font-bold text-white uppercase tracking-wider">Live Now</span>
+                        <span className="text-[10px] md:text-xs font-bold text-white uppercase tracking-wider">Live Now</span>
                     </div>
                 </div>
 
@@ -182,18 +182,18 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
                 </div>
 
                 {/* Content */}
-                <div className="relative p-6 pt-4 flex flex-col flex-1 z-20">
-                    <div className="h-[60px] mb-4 flex flex-col justify-start">
-                        <h3 className="text-lg font-bold text-white leading-tight line-clamp-2">{course.title}</h3>
-                        {course.subtitle && <p className="text-xs text-primary line-clamp-1">{course.subtitle}</p>}
+                <div className="relative p-4 md:p-6 pt-3 md:pt-4 flex flex-col flex-1 z-20">
+                    <div className="h-[55px] md:h-[60px] mb-3 md:mb-4 flex flex-col justify-start">
+                        <h3 className="text-base md:text-lg font-bold text-white leading-tight line-clamp-2">{course.title}</h3>
+                        {course.subtitle && <p className="text-[10px] md:text-xs text-primary line-clamp-1">{course.subtitle}</p>}
                     </div>
 
                     {/* Tags — simple hover via Tailwind, no Framer per-tag */}
-                    <div className="h-[32px] mb-4 flex flex-wrap gap-1.5 overflow-hidden">
+                    <div className="h-[28px] md:h-[32px] mb-3 md:mb-4 flex flex-wrap gap-1.5 overflow-hidden">
                         {course.tags.slice(0, 3).map((tag) => (
                             <span
                                 key={tag}
-                                className="px-2 py-1 text-[10px] font-medium text-white/80 rounded-full whitespace-nowrap cursor-pointer
+                                className="px-2 py-0.5 md:py-1 text-[9px] md:text-[10px] font-medium text-white/80 rounded-full whitespace-nowrap cursor-pointer
                                            hover:bg-primary hover:text-white transition-colors duration-200"
                                 style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
                             >
@@ -203,31 +203,31 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
                     </div>
 
                     {/* Info */}
-                    <div className="grid grid-cols-2 gap-3 text-xs mb-4 h-[56px]">
+                    <div className="grid grid-cols-2 gap-2 md:gap-3 text-xs mb-3 md:mb-4 h-[50px] md:h-[56px]">
                         <div>
-                            <div className="text-white/50 mb-1">Mentor</div>
-                            <div className="font-semibold text-white truncate">{course.mentor}</div>
+                            <div className="text-white/50 mb-1 text-[10px] md:text-xs">Mentor</div>
+                            <div className="font-semibold text-white truncate text-xs md:text-sm">{course.mentor}</div>
                         </div>
                         <div>
-                            <div className="text-white/50 mb-1">Next Session</div>
+                            <div className="text-white/50 mb-1 text-[10px] md:text-xs">Next Session</div>
                             <div className="flex items-center gap-1 font-semibold text-white">
                                 <Clock className="w-3 h-3 text-primary flex-shrink-0" />
-                                <span className="truncate">{course.session.day}</span>
+                                <span className="truncate text-xs md:text-sm">{course.session.day}</span>
                             </div>
                         </div>
                     </div>
 
                     {/* Seats & Progress */}
-                    <div className="flex items-center justify-between mb-4 h-[100px]">
+                    <div className="flex items-center justify-between mb-3 md:mb-4 h-[80px] md:h-[100px]">
                         <div className="text-xs">
                             <div className="flex items-center gap-1.5 text-white font-semibold mb-1">
                                 <Users className="w-3 h-3 text-primary" />
-                                <span>{course.seats} Seats</span>
+                                <span className="text-xs md:text-sm">{course.seats} Seats</span>
                             </div>
-                            <div className="text-white/50">{course.enrolled} enrolled</div>
+                            <div className="text-white/50 text-[10px] md:text-xs">{course.enrolled} enrolled</div>
                         </div>
                         <div className="flex-shrink-0">
-                            <div className="scale-75 origin-center"
+                            <div className="scale-[0.65] md:scale-75 origin-center"
                                 style={{ filter: 'drop-shadow(0 0 6px rgba(199,24,56,0.25))' }}>
                                 <CourseProgress progress={course.progress} delay={index * 0.05} />
                             </div>
@@ -236,12 +236,12 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
 
                     <div className="flex-1" />
 
-                    {/* Buttons */}
-                    <div className="grid grid-cols-2 gap-2 h-[48px] mt-auto">
+                    {/* Buttons - Full width on mobile, grid on desktop */}
+                    <div className="flex flex-col md:grid md:grid-cols-2 gap-2 mt-auto">
                         <motion.button
                             whileHover={{ scale: 1.04 }}
                             whileTap={{ scale: 0.96 }}
-                            className="relative px-3 py-2.5 text-white text-xs font-semibold rounded-xl overflow-hidden group/btn"
+                            className="relative w-full px-3 py-2.5 md:py-2.5 text-white text-xs md:text-xs font-semibold rounded-xl overflow-hidden group/btn"
                             style={{
                                 background: 'linear-gradient(135deg, rgba(199,24,56,0.9) 0%, rgba(161,14,38,1) 100%)',
                                 border: '1px solid rgba(255,255,255,0.08)',
@@ -260,7 +260,7 @@ export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
                         <motion.button
                             whileHover={{ scale: 1.04 }}
                             whileTap={{ scale: 0.96 }}
-                            className="relative px-3 py-2.5 text-white text-xs font-semibold rounded-xl overflow-hidden group/btn"
+                            className="relative w-full px-3 py-2.5 md:py-2.5 text-white text-xs md:text-xs font-semibold rounded-xl overflow-hidden group/btn"
                             style={{
                                 background: 'rgba(255,255,255,0.04)',
                                 border: '1px solid rgba(255,255,255,0.09)',

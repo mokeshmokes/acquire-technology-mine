@@ -18,20 +18,21 @@ export default function SyllabusSection({ syllabus }: SyllabusSectionProps) {
     };
 
     return (
-        <section id="syllabus" className="relative py-24 overflow-hidden">
+        <section id="syllabus" className="relative py-16 md:py-24 overflow-hidden">
             {/* Background */}
             <div className="absolute inset-0 bg-[#0C080A]" />
 
             {/* Content */}
-            <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-12">
+            <div className="relative z-10 max-w-5xl mx-auto px-5 md:px-6 lg:px-12">
                 <ScrollReveal>
-                    <div className="text-center mb-16">
+                    <div className="text-center mb-12 md:mb-16">
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-100px' }}
                             transition={{ duration: 0.6 }}
-                            className="text-4xl md:text-5xl font-bold text-white mb-6"
+                            className="font-bold text-white mb-4 md:mb-6 px-4"
+                            style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)' }}
                         >
                             Complete Syllabus
                         </motion.h2>
@@ -40,7 +41,7 @@ export default function SyllabusSection({ syllabus }: SyllabusSectionProps) {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-100px' }}
                             transition={{ duration: 0.6, delay: 0.2 }}
-                            className="text-lg text-white/70"
+                            className="text-base md:text-lg text-white/70 px-4"
                         >
                             Comprehensive curriculum designed by industry experts
                         </motion.p>
@@ -49,7 +50,7 @@ export default function SyllabusSection({ syllabus }: SyllabusSectionProps) {
 
                 {/* Modules */}
                 <ScrollReveal>
-                    <div className="space-y-4">
+                    <div className="space-y-3 md:space-y-4">
                         {syllabus.map((module, index) => (
                             <motion.div
                                 key={index}
@@ -57,7 +58,7 @@ export default function SyllabusSection({ syllabus }: SyllabusSectionProps) {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: '-50px' }}
                                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                                className="rounded-2xl overflow-hidden"
+                                className="rounded-xl md:rounded-2xl overflow-hidden"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.05)',
                                     backdropFilter: 'blur(18px)',
@@ -67,11 +68,11 @@ export default function SyllabusSection({ syllabus }: SyllabusSectionProps) {
                                 {/* Module Header */}
                                 <button
                                     onClick={() => toggleModule(index)}
-                                    className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors duration-200"
+                                    className="w-full p-4 md:p-6 flex items-center justify-between hover:bg-white/5 transition-colors duration-200"
                                 >
-                                    <div className="flex items-center gap-4 text-left">
+                                    <div className="flex items-center gap-3 md:gap-4 text-left flex-1 min-w-0">
                                         <div
-                                            className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center font-bold text-white"
+                                            className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl flex items-center justify-center font-bold text-white text-sm md:text-base"
                                             style={{
                                                 background: 'rgba(199, 24, 56, 0.2)',
                                                 border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -79,12 +80,12 @@ export default function SyllabusSection({ syllabus }: SyllabusSectionProps) {
                                         >
                                             {String(index + 1).padStart(2, '0')}
                                         </div>
-                                        <div>
-                                            <h3 className="text-xl font-semibold text-white mb-1">
+                                        <div className="min-w-0 flex-1">
+                                            <h3 className="text-base md:text-xl font-semibold text-white mb-1 truncate">
                                                 {module.title}
                                             </h3>
-                                            <div className="flex items-center gap-2 text-sm text-white/60">
-                                                <Clock className="w-4 h-4" />
+                                            <div className="flex items-center gap-2 text-xs md:text-sm text-white/60">
+                                                <Clock className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
                                                 <span>{module.duration}</span>
                                             </div>
                                         </div>
@@ -92,8 +93,9 @@ export default function SyllabusSection({ syllabus }: SyllabusSectionProps) {
                                     <motion.div
                                         animate={{ rotate: expandedModule === index ? 180 : 0 }}
                                         transition={{ duration: 0.3 }}
+                                        className="flex-shrink-0 ml-2"
                                     >
-                                        <ChevronDown className="w-6 h-6 text-white/60" />
+                                        <ChevronDown className="w-5 h-5 md:w-6 md:h-6 text-white/60" />
                                     </motion.div>
                                 </button>
 
@@ -107,14 +109,14 @@ export default function SyllabusSection({ syllabus }: SyllabusSectionProps) {
                                             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                                             className="overflow-hidden"
                                         >
-                                            <div className="px-6 pb-6 pt-2">
+                                            <div className="px-4 md:px-6 pb-4 md:pb-6 pt-2">
                                                 <div
-                                                    className="p-6 rounded-xl"
+                                                    className="p-4 md:p-6 rounded-lg md:rounded-xl"
                                                     style={{
                                                         background: 'rgba(0, 0, 0, 0.3)',
                                                     }}
                                                 >
-                                                    <ul className="space-y-3">
+                                                    <ul className="space-y-2 md:space-y-3">
                                                         {module.topics.map((topic, topicIndex) => (
                                                             <motion.li
                                                                 key={topicIndex}
@@ -124,10 +126,10 @@ export default function SyllabusSection({ syllabus }: SyllabusSectionProps) {
                                                                     duration: 0.3,
                                                                     delay: topicIndex * 0.05,
                                                                 }}
-                                                                className="flex items-start gap-3"
+                                                                className="flex items-start gap-2 md:gap-3"
                                                             >
-                                                                <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                                                                <span className="text-white/80">
+                                                                <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0 mt-0.5" />
+                                                                <span className="text-sm md:text-base text-white/80">
                                                                     {topic}
                                                                 </span>
                                                             </motion.li>

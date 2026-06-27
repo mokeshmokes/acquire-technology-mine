@@ -29,7 +29,7 @@ export default function FreeCoursesBackground() {
     return (
         <section
             ref={sectionRef}
-            className="relative min-h-screen w-full overflow-hidden py-32 bg-background"
+            className="relative min-h-screen w-full overflow-hidden py-20 md:py-32 bg-background"
         >
             {/* Static Background with Gradients */}
             <div className="absolute inset-0">
@@ -139,7 +139,7 @@ export default function FreeCoursesBackground() {
             />
 
             {/* Section Content */}
-            <div className="relative z-[10] container mx-auto px-6">
+            <div className="relative z-[10] container mx-auto px-5 md:px-6">
 
                 {/* Badge */}
                 <motion.div
@@ -175,7 +175,7 @@ export default function FreeCoursesBackground() {
                     transition={{ duration: 0.7, delay: 0.3 }}
                     className="text-center mb-8"
                 >
-                    <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
+                    <h2 className="font-bold mb-4" style={{ fontSize: 'clamp(2rem, 6vw, 4.5rem)' }}>
                         <span className="text-white">FREE </span>
                         <span
                             className="bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent"
@@ -186,7 +186,7 @@ export default function FreeCoursesBackground() {
                             MASTERCLASSES
                         </span>
                     </h2>
-                    <p className="text-2xl md:text-3xl font-semibold text-white/90">
+                    <p className="text-xl md:text-2xl lg:text-3xl font-semibold text-white/90">
                         Learn New Skills For Free
                     </p>
                 </motion.div>
