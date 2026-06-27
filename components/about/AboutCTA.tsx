@@ -9,7 +9,7 @@ export default function AboutCTA() {
     const isInView = useInView(ref, { once: true, margin: '-100px' });
 
     return (
-        <section ref={ref} className="relative py-32 px-6 overflow-hidden">
+        <section ref={ref} className="relative py-20 md:py-32 px-5 md:px-6 overflow-hidden">
             {/* Animated Background */}
             <div className="absolute inset-0">
                 <div
@@ -31,13 +31,14 @@ export default function AboutCTA() {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 max-w-4xl mx-auto text-center space-y-8">
+            <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6 md:space-y-8">
                 {/* Heading */}
                 <motion.h2
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                     transition={{ duration: 0.8 }}
-                    className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"
+                    className="font-bold text-white leading-tight px-4"
+                    style={{ fontSize: 'clamp(1.8rem, 5vw, 3.75rem)' }}
                 >
                     {ctaData.heading}
                 </motion.h2>
@@ -47,7 +48,7 @@ export default function AboutCTA() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ delay: 0.2, duration: 0.8 }}
-                    className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto"
+                    className="text-base md:text-lg lg:text-xl text-white/80 max-w-2xl mx-auto px-4"
                 >
                     {ctaData.description}
                 </motion.p>
@@ -57,14 +58,14 @@ export default function AboutCTA() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ delay: 0.4, duration: 0.8 }}
-                    className="flex flex-wrap gap-6 justify-center pt-4"
+                    className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-6 justify-center pt-4 px-4"
                 >
                     {ctaData.buttons.map((button) => (
                         <button
                             key={button.label}
-                            className={`group relative px-10 py-5 font-semibold text-lg rounded-xl shadow-2xl transition-all duration-300 overflow-hidden hover:scale-105 ${button.variant === 'primary'
-                                    ? 'bg-primary hover:bg-primary-hover text-white'
-                                    : 'bg-white text-primary hover:bg-white/90'
+                            className={`group relative px-8 md:px-10 py-4 md:py-5 font-semibold text-base md:text-lg rounded-xl shadow-2xl transition-all duration-300 overflow-hidden hover:scale-105 w-full sm:w-auto ${button.variant === 'primary'
+                                ? 'bg-primary hover:bg-primary-hover text-white'
+                                : 'bg-white text-primary hover:bg-white/90'
                                 }`}
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -78,12 +79,12 @@ export default function AboutCTA() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                     transition={{ delay: 0.6, duration: 0.8 }}
-                    className="flex items-center justify-center gap-8 pt-8"
+                    className="flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-8 pt-6 md:pt-8 px-4"
                 >
                     <div className="flex items-center gap-2">
-                        <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                        <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
                             <svg
-                                className="w-6 h-6 text-primary"
+                                className="w-5 h-5 md:w-6 md:h-6 text-primary"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -99,9 +100,9 @@ export default function AboutCTA() {
                         <span className="text-white/80 text-sm">Expert Mentors</span>
                     </div>
                     <div className="flex items-center gap-2">
-                        <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                        <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
                             <svg
-                                className="w-6 h-6 text-primary"
+                                className="w-5 h-5 md:w-6 md:h-6 text-primary"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -117,9 +118,9 @@ export default function AboutCTA() {
                         <span className="text-white/80 text-sm">Real Projects</span>
                     </div>
                     <div className="flex items-center gap-2">
-                        <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                        <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
                             <svg
-                                className="w-6 h-6 text-primary"
+                                className="w-5 h-5 md:w-6 md:h-6 text-primary"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"

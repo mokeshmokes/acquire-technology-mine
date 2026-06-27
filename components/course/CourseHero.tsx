@@ -60,16 +60,16 @@ export default function CourseHero({
             </div>
 
             {/* Content */}
-            <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-32 text-center">
+            <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-6 lg:px-12 py-24 md:py-32 text-center">
                 {/* Icon */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                    className="flex justify-center mb-8"
+                    className="flex justify-center mb-6 md:mb-8"
                 >
                     <div
-                        className="w-20 h-20 rounded-2xl flex items-center justify-center"
+                        className="w-16 h-16 md:w-20 md:h-20 rounded-xl md:rounded-2xl flex items-center justify-center"
                         style={{
                             background: 'rgba(199, 24, 56, 0.15)',
                             border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -77,7 +77,7 @@ export default function CourseHero({
                             boxShadow: '0 0 40px rgba(199, 24, 56, 0.3)',
                         }}
                     >
-                        <Icon className="w-10 h-10 text-primary" />
+                        <Icon className="w-8 h-8 md:w-10 md:h-10 text-primary" />
                     </div>
                 </motion.div>
 
@@ -86,8 +86,9 @@ export default function CourseHero({
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                    className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6"
+                    className="font-bold text-white mb-4 md:mb-6 px-4"
                     style={{
+                        fontSize: 'clamp(2rem, 6vw, 5rem)',
                         textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
                     }}
                 >
@@ -99,7 +100,7 @@ export default function CourseHero({
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto"
+                    className="text-base md:text-xl lg:text-2xl text-white/80 mb-10 md:mb-12 max-w-3xl mx-auto px-4"
                 >
                     {subtitle}
                 </motion.p>
@@ -109,20 +110,20 @@ export default function CourseHero({
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                    className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+                    className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4"
                 >
                     <Link href="#enroll">
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="group relative px-8 py-4 rounded-xl font-semibold text-white overflow-hidden"
+                            className="group relative px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-white overflow-hidden w-full sm:w-auto"
                             style={{
                                 background: 'linear-gradient(135deg, rgba(199, 24, 56, 0.9) 0%, rgba(161, 14, 38, 1) 100%)',
                                 boxShadow: '0 0 30px rgba(199, 24, 56, 0.4)',
                             }}
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                            <span className="relative flex items-center gap-2">
+                            <span className="relative flex items-center justify-center gap-2">
                                 Enroll Now
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </span>
@@ -133,14 +134,14 @@ export default function CourseHero({
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="group px-8 py-4 rounded-xl font-semibold text-white"
+                            className="group px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-white w-full sm:w-auto"
                             style={{
                                 background: 'rgba(255, 255, 255, 0.05)',
                                 backdropFilter: 'blur(10px)',
                                 border: '1px solid rgba(255, 255, 255, 0.1)',
                             }}
                         >
-                            <span className="flex items-center gap-2">
+                            <span className="flex items-center justify-center gap-2">
                                 <Download className="w-5 h-5" />
                                 Download Brochure
                             </span>
@@ -153,7 +154,7 @@ export default function CourseHero({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1, delay: 1 }}
-                    className="absolute bottom-12 left-1/2 -translate-x-1/2"
+                    className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2"
                 >
                     <motion.div
                         animate={{ y: [0, 10, 0] }}

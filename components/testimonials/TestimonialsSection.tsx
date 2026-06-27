@@ -14,7 +14,7 @@ export default function TestimonialsSection() {
     const { badge, heading, subtitle } = testimonialSectionData;
 
     return (
-        <section ref={ref} className="relative py-32 px-6 overflow-hidden bg-background">
+        <section ref={ref} className="relative py-16 md:py-24 lg:py-32 px-5 md:px-8 lg:px-6 overflow-hidden bg-background">
             {/* Background Effects */}
             <div className="absolute inset-0">
                 {/* Base Dark Background */}
@@ -185,7 +185,7 @@ export default function TestimonialsSection() {
                     initial={{ opacity: 0, y: -30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
                     transition={{ duration: 0.8 }}
-                    className="text-center mb-20 space-y-6"
+                    className="text-center mb-12 md:mb-16 lg:mb-20 space-y-4 md:space-y-6"
                 >
                     {/* Badge */}
                     <div className="inline-block">
@@ -205,7 +205,7 @@ export default function TestimonialsSection() {
                     </div>
 
                     {/* Heading */}
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+                    <h2 className="font-bold text-white" style={{ fontSize: 'clamp(1.8rem, 5vw, 3.75rem)' }}>
                         {heading.main}
                         <span className="bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent">
                             {heading.highlight}
@@ -214,7 +214,7 @@ export default function TestimonialsSection() {
                     </h2>
 
                     {/* Subtitle */}
-                    <p className="text-lg text-muted max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-base md:text-lg text-muted max-w-3xl mx-auto leading-relaxed">
                         {subtitle}
                     </p>
                 </motion.div>

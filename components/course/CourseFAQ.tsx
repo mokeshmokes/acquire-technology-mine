@@ -18,20 +18,21 @@ export default function CourseFAQ({ faqs }: CourseFAQProps) {
     };
 
     return (
-        <section className="relative py-24 overflow-hidden">
+        <section className="relative py-16 md:py-24 overflow-hidden">
             {/* Background */}
             <div className="absolute inset-0 bg-[#0C080A]" />
 
             {/* Content */}
-            <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-12">
+            <div className="relative z-10 max-w-4xl mx-auto px-5 md:px-6 lg:px-12">
                 <ScrollReveal>
-                    <div className="text-center mb-16">
+                    <div className="text-center mb-12 md:mb-16">
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-100px' }}
                             transition={{ duration: 0.6 }}
-                            className="text-4xl md:text-5xl font-bold text-white mb-6"
+                            className="font-bold text-white mb-4 md:mb-6 px-4"
+                            style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)' }}
                         >
                             Frequently Asked Questions
                         </motion.h2>
@@ -40,7 +41,7 @@ export default function CourseFAQ({ faqs }: CourseFAQProps) {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-100px' }}
                             transition={{ duration: 0.6, delay: 0.2 }}
-                            className="text-lg text-white/70"
+                            className="text-base md:text-lg text-white/70 px-4"
                         >
                             Got questions? We have got answers
                         </motion.p>
@@ -49,7 +50,7 @@ export default function CourseFAQ({ faqs }: CourseFAQProps) {
 
                 {/* FAQ List */}
                 <ScrollReveal>
-                    <div className="space-y-4">
+                    <div className="space-y-3 md:space-y-4">
                         {faqs.map((faq, index) => (
                             <motion.div
                                 key={index}
@@ -57,7 +58,7 @@ export default function CourseFAQ({ faqs }: CourseFAQProps) {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: '-50px' }}
                                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                                className="rounded-2xl overflow-hidden"
+                                className="rounded-xl md:rounded-2xl overflow-hidden"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.05)',
                                     backdropFilter: 'blur(18px)',
@@ -67,9 +68,9 @@ export default function CourseFAQ({ faqs }: CourseFAQProps) {
                                 {/* Question */}
                                 <button
                                     onClick={() => toggleFAQ(index)}
-                                    className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors duration-200 text-left"
+                                    className="w-full p-4 md:p-6 flex items-start justify-between hover:bg-white/5 transition-colors duration-200 text-left gap-3"
                                 >
-                                    <h3 className="text-lg font-semibold text-white pr-4">
+                                    <h3 className="text-base md:text-lg font-semibold text-white flex-1">
                                         {faq.question}
                                     </h3>
                                     <motion.div
@@ -78,9 +79,9 @@ export default function CourseFAQ({ faqs }: CourseFAQProps) {
                                         className="flex-shrink-0"
                                     >
                                         {expandedFAQ === index ? (
-                                            <Minus className="w-6 h-6 text-primary" />
+                                            <Minus className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                                         ) : (
-                                            <Plus className="w-6 h-6 text-white/60" />
+                                            <Plus className="w-5 h-5 md:w-6 md:h-6 text-white/60" />
                                         )}
                                     </motion.div>
                                 </button>
@@ -95,14 +96,14 @@ export default function CourseFAQ({ faqs }: CourseFAQProps) {
                                             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                                             className="overflow-hidden"
                                         >
-                                            <div className="px-6 pb-6">
+                                            <div className="px-4 md:px-6 pb-4 md:pb-6">
                                                 <div
-                                                    className="p-4 rounded-xl"
+                                                    className="p-3 md:p-4 rounded-lg md:rounded-xl"
                                                     style={{
                                                         background: 'rgba(0, 0, 0, 0.3)',
                                                     }}
                                                 >
-                                                    <p className="text-white/80 leading-relaxed">
+                                                    <p className="text-sm md:text-base text-white/80 leading-relaxed">
                                                         {faq.answer}
                                                     </p>
                                                 </div>

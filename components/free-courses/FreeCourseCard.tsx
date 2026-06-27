@@ -69,7 +69,7 @@ export default function FreeCourseCard({ course, index = 0 }: FreeCourseCardProp
     return (
         <motion.div
             ref={cardRef}
-            className="group relative h-full min-h-[520px]"
+            className="group relative h-full min-h-[480px] md:min-h-[500px] lg:min-h-[520px]"
             initial={{ opacity: 0, y: 50 }}
             animate={hasAnimated ? { opacity: 1, y: 0 } : {}}
             transition={{
@@ -163,9 +163,8 @@ export default function FreeCourseCard({ course, index = 0 }: FreeCourseCardProp
                                     src={course.image}
                                     alt={course.title}
                                     fill
-                                    className={`object-cover transition-opacity duration-500 ${
-                                        imageLoaded ? 'opacity-100' : 'opacity-0'
-                                    }`}
+                                    className={`object-cover transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'
+                                        }`}
                                     onLoad={() => setImageLoaded(true)}
                                     onError={() => setImageLoaded(true)}
                                 />
@@ -178,9 +177,8 @@ export default function FreeCourseCard({ course, index = 0 }: FreeCourseCardProp
                                 />
                                 {/* Hover glow — CSS transition */}
                                 <div
-                                    className={`absolute inset-0 transition-opacity duration-400 ${
-                                        isHovered ? 'opacity-100' : 'opacity-0'
-                                    }`}
+                                    className={`absolute inset-0 transition-opacity duration-400 ${isHovered ? 'opacity-100' : 'opacity-0'
+                                        }`}
                                     style={{
                                         background:
                                             'radial-gradient(circle at center, rgba(199,24,56,0.35) 0%, transparent 70%)',

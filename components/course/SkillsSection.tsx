@@ -10,7 +10,7 @@ interface SkillsSectionProps {
 
 export default function SkillsSection({ skills }: SkillsSectionProps) {
     return (
-        <section className="relative py-24 overflow-hidden">
+        <section className="relative py-16 md:py-24 overflow-hidden">
             {/* Background with animated orbs */}
             <div className="absolute inset-0">
                 <div className="absolute inset-0 bg-[#0C080A]" />
@@ -29,15 +29,16 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+            <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-6 lg:px-12">
                 <ScrollReveal>
-                    <div className="text-center mb-16">
+                    <div className="text-center mb-12 md:mb-16">
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-100px' }}
                             transition={{ duration: 0.6 }}
-                            className="text-4xl md:text-5xl font-bold text-white mb-6"
+                            className="font-bold text-white mb-4 md:mb-6 px-4"
+                            style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)' }}
                         >
                             Skills You Will Learn
                         </motion.h2>
@@ -46,7 +47,7 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-100px' }}
                             transition={{ duration: 0.6, delay: 0.2 }}
-                            className="text-lg text-white/70"
+                            className="text-base md:text-lg text-white/70 px-4"
                         >
                             Master these in-demand technologies and skills
                         </motion.p>
@@ -55,7 +56,7 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
 
                 {/* Skills Grid */}
                 <ScrollReveal>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
                         {skills.map((skill, index) => (
                             <motion.div
                                 key={skill}
@@ -64,7 +65,7 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
                                 viewport={{ once: true, margin: '-50px' }}
                                 transition={{ duration: 0.4, delay: index * 0.05 }}
                                 whileHover={{ scale: 1.05, y: -5 }}
-                                className="group relative p-6 rounded-xl"
+                                className="group relative p-4 md:p-6 rounded-lg md:rounded-xl"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.05)',
                                     backdropFilter: 'blur(18px)',

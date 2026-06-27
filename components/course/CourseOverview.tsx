@@ -12,20 +12,21 @@ interface CourseOverviewProps {
 
 export default function CourseOverview({ description, duration, level }: CourseOverviewProps) {
     return (
-        <section className="relative py-24 overflow-hidden">
+        <section className="relative py-16 md:py-24 overflow-hidden">
             {/* Background */}
             <div className="absolute inset-0 bg-[#0C080A]" />
 
             {/* Content */}
-            <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+            <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-6 lg:px-12">
                 <ScrollReveal>
-                    <div className="text-center mb-16">
+                    <div className="text-center mb-12 md:mb-16">
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-100px' }}
                             transition={{ duration: 0.6 }}
-                            className="text-4xl md:text-5xl font-bold text-white mb-6"
+                            className="font-bold text-white mb-4 md:mb-6 px-4"
+                            style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)' }}
                         >
                             Course Overview
                         </motion.h2>
@@ -34,7 +35,7 @@ export default function CourseOverview({ description, duration, level }: CourseO
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-100px' }}
                             transition={{ duration: 0.6, delay: 0.2 }}
-                            className="text-lg text-white/70 max-w-3xl mx-auto"
+                            className="text-base md:text-lg text-white/70 max-w-3xl mx-auto px-4"
                         >
                             {description}
                         </motion.p>
@@ -43,7 +44,7 @@ export default function CourseOverview({ description, duration, level }: CourseO
 
                 {/* Stats */}
                 <ScrollReveal>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto">
                         {[
                             { icon: Clock, label: 'Duration', value: duration },
                             { icon: BarChart3, label: 'Level', value: level },
@@ -56,7 +57,7 @@ export default function CourseOverview({ description, duration, level }: CourseO
                                 viewport={{ once: true, margin: '-100px' }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
                                 whileHover={{ scale: 1.05, y: -5 }}
-                                className="relative p-8 rounded-2xl text-center group"
+                                className="relative p-6 md:p-8 rounded-xl md:rounded-2xl text-center group"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.05)',
                                     backdropFilter: 'blur(18px)',
