@@ -44,7 +44,7 @@ export default function StickyCTA({ courseTitle }: StickyCTAProps) {
                 >
                     <div className="max-w-7xl mx-auto">
                         <div
-                            className="relative rounded-xl md:rounded-2xl p-4 md:p-6 flex flex-col sm:flex-row items-center justify-between gap-3 md:gap-4"
+                            className="relative rounded-xl md:rounded-2xl p-4 md:p-6 pr-12 md:pr-20 flex flex-col sm:flex-row items-center justify-between gap-3 md:gap-4"
                             style={{
                                 background: 'rgba(12, 8, 10, 0.98)',
                                 backdropFilter: 'blur(20px)',
@@ -92,7 +92,7 @@ export default function StickyCTA({ courseTitle }: StickyCTAProps) {
                             {/* Dismiss Button */}
                             <button
                                 onClick={handleDismiss}
-                                className="absolute top-2 right-2 md:top-4 md:right-4 w-7 h-7 md:w-8 md:h-8 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors duration-200"
+                                className="absolute top-3 right-3 md:top-1/2 md:-translate-y-1/2 md:right-6 w-7 h-7 md:w-8 md:h-8 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors duration-200"
                             >
                                 <X className="w-4 h-4 md:w-5 md:h-5 text-white/60 hover:text-white" />
                             </button>
