@@ -71,7 +71,7 @@ export default function StickyCTA({ courseTitle }: StickyCTAProps) {
                             </div>
 
                             {/* CTA Button */}
-                            <Link href="/apply">
+                            <Link href="/#contact">
                                 <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}

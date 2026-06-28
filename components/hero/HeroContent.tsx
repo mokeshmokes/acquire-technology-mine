@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ArrowRight, Phone } from 'lucide-react';
+import Link from 'next/link';
 
 export default function HeroContent() {
     return (
@@ -70,16 +71,18 @@ export default function HeroContent() {
                 </motion.button>
 
                 {/* Secondary Button - Full width on mobile, Glassmorphism */}
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="group w-full sm:w-auto px-6 py-3.5 sm:py-3 bg-white/5 hover:bg-white/10 backdrop-blur-md border border-white/10 hover:border-white/20 text-white font-semibold rounded-xl transition-all duration-300"
-                >
-                    <span className="flex items-center justify-center gap-2 text-base sm:text-sm">
-                        <Phone className="w-4 h-4" />
-                        Book Free Counselling
-                    </span>
-                </motion.button>
+                <Link href="#contact" className="w-full sm:w-auto">
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="group w-full px-6 py-3.5 sm:py-3 bg-white/5 hover:bg-white/10 backdrop-blur-md border border-white/10 hover:border-white/20 text-white font-semibold rounded-xl transition-all duration-300"
+                    >
+                        <span className="flex items-center justify-center gap-2 text-base sm:text-sm">
+                            <Phone className="w-4 h-4" />
+                            Book Free Counselling
+                        </span>
+                    </motion.button>
+                </Link>
             </motion.div>
         </div>
     );
