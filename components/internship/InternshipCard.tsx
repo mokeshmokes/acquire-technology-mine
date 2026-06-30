@@ -29,20 +29,13 @@ export default function InternshipCard({ internship, index }: InternshipCardProp
                 minHeight: '520px',
             }}
         >
-            {/* Hover Glow Effect */}
-            <div
-                className="absolute -inset-[1px] rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl -z-10"
-                style={{
-                    background: 'radial-gradient(circle at 50% 50%, rgba(199,24,56,0.3) 0%, rgba(122,0,25,0.18) 40%, transparent 70%)',
-                }}
-            />
+
 
             {/* Border Glow on Hover */}
             <div
                 className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{
                     border: '1px solid rgba(255,255,255,0.13)',
-                    boxShadow: '0 0 20px rgba(199,24,56,0.25)',
                 }}
             />
 

@@ -45,8 +45,7 @@ export default function MentorShowcase() {
                                 boxShadow: '0 20px 60px rgba(0, 0, 0, 0.45)',
                             }}
                         >
-                            {/* Hover Glow Effect */}
-                            <div className="absolute -inset-[1px] rounded-[28px] bg-gradient-to-r from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/40 group-hover:via-primary/20 group-hover:to-primary/40 opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl -z-10" />
+
 
                             {/* Floating Animation */}
                             <div

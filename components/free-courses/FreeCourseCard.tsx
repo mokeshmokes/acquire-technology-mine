@@ -82,14 +82,7 @@ export default function FreeCourseCard({ course, index = 0 }: FreeCourseCardProp
             onMouseLeave={handleMouseLeave}
             style={{ perspective: '1000px', willChange: 'transform, opacity' }}
         >
-            {/* Outer glow — CSS hover, zero JS */}
-            <div
-                className="absolute -inset-3 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                style={{
-                    background:
-                        'radial-gradient(circle, rgba(199,24,56,0.3) 0%, transparent 70%)',
-                }}
-            />
+
 
             {/* Main Card
              *  KEY CHANGE: removed backdropFilter entirely.
@@ -175,15 +168,7 @@ export default function FreeCourseCard({ course, index = 0 }: FreeCourseCardProp
                                             'linear-gradient(180deg, transparent 0%, rgba(18,2,6,0.7) 100%)',
                                     }}
                                 />
-                                {/* Hover glow — CSS transition */}
-                                <div
-                                    className={`absolute inset-0 transition-opacity duration-400 ${isHovered ? 'opacity-100' : 'opacity-0'
-                                        }`}
-                                    style={{
-                                        background:
-                                            'radial-gradient(circle at center, rgba(199,24,56,0.35) 0%, transparent 70%)',
-                                    }}
-                                />
+
                             </motion.div>
                         </div>
                     </motion.div>
@@ -252,7 +237,6 @@ export default function FreeCourseCard({ course, index = 0 }: FreeCourseCardProp
                     className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{
                         border: '1px solid rgba(199,24,56,0.55)',
-                        boxShadow: 'inset 0 0 30px rgba(199,24,56,0.08)',
                     }}
                 />
             </motion.div>

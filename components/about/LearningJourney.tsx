@@ -77,7 +77,7 @@ export default function LearningJourney() {
                                         <p className="text-sm text-muted leading-relaxed">{step.subtitle}</p>
 
                                         {/* Step Number - Desktop Only */}
-                                        <div className="hidden lg:block absolute -top-4 -right-4 w-10 h-10 rounded-full bg-primary text-white font-bold flex items-center justify-center text-sm shadow-lg">
+                                        <div className="hidden lg:flex absolute -top-4 -right-4 w-10 h-10 rounded-full bg-primary text-white font-bold items-center justify-center text-sm shadow-lg">
                                             {index + 1}
                                         </div>
                                     </div>

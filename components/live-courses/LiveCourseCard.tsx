@@ -67,36 +67,18 @@ export default function LiveCourseCard({ course }: LiveCourseCardProps) {
         cardScale.set(1);
     }, [mouseX, mouseY, liftY, cardScale]);
 
-    /*
-     * Cursor-light position: derive CSS custom properties from motion values
-     * so the radial gradient updates without React re-renders.
-     * We read them directly in the style string via a ref instead.
-     */
-    const lightRef = useRef<HTMLDivElement>(null);
-    const handleLightMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        if (!lightRef.current || !cardRef.current) return;
-        const rect = cardRef.current.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        lightRef.current.style.background = `radial-gradient(circle 200px at ${x}% ${y}%, rgba(199, 24, 56, 0.15) 0%, transparent 70%)`;
-    }, []);
+
 
     return (
         <div
             ref={cardRef}
             className="group relative h-full min-h-[420px] md:min-h-[460px] lg:min-h-[480px]"
-            onMouseMove={(e) => { handleMouseMove(e); handleLightMove(e); }}
+            onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             style={{ perspective: '1000px' }}
         >
-            {/* Ambient Outer Glow — CSS opacity transition, no JS */}
-            <div
-                className="absolute -inset-4 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                style={{
-                    background: 'radial-gradient(circle at 50% 50%, rgba(199,24,56,0.3) 0%, rgba(122,0,25,0.18) 40%, transparent 70%)',
-                }}
-            />
+
 
             {/* Card — motion values only, no React state */}
             <motion.div
@@ -118,7 +100,6 @@ export default function LiveCourseCard({ course }: LiveCourseCardProps) {
                     className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{
                         border: '1px solid rgba(255,255,255,0.13)',
-                        boxShadow: '0 0 20px rgba(199,24,56,0.25)',
                     }}
                 />
 
@@ -133,11 +114,7 @@ export default function LiveCourseCard({ course }: LiveCourseCardProps) {
                     />
                 </div>
 
-                {/* Cursor radial light — updated via DOM ref, no re-renders */}
-                <div
-                    ref={lightRef}
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[5]"
-                />
+
 
                 {/* Background particles — CSS only, lightweight */}
                 <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-15">

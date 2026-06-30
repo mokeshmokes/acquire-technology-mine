@@ -48,9 +48,7 @@ export default function WhyChooseUs() {
                                     boxShadow: '0 20px 60px rgba(0, 0, 0, 0.45)',
                                 }}
                             >
-                                {/* Hover Glow */}
-                                <div className="absolute inset-0 rounded-[28px] bg-primary/0 group-hover:bg-primary/10 transition-all duration-500 -z-10" />
-                                <div className="absolute -inset-[1px] rounded-[28px] bg-gradient-to-r from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/50 group-hover:via-primary/30 group-hover:to-primary/50 opacity-0 group-hover:opacity-100 transition-all duration-500 -z-20 blur-xl" />
+
 
                                 {/* Icon */}
                                 <div className="w-14 h-14 rounded-2xl bg-primary/10 group-hover:bg-primary group-hover:scale-110 flex items-center justify-center mb-6 transition-all duration-500">

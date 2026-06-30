@@ -149,19 +149,9 @@ export default function FreeCoursesBackground() {
                     className="text-center mb-6"
                 >
                     <div className="inline-block">
-                        <div
-                            className="flex items-center gap-2 px-4 py-2 rounded-full"
-                            style={{
-                                background: 'rgba(199,24,56,0.15)',
-                                border: '1px solid rgba(199,24,56,0.3)',
-                                boxShadow: '0 0 20px rgba(199,24,56,0.25)',
-                            }}
-                        >
-                            <div
-                                className="w-2 h-2 bg-primary rounded-full animate-dot-pulse"
-                                style={{ boxShadow: '0 0 8px rgba(199,24,56,0.8)' }}
-                            />
-                            <span className="text-xs font-bold text-white uppercase tracking-wider">
+                        <div className="flex items-center gap-2 px-4 py-2 bg-surface/80 backdrop-blur-sm border border-yellow-500/30 rounded-full">
+                            <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
+                            <span className="text-xs font-semibold text-yellow-400 uppercase tracking-wider">
                                 100% Free
                             </span>
                         </div>

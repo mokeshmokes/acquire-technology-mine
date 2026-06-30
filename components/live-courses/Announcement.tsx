@@ -14,28 +14,15 @@ export default function Announcement({ icon, text }: AnnouncementProps) {
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="relative inline-block"
+            whileHover={{ scale: 1.02, y: -1 }}
+            className="relative inline-block cursor-pointer"
         >
-            {/* Animated Glow */}
-            <motion.div
-                className="absolute -inset-2 bg-gradient-to-r from-primary/30 via-primary/20 to-primary/30 rounded-full blur-xl"
-                animate={{
-                    opacity: [0.5, 1, 0.5],
-                    scale: [1, 1.1, 1],
-                }}
-                transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                }}
-            />
-
             {/* Announcement Content */}
-            <div className="relative bg-surface/90 backdrop-blur-xl border border-primary/30 rounded-full px-6 py-3 shadow-lg">
+            <div className="relative bg-surface/80 backdrop-blur-sm border border-yellow-500/30 rounded-full px-6 py-3.5">
                 <div className="flex items-center gap-3">
                     <motion.span
                         animate={{
-                            scale: [1, 1.2, 1],
+                            scale: [1, 1.25, 1],
                         }}
                         transition={{
                             duration: 1.5,
@@ -46,7 +33,7 @@ export default function Announcement({ icon, text }: AnnouncementProps) {
                     >
                         {icon}
                     </motion.span>
-                    <span className="text-sm font-medium text-white">{text}</span>
+                    <span className="text-sm font-semibold text-yellow-400 tracking-wide">{text}</span>
                 </div>
             </div>
         </motion.div>

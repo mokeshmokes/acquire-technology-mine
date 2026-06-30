@@ -37,19 +37,9 @@ export default function InternshipSection() {
                     transition={{ duration: 0.6 }}
                     className="flex justify-center mb-6"
                 >
-                    <div
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full"
-                        style={{
-                            background: 'rgba(255, 255, 255, 0.05)',
-                            backdropFilter: 'blur(18px)',
-                            border: '1px solid rgba(255, 0, 60, 0.18)',
-                        }}
-                    >
-                        <div
-                            className="w-2 h-2 bg-primary rounded-full animate-pulse"
-                            style={{ boxShadow: '0 0 8px rgba(199,24,56,0.8)' }}
-                        />
-                        <span className="text-xs md:text-sm font-bold text-white uppercase tracking-wider">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-surface/80 backdrop-blur-sm border border-yellow-500/30 rounded-full">
+                        <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
+                        <span className="text-xs md:text-sm font-semibold text-yellow-400 uppercase tracking-wider">
                             Internship Programs
                         </span>
                     </div>
@@ -87,20 +77,9 @@ export default function InternshipSection() {
                     transition={{ duration: 0.6, delay: 0.4 }}
                     className="flex justify-center mb-12 md:mb-16"
                 >
-                    <div
-                        className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl"
-                        style={{
-                            background: 'rgba(255, 255, 255, 0.05)',
-                            backdropFilter: 'blur(20px)',
-                            border: '1px solid rgba(199, 24, 56, 0.3)',
-                            boxShadow: '0 0 30px rgba(199,24,56,0.2)',
-                        }}
-                    >
-                        <div
-                            className="w-2.5 h-2.5 bg-primary rounded-full animate-pulse"
-                            style={{ boxShadow: '0 0 10px rgba(199,24,56,0.9)' }}
-                        />
-                        <span className="text-sm md:text-base font-semibold text-white">
+                    <div className="inline-flex items-center gap-3 px-6 py-3 bg-surface/80 backdrop-blur-sm border border-yellow-500/30 rounded-2xl">
+                        <div className="w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse" />
+                        <span className="text-sm md:text-base font-semibold text-yellow-400">
                             We&apos;re accepting applications for a small cohort of talented interns.
                         </span>
                     </div>
