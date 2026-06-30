@@ -73,23 +73,16 @@ export default function CourseHighlights() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                                whileHover={{ y: -8, scale: 1.02 }}
+                                whileHover={{ y: -6 }}
                                 className="group relative rounded-3xl p-8"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.03)',
                                     backdropFilter: 'blur(20px)',
                                     border: '1px solid rgba(255, 255, 255, 0.08)',
                                     boxShadow: '0 20px 50px rgba(0, 0, 0, 0.3)',
+                                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                                 }}
                             >
-                                {/* Hover Glow */}
-                                <div
-                                    className="absolute -inset-[1px] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
-                                    style={{
-                                        background: 'radial-gradient(circle at 50% 50%, rgba(199,24,56,0.2) 0%, transparent 70%)',
-                                        filter: 'blur(20px)',
-                                    }}
-                                />
 
                                 {/* Icon */}
                                 <div

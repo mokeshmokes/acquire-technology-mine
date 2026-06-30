@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Send } from 'lucide-react';
 
@@ -13,9 +13,18 @@ export default function RegistrationForm({ courseTitle }: RegistrationFormProps)
         name: '',
         phone: '',
         email: '',
+        course: courseTitle, // Auto-filled from props
         qualification: '',
         city: '',
     });
+
+    // Update course field when courseTitle prop changes
+    useEffect(() => {
+        setFormData((prev) => ({
+            ...prev,
+            course: courseTitle,
+        }));
+    }, [courseTitle]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -123,6 +132,26 @@ export default function RegistrationForm({ courseTitle }: RegistrationFormProps)
                     />
                 </div>
 
+                {/* Course - Auto-filled and Read-only */}
+                <div style={{ width: '100%', boxSizing: 'border-box' }}>
+                    <input
+                        type="text"
+                        name="course"
+                        value={courseTitle}
+                        readOnly
+                        placeholder="Course *"
+                        required
+                        className="px-4 py-3 rounded-xl text-white placeholder-white/50 outline-none cursor-not-allowed"
+                        style={{
+                            background: 'rgba(255, 255, 255, 0.05)',
+                            border: '1px solid rgba(255, 255, 255, 0.08)',
+                            width: '100%',
+                            boxSizing: 'border-box',
+                            opacity: 0.9,
+                        }}
+                    />
+                </div>
+
                 {/* Qualification */}
                 <div style={{ width: '100%', boxSizing: 'border-box' }}>
                     <select
@@ -130,22 +159,23 @@ export default function RegistrationForm({ courseTitle }: RegistrationFormProps)
                         value={formData.qualification}
                         onChange={handleChange}
                         required
-                        className="px-4 py-3 rounded-xl text-white outline-none focus:ring-2 focus:ring-primary transition-all"
+                        className="px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-primary transition-all"
                         style={{
                             background: 'rgba(255, 255, 255, 0.08)',
                             border: '1px solid rgba(255, 255, 255, 0.1)',
                             width: '100%',
                             boxSizing: 'border-box',
+                            color: formData.qualification ? 'white' : 'rgba(255, 255, 255, 0.5)',
                         }}
                     >
-                        <option value="" disabled>
+                        <option value="" disabled style={{ background: '#1a1a1a', color: 'rgba(255, 255, 255, 0.5)' }}>
                             Select Qualification *
                         </option>
-                        <option value="10th">10th Pass</option>
-                        <option value="12th">12th Pass</option>
-                        <option value="graduate">Graduate</option>
-                        <option value="postgraduate">Post Graduate</option>
-                        <option value="working">Working Professional</option>
+                        <option value="10th" style={{ background: '#1a1a1a', color: 'white' }}>10th Pass</option>
+                        <option value="12th" style={{ background: '#1a1a1a', color: 'white' }}>12th Pass</option>
+                        <option value="graduate" style={{ background: '#1a1a1a', color: 'white' }}>Graduate</option>
+                        <option value="postgraduate" style={{ background: '#1a1a1a', color: 'white' }}>Post Graduate</option>
+                        <option value="working" style={{ background: '#1a1a1a', color: 'white' }}>Working Professional</option>
                     </select>
                 </div>
 

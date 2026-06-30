@@ -1,10 +1,110 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import {
+    Brain,
+    Network,
+    Database,
+    Cloud,
+    Shield,
+    Lock,
+    Target,
+    Infinity,
+    BarChart3,
+    Code2,
+    FileCode,
+    Container,
+    Globe,
+    Server,
+    Boxes,
+    Settings,
+    Zap,
+    GitBranch,
+    Layers,
+} from 'lucide-react';
 
 interface TechnologiesGridProps {
     skills: string[];
 }
+
+// Map technology names to their specific icons
+const getTechnologyIcon = (skill: string) => {
+    const skillLower = skill.toLowerCase();
+
+    // AI/ML Technologies
+    if (skillLower.includes('python')) return '🐍';
+    if (skillLower.includes('tensorflow')) return '🧠';
+    if (skillLower.includes('pytorch')) return '🔥';
+    if (skillLower.includes('langchain')) return '🔗';
+    if (skillLower.includes('openai') || skillLower.includes('gpt')) return '🤖';
+    if (skillLower.includes('llm') || skillLower.includes('ai')) return Brain;
+    if (skillLower.includes('rag')) return Layers;
+    if (skillLower.includes('vector')) return Database;
+    if (skillLower.includes('neural') || skillLower.includes('machine learning')) return Network;
+
+    // Web Development
+    if (skillLower.includes('react')) return '⚛️';
+    if (skillLower.includes('next')) return '▲';
+    if (skillLower.includes('node')) return '🟢';
+    if (skillLower.includes('javascript') || skillLower.includes('js')) return '📜';
+    if (skillLower.includes('typescript') || skillLower.includes('ts')) return '💙';
+    if (skillLower.includes('html')) return '🌐';
+    if (skillLower.includes('css')) return '🎨';
+    if (skillLower.includes('tailwind')) return '🌊';
+    if (skillLower.includes('express')) return FileCode;
+    if (skillLower.includes('fastapi')) return Zap;
+
+    // Data Science
+    if (skillLower.includes('sql') || skillLower.includes('mysql') || skillLower.includes('postgres')) return Database;
+    if (skillLower.includes('mongodb') || skillLower.includes('nosql')) return '🍃';
+    if (skillLower.includes('power bi') || skillLower.includes('powerbi')) return '📊';
+    if (skillLower.includes('tableau')) return BarChart3;
+    if (skillLower.includes('excel')) return '📈';
+    if (skillLower.includes('pandas') || skillLower.includes('numpy')) return '🐼';
+
+    // Cloud & DevOps
+    if (skillLower.includes('aws') || skillLower.includes('amazon')) return '☁️';
+    if (skillLower.includes('azure')) return '☁️';
+    if (skillLower.includes('gcp') || skillLower.includes('google cloud')) return '☁️';
+    if (skillLower.includes('docker')) return Container;
+    if (skillLower.includes('kubernetes') || skillLower.includes('k8s')) return Boxes;
+    if (skillLower.includes('devops')) return Infinity;
+    if (skillLower.includes('jenkins') || skillLower.includes('ci/cd')) return GitBranch;
+    if (skillLower.includes('terraform')) return Settings;
+    if (skillLower.includes('cloud')) return Cloud;
+
+    // Cyber Security
+    if (skillLower.includes('security') || skillLower.includes('cyber')) return Shield;
+    if (skillLower.includes('hacking') || skillLower.includes('ethical')) return '🔓';
+    if (skillLower.includes('penetration') || skillLower.includes('pentest')) return Target;
+    if (skillLower.includes('firewall')) return Lock;
+    if (skillLower.includes('encryption')) return Lock;
+
+    // Programming Languages
+    if (skillLower.includes('java') && !skillLower.includes('javascript')) return '☕';
+    if (skillLower.includes('c++') || skillLower.includes('cpp')) return '⚙️';
+    if (skillLower.includes('c#') || skillLower.includes('csharp')) return '💎';
+    if (skillLower.includes('php')) return '🐘';
+    if (skillLower.includes('ruby')) return '💎';
+    if (skillLower.includes('go') || skillLower.includes('golang')) return '🐹';
+    if (skillLower.includes('rust')) return '🦀';
+
+    // Digital Marketing
+    if (skillLower.includes('seo')) return '🔍';
+    if (skillLower.includes('social media')) return '📱';
+    if (skillLower.includes('marketing')) return '📢';
+    if (skillLower.includes('analytics')) return BarChart3;
+    if (skillLower.includes('ads') || skillLower.includes('ppc')) return '💰';
+
+    // General
+    if (skillLower.includes('api')) return Globe;
+    if (skillLower.includes('rest')) return Server;
+    if (skillLower.includes('graphql')) return Network;
+    if (skillLower.includes('git')) return GitBranch;
+
+    // Default
+    return Code2;
+};
 
 export default function TechnologiesGrid({ skills }: TechnologiesGridProps) {
     return (
@@ -52,48 +152,47 @@ export default function TechnologiesGrid({ skills }: TechnologiesGridProps) {
 
                 {/* Technologies Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-                    {skills.map((skill, index) => (
-                        <motion.div
-                            key={skill}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.05 }}
-                            whileHover={{ y: -8, scale: 1.05 }}
-                            className="group relative rounded-2xl p-6 text-center cursor-pointer"
-                            style={{
-                                background: 'rgba(255, 255, 255, 0.03)',
-                                backdropFilter: 'blur(20px)',
-                                border: '1px solid rgba(255, 255, 255, 0.08)',
-                                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
-                            }}
-                        >
-                            {/* Hover Glow */}
-                            <div
-                                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                                style={{
-                                    background: 'rgba(199, 24, 56, 0.1)',
-                                    boxShadow: '0 0 30px rgba(199, 24, 56, 0.3)',
-                                }}
-                            />
+                    {skills.map((skill, index) => {
+                        const IconComponent = getTechnologyIcon(skill);
+                        const isEmoji = typeof IconComponent === 'string';
 
-                            {/* Icon Placeholder - Will show actual tech icons */}
-                            <div
-                                className="relative w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+                        return (
+                            <motion.div
+                                key={skill}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.05 }}
+                                className="relative rounded-2xl p-6 text-center"
                                 style={{
-                                    background: 'rgba(199, 24, 56, 0.15)',
-                                    border: '1px solid rgba(199, 24, 56, 0.3)',
+                                    background: 'rgba(255, 255, 255, 0.03)',
+                                    backdropFilter: 'blur(20px)',
+                                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                                    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
                                 }}
                             >
-                                <span className="text-2xl">💻</span>
-                            </div>
+                                {/* Technology Icon */}
+                                <div
+                                    className="relative w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center"
+                                    style={{
+                                        background: 'rgba(199, 24, 56, 0.15)',
+                                        border: '1px solid rgba(199, 24, 56, 0.3)',
+                                    }}
+                                >
+                                    {isEmoji ? (
+                                        <span className="text-2xl">{IconComponent}</span>
+                                    ) : (
+                                        <IconComponent className="w-6 h-6 text-primary" />
+                                    )}
+                                </div>
 
-                            {/* Skill Name */}
-                            <p className="relative text-sm md:text-base font-semibold text-white group-hover:text-primary transition-colors duration-300">
-                                {skill}
-                            </p>
-                        </motion.div>
-                    ))}
+                                {/* Skill Name */}
+                                <p className="relative text-sm md:text-base font-semibold text-white">
+                                    {skill}
+                                </p>
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </div>
         </section>

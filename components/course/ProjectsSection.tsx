@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Code2, ExternalLink } from 'lucide-react';
+import { Code2 } from 'lucide-react';
 import ScrollReveal from '@/components/animations/ScrollReveal';
 import { CourseProject } from '@/data/courseData';
 
@@ -59,21 +59,13 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: '-50px' }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                                whileHover={{ y: -10, scale: 1.02 }}
-                                className="group relative p-6 md:p-8 rounded-xl md:rounded-2xl"
+                                className="relative p-6 md:p-8 rounded-xl md:rounded-2xl"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.05)',
                                     backdropFilter: 'blur(18px)',
                                     border: '1px solid rgba(255, 0, 60, 0.18)',
                                 }}
                             >
-                                {/* Hover Glow */}
-                                <div
-                                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                                    style={{
-                                        background: 'linear-gradient(135deg, rgba(199, 24, 56, 0.1), rgba(161, 14, 38, 0.1))',
-                                    }}
-                                />
 
                                 <div className="relative">
                                     {/* Icon */}
@@ -88,7 +80,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                                     </div>
 
                                     {/* Title */}
-                                    <h3 className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3 group-hover:text-primary transition-colors duration-200">
+                                    <h3 className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3">
                                         {project.title}
                                     </h3>
 
@@ -109,11 +101,6 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                                                 {tech}
                                             </span>
                                         ))}
-                                    </div>
-
-                                    {/* Hover Icon */}
-                                    <div className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <ExternalLink className="w-5 h-5 text-primary" />
                                     </div>
                                 </div>
                             </motion.div>
