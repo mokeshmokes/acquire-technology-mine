@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Send } from 'lucide-react';
 
@@ -13,9 +13,18 @@ export default function RegistrationForm({ courseTitle }: RegistrationFormProps)
         name: '',
         phone: '',
         email: '',
+        course: courseTitle, // Auto-filled from props
         qualification: '',
         city: '',
     });
+
+    // Update course field when courseTitle prop changes
+    useEffect(() => {
+        setFormData((prev) => ({
+            ...prev,
+            course: courseTitle,
+        }));
+    }, [courseTitle]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -119,6 +128,26 @@ export default function RegistrationForm({ courseTitle }: RegistrationFormProps)
                             border: '1px solid rgba(255, 255, 255, 0.1)',
                             width: '100%',
                             boxSizing: 'border-box',
+                        }}
+                    />
+                </div>
+
+                {/* Course - Auto-filled and Read-only */}
+                <div style={{ width: '100%', boxSizing: 'border-box' }}>
+                    <input
+                        type="text"
+                        name="course"
+                        value={courseTitle}
+                        readOnly
+                        placeholder="Course *"
+                        required
+                        className="px-4 py-3 rounded-xl text-white placeholder-white/50 outline-none cursor-not-allowed"
+                        style={{
+                            background: 'rgba(255, 255, 255, 0.05)',
+                            border: '1px solid rgba(255, 255, 255, 0.08)',
+                            width: '100%',
+                            boxSizing: 'border-box',
+                            opacity: 0.9,
                         }}
                     />
                 </div>

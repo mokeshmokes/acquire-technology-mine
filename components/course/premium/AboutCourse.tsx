@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { CheckCircle2, Target, Users2, TrendingUp } from 'lucide-react';
+import { CheckCircle2, Target, Users2, TrendingUp, Sparkles, Award, Briefcase } from 'lucide-react';
 
 interface AboutCourseProps {
     description: string;
@@ -11,62 +11,133 @@ interface AboutCourseProps {
 export default function AboutCourse({ description, careers }: AboutCourseProps) {
     return (
         <section className="relative py-20 md:py-32 px-5 md:px-6 overflow-hidden">
-            <div className="max-w-7xl mx-auto">
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                    {/* LEFT SIDE - Content */}
+            {/* Background Effects */}
+            <div className="absolute inset-0 opacity-30">
+                <div
+                    className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full"
+                    style={{
+                        background: 'radial-gradient(circle, rgba(199,24,56,0.15) 0%, transparent 70%)',
+                        filter: 'blur(80px)',
+                    }}
+                />
+                <div
+                    className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full"
+                    style={{
+                        background: 'radial-gradient(circle, rgba(161,14,38,0.15) 0%, transparent 70%)',
+                        filter: 'blur(80px)',
+                    }}
+                />
+            </div>
+
+            <div className="max-w-7xl mx-auto relative z-10">
+                {/* Section Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-16"
+                >
+                    <h2
+                        className="font-bold text-white mb-4"
+                        style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)' }}
+                    >
+                        About This{' '}
+                        <span className="bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent">
+                            Course
+                        </span>
+                    </h2>
+                    <p className="text-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
+                        {description}
+                    </p>
+                </motion.div>
+
+                {/* Main Content Grid */}
+                <div className="grid lg:grid-cols-2 gap-8">
+                    {/* LEFT SIDE - Career Opportunities Card */}
                     <motion.div
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="space-y-8"
+                        className="rounded-3xl p-8 md:p-10"
+                        style={{
+                            background: 'rgba(255, 255, 255, 0.03)',
+                            backdropFilter: 'blur(20px)',
+                            border: '1px solid rgba(255, 255, 255, 0.08)',
+                            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.4)',
+                        }}
                     >
-                        {/* Heading */}
-                        <div>
-                            <h2
-                                className="font-bold text-white mb-4"
-                                style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)' }}
+                        <div className="flex items-center gap-3 mb-6">
+                            <div
+                                className="w-12 h-12 rounded-xl flex items-center justify-center"
+                                style={{
+                                    background: 'rgba(199, 24, 56, 0.15)',
+                                    border: '1px solid rgba(199, 24, 56, 0.3)',
+                                }}
                             >
-                                About This{' '}
-                                <span className="bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent">
-                                    Course
-                                </span>
-                            </h2>
-                            <p className="text-lg text-white/80 leading-relaxed">{description}</p>
-                        </div>
-
-                        {/* Career Opportunities */}
-                        <div>
-                            <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
                                 <TrendingUp className="w-6 h-6 text-primary" />
-                                Career Opportunities
-                            </h3>
-                            <div className="space-y-3">
-                                {careers.slice(0, 3).map((career, index) => (
-                                    <motion.div
-                                        key={career.title}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: index * 0.1 }}
-                                        className="flex items-start gap-3"
-                                    >
-                                        <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                                        <div>
-                                            <p className="text-white font-semibold">{career.title}</p>
-                                            <p className="text-sm text-primary">{career.salary}</p>
-                                        </div>
-                                    </motion.div>
-                                ))}
                             </div>
+                            <h3 className="text-2xl font-bold text-white">Career Opportunities</h3>
                         </div>
 
+                        <div className="space-y-4">
+                            {careers.slice(0, 4).map((career, index) => (
+                                <motion.div
+                                    key={career.title}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1 }}
+                                    className="rounded-2xl p-5"
+                                    style={{
+                                        background: 'rgba(255, 255, 255, 0.04)',
+                                        border: '1px solid rgba(255, 255, 255, 0.06)',
+                                    }}
+                                >
+                                    <div className="flex items-start gap-3">
+                                        <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                                        <div className="flex-1">
+                                            <p className="text-white font-semibold mb-1">{career.title}</p>
+                                            <p className="text-sm text-primary font-medium">{career.salary}</p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </motion.div>
+
+                    {/* RIGHT SIDE - Who Should Join & Benefits */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="space-y-6"
+                    >
                         {/* Who Should Join */}
-                        <div>
-                            <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                                <Users2 className="w-6 h-6 text-primary" />
-                                Who Should Join
-                            </h3>
+                        <div
+                            className="rounded-3xl p-8 md:p-10"
+                            style={{
+                                background: 'rgba(255, 255, 255, 0.03)',
+                                backdropFilter: 'blur(20px)',
+                                border: '1px solid rgba(255, 255, 255, 0.08)',
+                                boxShadow: '0 20px 60px rgba(0, 0, 0, 0.4)',
+                            }}
+                        >
+                            <div className="flex items-center gap-3 mb-6">
+                                <div
+                                    className="w-12 h-12 rounded-xl flex items-center justify-center"
+                                    style={{
+                                        background: 'rgba(199, 24, 56, 0.15)',
+                                        border: '1px solid rgba(199, 24, 56, 0.3)',
+                                    }}
+                                >
+                                    <Users2 className="w-6 h-6 text-primary" />
+                                </div>
+                                <h3 className="text-2xl font-bold text-white">Who Should Join</h3>
+                            </div>
+
                             <div className="space-y-3">
                                 {[
                                     'College students looking to build a tech career',
@@ -82,82 +153,65 @@ export default function AboutCourse({ description, careers }: AboutCourseProps) 
                                         transition={{ delay: index * 0.1 }}
                                         className="flex items-start gap-3"
                                     >
-                                        <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                                        <p className="text-white/80">{item}</p>
+                                        <div
+                                            className="w-2 h-2 rounded-full flex-shrink-0 mt-2"
+                                            style={{ background: 'rgba(199, 24, 56, 0.8)' }}
+                                        />
+                                        <p className="text-white/80 leading-relaxed">{item}</p>
                                     </motion.div>
                                 ))}
                             </div>
                         </div>
 
-                        {/* Benefits */}
-                        <div>
-                            <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                                <Target className="w-6 h-6 text-primary" />
-                                What You&apos;ll Gain
-                            </h3>
-                            <div className="space-y-3">
-                                {[
-                                    'Industry-relevant skills and hands-on experience',
-                                    'Portfolio of real-world projects',
-                                    'Industry-recognized certification',
-                                    'Career guidance and placement support',
-                                ].map((item, index) => (
-                                    <motion.div
-                                        key={item}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: index * 0.1 }}
-                                        className="flex items-start gap-3"
-                                    >
-                                        <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                                        <p className="text-white/80">{item}</p>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* RIGHT SIDE - Illustration/Image */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="relative"
-                    >
+                        {/* What You'll Gain */}
                         <div
-                            className="relative rounded-3xl overflow-hidden"
+                            className="rounded-3xl p-8 md:p-10"
                             style={{
-                                background: 'linear-gradient(135deg, rgba(199, 24, 56, 0.1) 0%, rgba(161, 14, 38, 0.05) 100%)',
-                                border: '1px solid rgba(255, 255, 255, 0.1)',
-                                boxShadow: '0 20px 60px rgba(0, 0, 0, 0.4)',
-                                minHeight: '500px',
+                                background: 'linear-gradient(135deg, rgba(199, 24, 56, 0.08) 0%, rgba(161, 14, 38, 0.04) 100%)',
+                                backdropFilter: 'blur(20px)',
+                                border: '1px solid rgba(199, 24, 56, 0.2)',
+                                boxShadow: '0 20px 60px rgba(199, 24, 56, 0.15)',
                             }}
                         >
-                            {/* Placeholder - Replace with actual image */}
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="text-center space-y-4">
-                                    <div className="text-8xl">💼</div>
-                                    <p className="text-white/50 text-sm">Course Illustration</p>
+                            <div className="flex items-center gap-3 mb-6">
+                                <div
+                                    className="w-12 h-12 rounded-xl flex items-center justify-center"
+                                    style={{
+                                        background: 'rgba(199, 24, 56, 0.2)',
+                                        border: '1px solid rgba(199, 24, 56, 0.4)',
+                                    }}
+                                >
+                                    <Sparkles className="w-6 h-6 text-primary" />
                                 </div>
+                                <h3 className="text-2xl font-bold text-white">What You&apos;ll Gain</h3>
                             </div>
 
-                            {/* Decorative elements */}
-                            <div
-                                className="absolute top-10 right-10 w-32 h-32 rounded-full opacity-20"
-                                style={{
-                                    background: 'radial-gradient(circle, rgba(199,24,56,0.5) 0%, transparent 70%)',
-                                    filter: 'blur(40px)',
-                                }}
-                            />
-                            <div
-                                className="absolute bottom-10 left-10 w-32 h-32 rounded-full opacity-20"
-                                style={{
-                                    background: 'radial-gradient(circle, rgba(161,14,38,0.5) 0%, transparent 70%)',
-                                    filter: 'blur(40px)',
-                                }}
-                            />
+                            <div className="grid grid-cols-2 gap-4">
+                                {[
+                                    { icon: Target, text: 'Industry Skills' },
+                                    { icon: Briefcase, text: 'Real Projects' },
+                                    { icon: Award, text: 'Certification' },
+                                    { icon: TrendingUp, text: 'Career Support' },
+                                ].map((item, index) => (
+                                    <motion.div
+                                        key={item.text}
+                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: index * 0.1 }}
+                                        className="text-center p-4 rounded-2xl"
+                                        style={{
+                                            background: 'rgba(255, 255, 255, 0.05)',
+                                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                                        }}
+                                    >
+                                        <div className="flex justify-center mb-3">
+                                            <item.icon className="w-8 h-8 text-primary" />
+                                        </div>
+                                        <p className="text-sm font-semibold text-white">{item.text}</p>
+                                    </motion.div>
+                                ))}
+                            </div>
                         </div>
                     </motion.div>
                 </div>

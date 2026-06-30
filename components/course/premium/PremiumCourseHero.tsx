@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Star, Users, Award, Briefcase, Play } from 'lucide-react';
+import { Star, Users, Award, Play } from 'lucide-react';
 import { CourseData } from '@/data/courseData';
 import RegistrationForm from './RegistrationForm';
 
@@ -105,6 +105,7 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
                             minWidth: 0, // Prevent overflow in Chrome
                             width: '100%',
                             boxSizing: 'border-box',
+                            paddingTop: '48px', // Move content down to align with form
                         }}
                     >
                         {/* Trust Badges */}
@@ -214,22 +215,22 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
                         </div>
 
                         {/* Course Statistics */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6" style={{ opacity: 0.65 }}>
                             <div className="space-y-1">
-                                <div className="text-3xl md:text-4xl font-bold text-glow-red">5000+</div>
-                                <div className="text-sm text-white/60">Students</div>
+                                <div className="text-3xl md:text-4xl font-bold" style={{ color: 'rgba(199, 24, 56, 0.85)' }}>5000+</div>
+                                <div className="text-xs md:text-sm text-white/50 font-normal">Students</div>
                             </div>
                             <div className="space-y-1">
-                                <div className="text-3xl md:text-4xl font-bold text-glow-red">50+</div>
-                                <div className="text-sm text-white/60">Projects</div>
+                                <div className="text-3xl md:text-4xl font-bold" style={{ color: 'rgba(199, 24, 56, 0.85)' }}>50+</div>
+                                <div className="text-xs md:text-sm text-white/50 font-normal">Projects</div>
                             </div>
                             <div className="space-y-1">
-                                <div className="text-3xl md:text-4xl font-bold text-glow-red">100%</div>
-                                <div className="text-sm text-white/60">Certificate</div>
+                                <div className="text-3xl md:text-4xl font-bold" style={{ color: 'rgba(199, 24, 56, 0.85)' }}>100%</div>
+                                <div className="text-xs md:text-sm text-white/50 font-normal">Certificate</div>
                             </div>
                             <div className="space-y-1">
-                                <div className="text-3xl md:text-4xl font-bold text-glow-red">Live</div>
-                                <div className="text-sm text-white/60">Internship</div>
+                                <div className="text-3xl md:text-4xl font-bold" style={{ color: 'rgba(199, 24, 56, 0.85)' }}>Live</div>
+                                <div className="text-xs md:text-sm text-white/50 font-normal">Internship</div>
                             </div>
                         </div>
                     </motion.div>
