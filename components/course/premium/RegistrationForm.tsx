@@ -36,8 +36,12 @@ export default function RegistrationForm({ courseTitle }: RegistrationFormProps)
             style={{
                 background: 'rgba(255, 255, 255, 0.05)',
                 backdropFilter: 'blur(30px)',
+                WebkitBackdropFilter: 'blur(30px)', // Safari support
                 border: '1px solid rgba(255, 255, 255, 0.1)',
                 boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(199, 24, 56, 0.15)',
+                boxSizing: 'border-box',
+                maxWidth: '100%',
+                width: '100%',
             }}
         >
             {/* Top Badge */}
@@ -61,9 +65,9 @@ export default function RegistrationForm({ courseTitle }: RegistrationFormProps)
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4" style={{ width: '100%', boxSizing: 'border-box' }}>
                 {/* Name */}
-                <div>
+                <div style={{ width: '100%', boxSizing: 'border-box' }}>
                     <input
                         type="text"
                         name="name"
@@ -71,16 +75,18 @@ export default function RegistrationForm({ courseTitle }: RegistrationFormProps)
                         onChange={handleChange}
                         placeholder="Full Name *"
                         required
-                        className="w-full px-4 py-3 rounded-xl text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-primary transition-all"
+                        className="px-4 py-3 rounded-xl text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-primary transition-all"
                         style={{
                             background: 'rgba(255, 255, 255, 0.08)',
                             border: '1px solid rgba(255, 255, 255, 0.1)',
+                            width: '100%',
+                            boxSizing: 'border-box',
                         }}
                     />
                 </div>
 
                 {/* Phone */}
-                <div>
+                <div style={{ width: '100%', boxSizing: 'border-box' }}>
                     <input
                         type="tel"
                         name="phone"
@@ -88,16 +94,18 @@ export default function RegistrationForm({ courseTitle }: RegistrationFormProps)
                         onChange={handleChange}
                         placeholder="Phone Number *"
                         required
-                        className="w-full px-4 py-3 rounded-xl text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-primary transition-all"
+                        className="px-4 py-3 rounded-xl text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-primary transition-all"
                         style={{
                             background: 'rgba(255, 255, 255, 0.08)',
                             border: '1px solid rgba(255, 255, 255, 0.1)',
+                            width: '100%',
+                            boxSizing: 'border-box',
                         }}
                     />
                 </div>
 
                 {/* Email */}
-                <div>
+                <div style={{ width: '100%', boxSizing: 'border-box' }}>
                     <input
                         type="email"
                         name="email"
@@ -105,25 +113,29 @@ export default function RegistrationForm({ courseTitle }: RegistrationFormProps)
                         onChange={handleChange}
                         placeholder="Email Address *"
                         required
-                        className="w-full px-4 py-3 rounded-xl text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-primary transition-all"
+                        className="px-4 py-3 rounded-xl text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-primary transition-all"
                         style={{
                             background: 'rgba(255, 255, 255, 0.08)',
                             border: '1px solid rgba(255, 255, 255, 0.1)',
+                            width: '100%',
+                            boxSizing: 'border-box',
                         }}
                     />
                 </div>
 
                 {/* Qualification */}
-                <div>
+                <div style={{ width: '100%', boxSizing: 'border-box' }}>
                     <select
                         name="qualification"
                         value={formData.qualification}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl text-white outline-none focus:ring-2 focus:ring-primary transition-all"
+                        className="px-4 py-3 rounded-xl text-white outline-none focus:ring-2 focus:ring-primary transition-all"
                         style={{
                             background: 'rgba(255, 255, 255, 0.08)',
                             border: '1px solid rgba(255, 255, 255, 0.1)',
+                            width: '100%',
+                            boxSizing: 'border-box',
                         }}
                     >
                         <option value="" disabled>
@@ -138,7 +150,7 @@ export default function RegistrationForm({ courseTitle }: RegistrationFormProps)
                 </div>
 
                 {/* City */}
-                <div>
+                <div style={{ width: '100%', boxSizing: 'border-box' }}>
                     <input
                         type="text"
                         name="city"
@@ -146,10 +158,12 @@ export default function RegistrationForm({ courseTitle }: RegistrationFormProps)
                         onChange={handleChange}
                         placeholder="City *"
                         required
-                        className="w-full px-4 py-3 rounded-xl text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-primary transition-all"
+                        className="px-4 py-3 rounded-xl text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-primary transition-all"
                         style={{
                             background: 'rgba(255, 255, 255, 0.08)',
                             border: '1px solid rgba(255, 255, 255, 0.1)',
+                            width: '100%',
+                            boxSizing: 'border-box',
                         }}
                     />
                 </div>
@@ -159,10 +173,12 @@ export default function RegistrationForm({ courseTitle }: RegistrationFormProps)
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     type="submit"
-                    className="w-full px-6 py-4 rounded-xl font-semibold text-white relative overflow-hidden group"
+                    className="px-6 py-4 rounded-xl font-semibold text-white relative overflow-hidden group"
                     style={{
                         background: 'linear-gradient(135deg, rgba(199,24,56,0.9) 0%, rgba(161,14,38,1) 100%)',
                         boxShadow: '0 0 30px rgba(199,24,56,0.4)',
+                        width: '100%',
+                        boxSizing: 'border-box',
                     }}
                 >
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
