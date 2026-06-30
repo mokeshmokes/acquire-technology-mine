@@ -2,16 +2,16 @@ import { notFound } from 'next/navigation';
 import { getCourseBySlug, coursesData } from '@/data/courseData';
 import { courseIconsMap } from '@/data/floatingIcons';
 import Header from '@/components/navigation/Header';
-import CourseHero from '@/components/course/CourseHero';
-import CourseOverview from '@/components/course/CourseOverview';
-import SkillsSection from '@/components/course/SkillsSection';
+import PremiumCourseHero from '@/components/course/premium/PremiumCourseHero';
+import CourseHighlights from '@/components/course/premium/CourseHighlights';
+import AboutCourse from '@/components/course/premium/AboutCourse';
+import TechnologiesGrid from '@/components/course/premium/TechnologiesGrid';
 import SyllabusSection from '@/components/course/SyllabusSection';
 import ProjectsSection from '@/components/course/ProjectsSection';
 import MentorSection from '@/components/course/MentorSection';
 import LearningProcess from '@/components/course/LearningProcess';
-import CareerOpportunities from '@/components/course/CareerOpportunities';
 import CourseFAQ from '@/components/course/CourseFAQ';
-import StickyCTA from '@/components/course/StickyCTA';
+import FinalCTA from '@/components/course/premium/FinalCTA';
 import SectionFloatingIcons from '@/components/course/SectionFloatingIcons';
 import Newsletter from '@/components/footer/Newsletter';
 import Footer from '@/components/footer/Footer';
@@ -66,71 +66,65 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
 
                         {/* All content needs relative positioning to stay above floating icons */}
                         <div className="relative z-10">
-                            {/* 1. Hero Section with floating icons */}
+                            {/* 1. Premium Hero Section with Registration Form */}
                             <section className="relative">
-                                <CourseHero
-                                    title={course.title}
-                                    subtitle={course.subtitle}
-                                    iconName={course.iconName}
-                                />
+                                <PremiumCourseHero course={course} />
                                 <SectionFloatingIcons icons={courseIcons.slice(0, 2)} />
                             </section>
 
-                            {/* 2. Course Overview with floating icons */}
+                            {/* 2. Course Highlights - 6 Premium Cards */}
                             <section className="relative">
-                                <CourseOverview
-                                    description={course.description}
-                                    duration={course.duration}
-                                    level={course.level}
-                                />
+                                <CourseHighlights />
                                 <SectionFloatingIcons icons={courseIcons.slice(2, 4)} />
                             </section>
 
-                            {/* 3. Skills Section with floating icons */}
+                            {/* 3. About This Course - Two Column */}
                             <section className="relative">
-                                <SkillsSection skills={course.skills} />
+                                <AboutCourse description={course.description} careers={course.careers} />
                                 <SectionFloatingIcons icons={courseIcons.slice(4, 6)} />
                             </section>
 
-                            {/* 4. Complete Syllabus with floating icons */}
+                            {/* 4. Technologies You'll Master - Premium Grid */}
                             <section className="relative">
-                                <SyllabusSection syllabus={course.syllabus} />
+                                <TechnologiesGrid skills={course.skills} />
                                 <SectionFloatingIcons icons={courseIcons.slice(6, 8)} />
                             </section>
 
-                            {/* 5. Projects with floating icons */}
+                            {/* 5. Complete Learning Roadmap (KEEP EXISTING) */}
                             <section className="relative">
-                                <ProjectsSection projects={course.projects} />
+                                <LearningProcess />
                                 <SectionFloatingIcons icons={courseIcons.slice(8, 10)} />
                             </section>
 
-                            {/* 6. Mentor Section with floating icons */}
+                            {/* 6. Detailed Curriculum (KEEP EXISTING) */}
                             <section className="relative">
-                                <MentorSection mentor={course.mentor} />
+                                <SyllabusSection syllabus={course.syllabus} />
                                 <SectionFloatingIcons icons={courseIcons.slice(10, 12)} />
                             </section>
 
-                            {/* 7. Learning Process with floating icons */}
+                            {/* 7. Projects Section (KEEP EXISTING) */}
                             <section className="relative">
-                                <LearningProcess />
+                                <ProjectsSection projects={course.projects} />
                                 <SectionFloatingIcons icons={courseIcons.slice(12, 14)} />
                             </section>
 
-                            {/* 8. Career Opportunities with floating icons */}
+                            {/* 8. Meet Your Mentor (KEEP EXISTING) */}
                             <section className="relative">
-                                <CareerOpportunities careers={course.careers} />
+                                <MentorSection mentor={course.mentor} />
                                 <SectionFloatingIcons icons={courseIcons.slice(14, 16)} />
                             </section>
 
-                            {/* 9. FAQ with floating icons */}
+                            {/* 9. FAQ Section (KEEP EXISTING) */}
                             <section className="relative">
                                 <CourseFAQ faqs={course.faqs} />
                                 <SectionFloatingIcons icons={courseIcons.slice(16, 18)} />
                             </section>
-                        </div>
 
-                        {/* 10. Sticky CTA - NO FLOATING ICONS */}
-                        <StickyCTA courseTitle={course.title} />
+                            {/* 10. Final Call to Action */}
+                            <section className="relative">
+                                <FinalCTA courseTitle={course.title} />
+                            </section>
+                        </div>
 
                         {/* Newsletter & Footer - NO FLOATING ICONS */}
                         <Newsletter />

@@ -13,7 +13,6 @@ function FloatingIconElement({
     position,
     mouseX,
     mouseY,
-    index,
 }: {
     icon: { emoji: string; label: string };
     position: { top: string; left?: string; right?: string };
