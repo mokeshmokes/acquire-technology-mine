@@ -23,7 +23,7 @@ interface LiveCourseCardProps {
     index: number;
 }
 
-export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
+export default function LiveCourseCard({ course }: LiveCourseCardProps) {
     const cardRef = useRef<HTMLDivElement>(null);
 
     /*

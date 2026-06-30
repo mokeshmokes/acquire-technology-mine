@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Testimonial } from '@/data/testimonials';
@@ -40,6 +40,20 @@ export default function TestimonialCarousel({ testimonials }: TestimonialCarouse
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    const handlePrev = useCallback(() => {
+        setCurrentIndex((prev) => {
+            const newIndex = prev - 1;
+            return newIndex < 0 ? testimonials.length - 1 : newIndex;
+        });
+    }, [testimonials.length]);
+
+    const handleNext = useCallback(() => {
+        setCurrentIndex((prev) => {
+            const newIndex = prev + 1;
+            return newIndex >= testimonials.length ? 0 : newIndex;
+        });
+    }, [testimonials.length]);
+
     // Auto-slide every 4 seconds (mobile) or 5 seconds (desktop)
     useEffect(() => {
         if (isPaused) return;
@@ -49,21 +63,7 @@ export default function TestimonialCarousel({ testimonials }: TestimonialCarouse
         }, isMobile ? 4000 : 5000);
 
         return () => clearInterval(interval);
-    }, [isPaused, currentIndex, isMobile]);
-
-    const handlePrev = () => {
-        setCurrentIndex((prev) => {
-            const newIndex = prev - 1;
-            return newIndex < 0 ? testimonials.length - 1 : newIndex;
-        });
-    };
-
-    const handleNext = () => {
-        setCurrentIndex((prev) => {
-            const newIndex = prev + 1;
-            return newIndex >= testimonials.length ? 0 : newIndex;
-        });
-    };
+    }, [isPaused, isMobile, handleNext]);
 
     const handleDotClick = (index: number) => {
         setCurrentIndex(index);
