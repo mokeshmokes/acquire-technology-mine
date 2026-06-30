@@ -12,21 +12,65 @@ interface PremiumCourseHeroProps {
 export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
     return (
         <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
-            {/* Background Video */}
+            {/* Premium Static Background */}
             <div className="absolute inset-0 z-0">
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover opacity-20"
-                >
-                    <source src={course.heroVideo} type="video/mp4" />
-                </video>
+                {/* Main Gradient Background */}
                 <div
                     className="absolute inset-0"
                     style={{
-                        background: 'linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(18,8,12,0.92) 50%, rgba(0,0,0,0.95) 100%)',
+                        background: 'linear-gradient(180deg, rgba(8,8,8,1) 0%, rgba(18,6,8,1) 30%, rgba(32,8,12,1) 60%, rgba(24,7,10,1) 90%, rgba(8,8,8,1) 100%)',
+                    }}
+                />
+
+                {/* Radial Glow Effects */}
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        background: 'radial-gradient(circle at 30% 40%, rgba(122,0,25,0.15) 0%, transparent 50%)',
+                    }}
+                />
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        background: 'radial-gradient(circle at 70% 60%, rgba(199,24,56,0.12) 0%, transparent 50%)',
+                    }}
+                />
+
+                {/* Subtle Technology Pattern Overlay */}
+                <div
+                    className="absolute inset-0 opacity-5"
+                    style={{
+                        backgroundImage: `repeating-linear-gradient(
+                            0deg,
+                            rgba(255,255,255,0.03) 0px,
+                            transparent 1px,
+                            transparent 2px,
+                            rgba(255,255,255,0.03) 3px
+                        ),
+                        repeating-linear-gradient(
+                            90deg,
+                            rgba(255,255,255,0.03) 0px,
+                            transparent 1px,
+                            transparent 2px,
+                            rgba(255,255,255,0.03) 3px
+                        )`,
+                        backgroundSize: '100px 100px',
+                    }}
+                />
+
+                {/* Ambient Light Glow - Top */}
+                <div
+                    className="absolute top-0 left-0 right-0 h-64"
+                    style={{
+                        background: 'linear-gradient(180deg, rgba(199,24,56,0.08) 0%, transparent 100%)',
+                    }}
+                />
+
+                {/* Ambient Light Glow - Bottom */}
+                <div
+                    className="absolute bottom-0 left-0 right-0 h-64"
+                    style={{
+                        background: 'linear-gradient(0deg, rgba(122,0,25,0.08) 0%, transparent 100%)',
                     }}
                 />
             </div>
