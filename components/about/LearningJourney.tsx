@@ -58,8 +58,7 @@ export default function LearningJourney() {
                                     <div
                                         className="relative rounded-2xl md:rounded-[28px] p-6 md:p-8 text-center lg:hover:scale-105 transition-transform duration-500 flex flex-col items-center justify-center ml-[72px] w-[calc(100%-88px)] lg:ml-0 lg:w-full"
                                         style={{
-                                            background: 'rgba(255, 255, 255, 0.05)',
-                                            backdropFilter: 'blur(18px)',
+                                            background: 'rgba(18, 10, 14, 0.94)',
                                             border: '1px solid rgba(255, 0, 60, 0.18)',
                                             boxShadow: '0 20px 60px rgba(0, 0, 0, 0.45)',
                                             minHeight: '240px',

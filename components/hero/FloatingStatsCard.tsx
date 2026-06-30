@@ -18,7 +18,7 @@ export default function FloatingStatsCard() {
 
             {/* Card */}
             <div className="relative border border-white/15 rounded-2xl p-5 md:p-4 shadow-2xl"
-                style={{ background: 'rgba(18,6,10,0.75)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}>
+                style={{ background: 'rgba(18,6,10,0.92)' }}>
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl pointer-events-none" />
 
                 {/* 2×2 CSS Grid with equal spacing */}

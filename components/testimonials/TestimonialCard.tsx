@@ -18,8 +18,7 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="group relative rounded-[28px] md:rounded-[28px] p-6 md:p-8 h-full flex flex-col w-full max-w-[340px] md:max-w-none mx-auto"
             style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                backdropFilter: 'blur(20px)',
+                background: 'rgba(18, 10, 14, 0.94)',
                 border: '1px solid rgba(255, 0, 70, 0.15)',
                 boxShadow: '0 20px 60px rgba(0, 0, 0, 0.45)',
                 minHeight: '450px',

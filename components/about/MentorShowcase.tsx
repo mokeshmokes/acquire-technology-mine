@@ -39,8 +39,7 @@ export default function MentorShowcase() {
                             }}
                             className="group relative rounded-[20px] md:rounded-[28px] p-5 md:p-6 transition-all duration-500"
                             style={{
-                                background: 'rgba(255, 255, 255, 0.05)',
-                                backdropFilter: 'blur(18px)',
+                                background: 'rgba(18, 10, 14, 0.94)',
                                 border: '1px solid rgba(255, 0, 60, 0.18)',
                                 boxShadow: '0 20px 60px rgba(0, 0, 0, 0.45)',
                             }}
