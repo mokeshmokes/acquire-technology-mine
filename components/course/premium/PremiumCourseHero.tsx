@@ -14,25 +14,25 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
         <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
             {/* Premium Static Background */}
             <div className="absolute inset-0 z-0">
-                {/* Main Gradient Background */}
+                {/* Main Gradient Background - Pure Dark */}
                 <div
                     className="absolute inset-0"
                     style={{
-                        background: 'linear-gradient(180deg, rgba(8,8,8,1) 0%, rgba(18,6,8,1) 30%, rgba(32,8,12,1) 60%, rgba(24,7,10,1) 90%, rgba(8,8,8,1) 100%)',
+                        background: 'linear-gradient(180deg, rgba(8,8,8,1) 0%, rgba(10,10,10,1) 30%, rgba(12,12,12,1) 60%, rgba(10,10,10,1) 90%, rgba(8,8,8,1) 100%)',
                     }}
                 />
 
-                {/* Radial Glow Effects */}
+                {/* Subtle Dark Glow Effects - No Red */}
                 <div
                     className="absolute inset-0"
                     style={{
-                        background: 'radial-gradient(circle at 30% 40%, rgba(122,0,25,0.15) 0%, transparent 50%)',
+                        background: 'radial-gradient(circle at 30% 40%, rgba(20,20,20,0.5) 0%, transparent 50%)',
                     }}
                 />
                 <div
                     className="absolute inset-0"
                     style={{
-                        background: 'radial-gradient(circle at 70% 60%, rgba(199,24,56,0.12) 0%, transparent 50%)',
+                        background: 'radial-gradient(circle at 70% 60%, rgba(15,15,15,0.5) 0%, transparent 50%)',
                     }}
                 />
 
@@ -58,19 +58,11 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
                     }}
                 />
 
-                {/* Ambient Light Glow - Top */}
+                {/* Very Subtle Vignette Effect */}
                 <div
-                    className="absolute top-0 left-0 right-0 h-64"
+                    className="absolute inset-0"
                     style={{
-                        background: 'linear-gradient(180deg, rgba(199,24,56,0.08) 0%, transparent 100%)',
-                    }}
-                />
-
-                {/* Ambient Light Glow - Bottom */}
-                <div
-                    className="absolute bottom-0 left-0 right-0 h-64"
-                    style={{
-                        background: 'linear-gradient(0deg, rgba(122,0,25,0.08) 0%, transparent 100%)',
+                        background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.3) 100%)',
                     }}
                 />
             </div>
@@ -215,22 +207,22 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
                         </div>
 
                         {/* Course Statistics */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6" style={{ opacity: 0.65 }}>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6">
                             <div className="space-y-1">
-                                <div className="text-3xl md:text-4xl font-bold" style={{ color: 'rgba(199, 24, 56, 0.85)' }}>5000+</div>
-                                <div className="text-xs md:text-sm text-white/50 font-normal">Students</div>
+                                <div className="text-3xl md:text-4xl font-bold text-primary">5000+</div>
+                                <div className="text-xs md:text-sm text-white/60 font-normal">Students</div>
                             </div>
                             <div className="space-y-1">
-                                <div className="text-3xl md:text-4xl font-bold" style={{ color: 'rgba(199, 24, 56, 0.85)' }}>50+</div>
-                                <div className="text-xs md:text-sm text-white/50 font-normal">Projects</div>
+                                <div className="text-3xl md:text-4xl font-bold text-primary">50+</div>
+                                <div className="text-xs md:text-sm text-white/60 font-normal">Projects</div>
                             </div>
                             <div className="space-y-1">
-                                <div className="text-3xl md:text-4xl font-bold" style={{ color: 'rgba(199, 24, 56, 0.85)' }}>100%</div>
-                                <div className="text-xs md:text-sm text-white/50 font-normal">Certificate</div>
+                                <div className="text-3xl md:text-4xl font-bold text-primary">100%</div>
+                                <div className="text-xs md:text-sm text-white/60 font-normal">Certificate</div>
                             </div>
                             <div className="space-y-1">
-                                <div className="text-3xl md:text-4xl font-bold" style={{ color: 'rgba(199, 24, 56, 0.85)' }}>Live</div>
-                                <div className="text-xs md:text-sm text-white/50 font-normal">Internship</div>
+                                <div className="text-3xl md:text-4xl font-bold text-primary">Live</div>
+                                <div className="text-xs md:text-sm text-white/60 font-normal">Internship</div>
                             </div>
                         </div>
                     </motion.div>

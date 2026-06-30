@@ -159,22 +159,23 @@ export default function RegistrationForm({ courseTitle }: RegistrationFormProps)
                         value={formData.qualification}
                         onChange={handleChange}
                         required
-                        className="px-4 py-3 rounded-xl text-white outline-none focus:ring-2 focus:ring-primary transition-all"
+                        className="px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-primary transition-all"
                         style={{
                             background: 'rgba(255, 255, 255, 0.08)',
                             border: '1px solid rgba(255, 255, 255, 0.1)',
                             width: '100%',
                             boxSizing: 'border-box',
+                            color: formData.qualification ? 'white' : 'rgba(255, 255, 255, 0.5)',
                         }}
                     >
-                        <option value="" disabled>
+                        <option value="" disabled style={{ background: '#1a1a1a', color: 'rgba(255, 255, 255, 0.5)' }}>
                             Select Qualification *
                         </option>
-                        <option value="10th">10th Pass</option>
-                        <option value="12th">12th Pass</option>
-                        <option value="graduate">Graduate</option>
-                        <option value="postgraduate">Post Graduate</option>
-                        <option value="working">Working Professional</option>
+                        <option value="10th" style={{ background: '#1a1a1a', color: 'white' }}>10th Pass</option>
+                        <option value="12th" style={{ background: '#1a1a1a', color: 'white' }}>12th Pass</option>
+                        <option value="graduate" style={{ background: '#1a1a1a', color: 'white' }}>Graduate</option>
+                        <option value="postgraduate" style={{ background: '#1a1a1a', color: 'white' }}>Post Graduate</option>
+                        <option value="working" style={{ background: '#1a1a1a', color: 'white' }}>Working Professional</option>
                     </select>
                 </div>
 
