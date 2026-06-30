@@ -48,7 +48,7 @@ export async function POST(request: Request) {
         try {
             const result = JSON.parse(responseText);
             return NextResponse.json(result);
-        } catch (e) {
+        } catch {
             console.error('Apps Script response is not valid JSON. Response:', responseText);
 
             if (responseText.includes('<!DOCTYPE') || responseText.includes('<html')) {
@@ -66,10 +66,11 @@ export async function POST(request: Request) {
                 { status: 500 }
             );
         }
-    } catch (error: any) {
+    } catch (error) {
         console.error('Error submitting form:', error);
+        const errorMessage = error instanceof Error ? error.message : 'Internal Server Error';
         return NextResponse.json(
-            { success: false, error: error.message || 'Internal Server Error' },
+            { success: false, error: errorMessage },
             { status: 500 }
         );
     }

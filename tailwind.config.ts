@@ -14,9 +14,9 @@ const config: Config = {
                 surface: '#12080C',
                 'surface-elevated': '#1E0F11',
                 primary: {
-                    DEFAULT: '#7A0019',
-                    hover: '#C21838',
-                    secondary: '#A10E26',
+                    DEFAULT: '#E8192C',
+                    hover: '#FF3B30',
+                    secondary: '#C71838',
                 },
                 border: 'rgba(255, 255, 255, 0.08)',
                 muted: '#B8B8B8',

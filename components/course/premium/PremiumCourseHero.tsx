@@ -95,7 +95,7 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
                             >
                                 {course.title}
                             </h1>
-                            <p className="text-xl md:text-2xl text-primary font-semibold">{course.subtitle}</p>
+                            <p className="text-xl md:text-2xl text-glow-red font-semibold">{course.subtitle}</p>
                         </div>
 
                         {/* Description */}
@@ -138,19 +138,19 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
                         {/* Course Statistics */}
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6">
                             <div className="space-y-1">
-                                <div className="text-3xl md:text-4xl font-bold text-primary">5000+</div>
+                                <div className="text-3xl md:text-4xl font-bold text-glow-red">5000+</div>
                                 <div className="text-sm text-white/60">Students</div>
                             </div>
                             <div className="space-y-1">
-                                <div className="text-3xl md:text-4xl font-bold text-primary">50+</div>
+                                <div className="text-3xl md:text-4xl font-bold text-glow-red">50+</div>
                                 <div className="text-sm text-white/60">Projects</div>
                             </div>
                             <div className="space-y-1">
-                                <div className="text-3xl md:text-4xl font-bold text-primary">100%</div>
+                                <div className="text-3xl md:text-4xl font-bold text-glow-red">100%</div>
                                 <div className="text-sm text-white/60">Certificate</div>
                             </div>
                             <div className="space-y-1">
-                                <div className="text-3xl md:text-4xl font-bold text-primary">Live</div>
+                                <div className="text-3xl md:text-4xl font-bold text-glow-red">Live</div>
                                 <div className="text-sm text-white/60">Internship</div>
                             </div>
                         </div>
