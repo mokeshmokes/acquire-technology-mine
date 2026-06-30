@@ -110,18 +110,18 @@ export default function TechnologiesGrid({ skills }: TechnologiesGridProps) {
     return (
         <section className="relative py-20 md:py-32 px-5 md:px-6 overflow-hidden">
             {/* Background Effects */}
-            <div className="absolute inset-0 opacity-30">
+            <div className="absolute inset-0 opacity-20">
                 <div
                     className="absolute top-20 left-20 w-96 h-96 rounded-full"
                     style={{
-                        background: 'radial-gradient(circle, rgba(199,24,56,0.15) 0%, transparent 70%)',
+                        background: 'radial-gradient(circle, rgba(199,24,56,0.2) 0%, transparent 70%)',
                         filter: 'blur(80px)',
                     }}
                 />
                 <div
                     className="absolute bottom-20 right-20 w-96 h-96 rounded-full"
                     style={{
-                        background: 'radial-gradient(circle, rgba(161,14,38,0.15) 0%, transparent 70%)',
+                        background: 'radial-gradient(circle, rgba(161,14,38,0.2) 0%, transparent 70%)',
                         filter: 'blur(80px)',
                     }}
                 />
@@ -150,8 +150,8 @@ export default function TechnologiesGrid({ skills }: TechnologiesGridProps) {
                     </p>
                 </motion.div>
 
-                {/* Technologies Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                {/* Simple Clean Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                     {skills.map((skill, index) => {
                         const IconComponent = getTechnologyIcon(skill);
                         const isEmoji = typeof IconComponent === 'string';
@@ -159,35 +159,35 @@ export default function TechnologiesGrid({ skills }: TechnologiesGridProps) {
                         return (
                             <motion.div
                                 key={skill}
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.05 }}
-                                className="relative rounded-2xl p-6 text-center"
+                                transition={{ duration: 0.4, delay: index * 0.03 }}
+                                className="group relative rounded-xl p-5 text-center"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.03)',
-                                    backdropFilter: 'blur(20px)',
                                     border: '1px solid rgba(255, 255, 255, 0.08)',
-                                    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
                                 }}
                             >
-                                {/* Technology Icon */}
-                                <div
-                                    className="relative w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center"
-                                    style={{
-                                        background: 'rgba(199, 24, 56, 0.15)',
-                                        border: '1px solid rgba(199, 24, 56, 0.3)',
-                                    }}
-                                >
-                                    {isEmoji ? (
-                                        <span className="text-2xl">{IconComponent}</span>
-                                    ) : (
-                                        <IconComponent className="w-6 h-6 text-primary" />
-                                    )}
+                                {/* Icon */}
+                                <div className="flex justify-center mb-3">
+                                    <div
+                                        className="w-14 h-14 rounded-xl flex items-center justify-center"
+                                        style={{
+                                            background: 'rgba(199, 24, 56, 0.12)',
+                                            border: '1px solid rgba(199, 24, 56, 0.25)',
+                                        }}
+                                    >
+                                        {isEmoji ? (
+                                            <span className="text-2xl">{IconComponent}</span>
+                                        ) : (
+                                            <IconComponent className="w-7 h-7 text-primary" />
+                                        )}
+                                    </div>
                                 </div>
 
                                 {/* Skill Name */}
-                                <p className="relative text-sm md:text-base font-semibold text-white">
+                                <p className="text-sm font-semibold text-white leading-tight">
                                     {skill}
                                 </p>
                             </motion.div>

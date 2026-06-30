@@ -75,11 +75,7 @@ export const coursesData: CourseData[] = [
             'RAG Systems',
             'AI Agents',
             'Python for AI',
-            'TensorFlow',
-            'Hugging Face',
             'FastAPI',
-            'Vector Databases',
-            'AI Deployment',
         ],
         projects: [
             {
@@ -292,17 +288,12 @@ export const coursesData: CourseData[] = [
         level: 'Beginner to Advanced',
         skills: [
             'Python Programming',
-            'Statistics & Mathematics',
             'Machine Learning',
             'Deep Learning',
-            'Data Analysis',
-            'Data Visualization',
             'SQL & Databases',
             'Power BI',
-            'Tableau',
-            'NumPy & Pandas',
-            'Scikit-learn',
-            'TensorFlow',
+            'Data Visualization',
+            'Pandas & NumPy',
         ],
         projects: [
             {
@@ -418,7 +409,7 @@ export const coursesData: CourseData[] = [
         },
         duration: '6 Months',
         level: 'Beginner to Advanced',
-        skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Next.js', 'Node.js', 'MongoDB'],
+        skills: ['HTML & CSS', 'JavaScript', 'React', 'Next.js', 'Node.js', 'MongoDB', 'Tailwind CSS'],
         projects: [
             {
                 title: 'E-commerce Platform',
@@ -469,7 +460,7 @@ export const coursesData: CourseData[] = [
         },
         duration: '5 Months',
         level: 'Intermediate',
-        skills: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'CI/CD', 'Terraform'],
+        skills: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'DevOps', 'Terraform'],
         projects: [
             {
                 title: 'Scalable Cloud Infrastructure',
@@ -520,7 +511,7 @@ export const coursesData: CourseData[] = [
         },
         duration: '6 Months',
         level: 'Intermediate to Advanced',
-        skills: ['Ethical Hacking', 'Network Security', 'Penetration Testing', 'OWASP', 'Linux'],
+        skills: ['Ethical Hacking', 'Network Security', 'Penetration Testing', 'Linux', 'OWASP'],
         projects: [
             {
                 title: 'Vulnerability Assessment',
