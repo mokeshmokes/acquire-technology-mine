@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Phone } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface FinalCTAProps {
     courseTitle: string;
@@ -81,22 +81,6 @@ export default function FinalCTA({ courseTitle }: FinalCTAProps) {
                             </div>
                         </motion.button>
 
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="px-10 py-5 rounded-xl font-semibold text-white text-lg relative overflow-hidden group"
-                            style={{
-                                background: 'rgba(255,255,255,0.08)',
-                                border: '1px solid rgba(255,255,255,0.2)',
-                                backdropFilter: 'blur(20px)',
-                            }}
-                        >
-                            <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                            <div className="relative flex items-center gap-2">
-                                <Phone className="w-5 h-5" />
-                                <span>Book Free Counselling</span>
-                            </div>
-                        </motion.button>
                     </div>
 
                     {/* Trust Indicators */}

@@ -85,9 +85,9 @@ export default function AboutHero() {
                             transition={{ delay: 0.2, duration: 0.6 }}
                             className="inline-block"
                         >
-                            <div className="flex items-center gap-2 px-4 py-2 bg-surface/80 backdrop-blur-sm border border-primary/30 rounded-full">
-                                <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                                <span className="text-xs font-semibold text-primary uppercase tracking-wider">
+                            <div className="flex items-center gap-2 px-4 py-2 bg-surface/80 backdrop-blur-sm border border-yellow-500/30 rounded-full">
+                                <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
+                                <span className="text-xs font-semibold text-yellow-400 uppercase tracking-wider">
                                     {badge}
                                 </span>
                             </div>

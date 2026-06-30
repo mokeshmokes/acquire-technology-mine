@@ -308,13 +308,6 @@ export default function MobileNavigation() {
                                     >
                                         Apply Now
                                     </Link>
-                                    <Link
-                                        href="/#contact"
-                                        onClick={closeMenu}
-                                        className="block w-full text-center px-6 py-4 rounded-xl font-semibold text-white/90 hover:text-white border border-primary/40 hover:border-primary/60 transition-all hover:bg-white/5"
-                                    >
-                                        Book Free Counselling
-                                    </Link>
                                 </div>
                             </div>
                         </motion.div>

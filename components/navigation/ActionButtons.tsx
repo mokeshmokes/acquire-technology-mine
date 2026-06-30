@@ -53,12 +53,6 @@ export default function ActionButtons() {
                 href="/#contact"
                 variant="primary"
             />
-
-            <NavigationButton
-                label="Book Free Counselling"
-                href="/#contact"
-                variant="secondary"
-            />
         </div>
     );
 }
