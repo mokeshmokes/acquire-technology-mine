@@ -49,10 +49,27 @@ export default function ContactForm() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
-        await new Promise((r) => setTimeout(r, 1800));
-        setIsLoading(false);
-        setIsSubmitted(true);
-        if (proofTimer.current) clearInterval(proofTimer.current);
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+            const result = await response.json();
+            if (result.success) {
+                setIsSubmitted(true);
+                if (proofTimer.current) clearInterval(proofTimer.current);
+            } else {
+                alert(result.error || 'Failed to submit. Please try again.');
+            }
+        } catch (error) {
+            console.error('Submission error:', error);
+            alert('Failed to submit. Please try again.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     // ── Shared field wrapper

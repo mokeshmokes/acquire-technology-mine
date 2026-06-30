@@ -188,7 +188,7 @@ export const ctaData = {
     heading: 'Ready to Build Your Technology Career?',
     description: 'Start learning with industry experts and become job-ready.',
     buttons: [
-        { label: 'Apply Now', variant: 'primary' as const, href: '/apply' },
-        { label: 'Contact Us', variant: 'secondary' as const, href: '/contact' },
+        { label: 'Apply Now', variant: 'primary' as const, href: '/#contact' },
+        { label: 'Contact Us', variant: 'secondary' as const, href: '/#contact' },
     ],
 };

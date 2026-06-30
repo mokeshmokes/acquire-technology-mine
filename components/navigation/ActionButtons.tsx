@@ -50,13 +50,13 @@ export default function ActionButtons() {
 
             <NavigationButton
                 label="Apply Now"
-                href="/apply"
+                href="/#contact"
                 variant="primary"
             />
 
             <NavigationButton
                 label="Book Free Counselling"
-                href="/counselling"
+                href="/#contact"
                 variant="secondary"
             />
         </div>

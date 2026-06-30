@@ -298,7 +298,7 @@ export default function MobileNavigation() {
                                 {/* CTA Buttons */}
                                 <div className="mt-8 pt-8 border-t border-white/10 space-y-3">
                                     <Link
-                                        href="/apply"
+                                        href="/#contact"
                                         onClick={closeMenu}
                                         className="block w-full text-center px-6 py-4 rounded-xl font-semibold text-white transition-all"
                                         style={{
@@ -309,7 +309,7 @@ export default function MobileNavigation() {
                                         Apply Now
                                     </Link>
                                     <Link
-                                        href="/counselling"
+                                        href="/#contact"
                                         onClick={closeMenu}
                                         className="block w-full text-center px-6 py-4 rounded-xl font-semibold text-white/90 hover:text-white border border-primary/40 hover:border-primary/60 transition-all hover:bg-white/5"
                                     >

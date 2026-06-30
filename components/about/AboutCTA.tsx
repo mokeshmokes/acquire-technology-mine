@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import Link from 'next/link';
 import { ctaData } from '@/data/aboutUs';
 
 export default function AboutCTA() {
@@ -61,16 +62,21 @@ export default function AboutCTA() {
                     className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-6 justify-center pt-4 px-4"
                 >
                     {ctaData.buttons.map((button) => (
-                        <button
+                        <Link
                             key={button.label}
-                            className={`group relative px-8 md:px-10 py-4 md:py-5 font-semibold text-base md:text-lg rounded-xl shadow-2xl transition-all duration-300 overflow-hidden hover:scale-105 w-full sm:w-auto ${button.variant === 'primary'
-                                ? 'bg-primary hover:bg-primary-hover text-white'
-                                : 'bg-white text-primary hover:bg-white/90'
-                                }`}
+                            href={button.href}
+                            className="w-full sm:w-auto"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                            <span className="relative">{button.label}</span>
-                        </button>
+                            <button
+                                className={`group relative px-8 md:px-10 py-4 md:py-5 font-semibold text-base md:text-lg rounded-xl shadow-2xl transition-all duration-300 overflow-hidden hover:scale-105 w-full ${button.variant === 'primary'
+                                    ? 'bg-primary hover:bg-primary-hover text-white'
+                                    : 'bg-white text-primary hover:bg-white/90'
+                                    }`}
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <span className="relative">{button.label}</span>
+                            </button>
+                        </Link>
                     ))}
                 </motion.div>
 

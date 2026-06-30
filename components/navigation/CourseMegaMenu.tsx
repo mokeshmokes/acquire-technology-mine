@@ -174,15 +174,14 @@ export default function CourseMegaMenu() {
                                         transition={{ delay: index * 0.03, duration: 0.2 }}
                                     >
                                         <Link href={`/courses/${activeSubmenu}`}>
-                                            <motion.div
-                                                whileHover={{ x: 4 }}
-                                                className="group flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/5 transition-all duration-200 cursor-pointer"
+                                            <div
+                                                className="flex items-center gap-3 px-4 py-3"
                                             >
-                                                <subItem.icon className="w-4 h-4 text-white/60 group-hover:text-primary transition-colors duration-200" />
-                                                <span className="text-sm text-white/80 group-hover:text-white transition-colors duration-200">
+                                                <subItem.icon className="w-4 h-4 text-white/60" />
+                                                <span className="text-sm text-white/80">
                                                     {subItem.title}
                                                 </span>
-                                            </motion.div>
+                                            </div>
                                         </Link>
                                     </motion.div>
                                 ))}
