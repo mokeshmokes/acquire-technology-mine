@@ -31,14 +31,37 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
                 />
             </div>
 
-            <div className="container mx-auto px-5 md:px-6 relative z-10">
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Container with proper constraints */}
+            <div
+                className="w-full relative z-10"
+                style={{
+                    maxWidth: '1400px',
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                    paddingLeft: '1.25rem',
+                    paddingRight: '1.25rem',
+                    boxSizing: 'border-box',
+                }}
+            >
+                <div
+                    className="grid lg:grid-cols-2 items-start"
+                    style={{
+                        gap: 'clamp(3rem, 5vw, 4rem)',
+                        gridAutoFlow: 'dense',
+                        minWidth: 0, // Fix for Chrome grid overflow
+                    }}
+                >
                     {/* LEFT SIDE - Content */}
                     <motion.div
                         initial={{ opacity: 0, x: -30 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
                         className="space-y-6"
+                        style={{
+                            minWidth: 0, // Prevent overflow in Chrome
+                            width: '100%',
+                            boxSizing: 'border-box',
+                        }}
                     >
                         {/* Trust Badges */}
                         <div className="flex flex-wrap gap-3">
@@ -88,10 +111,14 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
                         </div>
 
                         {/* Course Title */}
-                        <div className="space-y-3">
+                        <div className="space-y-3" style={{ minWidth: 0, width: '100%' }}>
                             <h1
                                 className="font-bold text-white leading-tight"
-                                style={{ fontSize: 'clamp(2rem, 6vw, 3.5rem)' }}
+                                style={{
+                                    fontSize: 'clamp(2rem, 6vw, 3.5rem)',
+                                    wordBreak: 'break-word',
+                                    overflowWrap: 'break-word',
+                                }}
                             >
                                 {course.title}
                             </h1>
@@ -99,7 +126,14 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
                         </div>
 
                         {/* Description */}
-                        <p className="text-base md:text-lg text-white/80 leading-relaxed max-w-2xl">
+                        <p
+                            className="text-base md:text-lg text-white/80 leading-relaxed"
+                            style={{
+                                maxWidth: '100%',
+                                wordBreak: 'break-word',
+                                overflowWrap: 'break-word',
+                            }}
+                        >
                             {course.description}
                         </p>
 
@@ -161,6 +195,12 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
                         initial={{ opacity: 0, x: 30 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
+                        style={{
+                            minWidth: 0, // Prevent overflow in Chrome
+                            width: '100%',
+                            boxSizing: 'border-box',
+                            maxWidth: '100%',
+                        }}
                     >
                         <RegistrationForm courseTitle={course.title} />
                     </motion.div>
