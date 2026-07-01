@@ -330,7 +330,11 @@ export default function AboutHero() {
                                         alt="CEO - Acquiring Technology"
                                         fill
                                         priority
-                                        className="object-contain"
+                                        className="object-contain object-bottom"
+                                        style={{
+                                            maskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)',
+                                            WebkitMaskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)',
+                                        }}
                                     />
                                 </motion.div>
                             </motion.div>
@@ -438,7 +442,11 @@ export default function AboutHero() {
                                 alt="CEO - Acquiring Technology"
                                 fill
                                 priority
-                                className="object-contain"
+                                className="object-contain object-bottom"
+                                style={{
+                                    maskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)',
+                                    WebkitMaskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)',
+                                }}
                             />
                         </motion.div>
                     </motion.div>

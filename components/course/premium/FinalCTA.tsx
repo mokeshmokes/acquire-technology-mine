@@ -8,6 +8,15 @@ interface FinalCTAProps {
 }
 
 export default function FinalCTA({ courseTitle }: FinalCTAProps) {
+    const handleEnrollClick = () => {
+        const formElement = document.getElementById('enroll-form-container');
+        if (formElement) {
+            window.dispatchEvent(new CustomEvent('trigger-enroll-highlight'));
+        } else {
+            window.location.hash = 'contact';
+        }
+    };
+
     return (
         <section className="relative py-20 md:py-32 px-5 md:px-6 overflow-hidden">
             {/* Animated Background */}
@@ -66,6 +75,7 @@ export default function FinalCTA({ courseTitle }: FinalCTAProps) {
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
                         <motion.button
+                            onClick={handleEnrollClick}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className="px-10 py-5 rounded-xl font-semibold text-white text-lg relative overflow-hidden group"

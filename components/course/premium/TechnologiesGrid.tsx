@@ -9,7 +9,7 @@ import {
     Shield,
     Lock,
     Target,
-    Infinity,
+    Infinity as InfinityIcon,
     BarChart3,
     Code2,
     FileCode,
@@ -21,80 +21,99 @@ import {
     Zap,
     GitBranch,
     Layers,
+    Atom,
+    Terminal,
+    Cpu,
+    Braces,
+    TableProperties,
+    TrendingUp,
+    PieChart,
+    Binary,
+    ShieldAlert,
+    Coffee,
+    Wrench,
+    Search,
+    Megaphone,
+    DollarSign,
+    Share2,
 } from 'lucide-react';
 
 interface TechnologiesGridProps {
     skills: string[];
 }
 
-// Map technology names to their specific icons
+// Map technology names to their specific Lucide vector icons
 const getTechnologyIcon = (skill: string) => {
     const skillLower = skill.toLowerCase();
 
     // AI/ML Technologies
-    if (skillLower.includes('python')) return '🐍';
-    if (skillLower.includes('tensorflow')) return '🧠';
-    if (skillLower.includes('pytorch')) return '🔥';
-    if (skillLower.includes('langchain')) return '🔗';
-    if (skillLower.includes('openai') || skillLower.includes('gpt')) return '🤖';
+    if (skillLower.includes('python')) return Terminal;
+    if (skillLower.includes('tensorflow')) return Brain;
+    if (skillLower.includes('pytorch')) return Cpu;
+    if (skillLower.includes('langchain')) return Network;
+    if (skillLower.includes('openai') || skillLower.includes('gpt')) return Brain;
     if (skillLower.includes('llm') || skillLower.includes('ai')) return Brain;
     if (skillLower.includes('rag')) return Layers;
     if (skillLower.includes('vector')) return Database;
     if (skillLower.includes('neural') || skillLower.includes('machine learning')) return Network;
+    if (skillLower.includes('deep learning')) return Cpu;
+    if (skillLower.includes('scikit-learn') || skillLower.includes('scikit')) return Binary;
 
     // Web Development
-    if (skillLower.includes('react')) return '⚛️';
-    if (skillLower.includes('next')) return '▲';
-    if (skillLower.includes('node')) return '🟢';
-    if (skillLower.includes('javascript') || skillLower.includes('js')) return '📜';
-    if (skillLower.includes('typescript') || skillLower.includes('ts')) return '💙';
-    if (skillLower.includes('html')) return '🌐';
-    if (skillLower.includes('css')) return '🎨';
-    if (skillLower.includes('tailwind')) return '🌊';
+    if (skillLower.includes('react')) return Atom;
+    if (skillLower.includes('next')) return Layers;
+    if (skillLower.includes('node')) return Server;
+    if (skillLower.includes('javascript') || skillLower.includes('js')) return Braces;
+    if (skillLower.includes('typescript') || skillLower.includes('ts')) return Code2;
+    if (skillLower.includes('html')) return Globe;
+    if (skillLower.includes('css')) return Layers;
+    if (skillLower.includes('tailwind')) return Layers;
     if (skillLower.includes('express')) return FileCode;
     if (skillLower.includes('fastapi')) return Zap;
 
-    // Data Science
-    if (skillLower.includes('sql') || skillLower.includes('mysql') || skillLower.includes('postgres')) return Database;
-    if (skillLower.includes('mongodb') || skillLower.includes('nosql')) return '🍃';
-    if (skillLower.includes('power bi') || skillLower.includes('powerbi')) return '📊';
-    if (skillLower.includes('tableau')) return BarChart3;
-    if (skillLower.includes('excel')) return '📈';
-    if (skillLower.includes('pandas') || skillLower.includes('numpy')) return '🐼';
+    // Data Science / Analysis
+    if (skillLower.includes('sql') || skillLower.includes('mysql') || skillLower.includes('postgres') || skillLower.includes('database')) return Database;
+    if (skillLower.includes('mongodb') || skillLower.includes('nosql')) return Database;
+    if (skillLower.includes('power bi') || skillLower.includes('powerbi')) return TrendingUp;
+    if (skillLower.includes('tableau')) return PieChart;
+    if (skillLower.includes('excel')) return TableProperties;
+    if (skillLower.includes('pandas') || skillLower.includes('numpy')) return Binary;
+    if (skillLower.includes('data analysis') || skillLower.includes('statistics') || skillLower.includes('mathematics')) return BarChart3;
+    if (skillLower.includes('data visualization')) return PieChart;
 
     // Cloud & DevOps
-    if (skillLower.includes('aws') || skillLower.includes('amazon')) return '☁️';
-    if (skillLower.includes('azure')) return '☁️';
-    if (skillLower.includes('gcp') || skillLower.includes('google cloud')) return '☁️';
+    if (skillLower.includes('aws') || skillLower.includes('amazon')) return Cloud;
+    if (skillLower.includes('azure')) return Cloud;
+    if (skillLower.includes('gcp') || skillLower.includes('google cloud')) return Cloud;
     if (skillLower.includes('docker')) return Container;
     if (skillLower.includes('kubernetes') || skillLower.includes('k8s')) return Boxes;
-    if (skillLower.includes('devops')) return Infinity;
+    if (skillLower.includes('devops')) return InfinityIcon;
     if (skillLower.includes('jenkins') || skillLower.includes('ci/cd')) return GitBranch;
     if (skillLower.includes('terraform')) return Settings;
     if (skillLower.includes('cloud')) return Cloud;
 
     // Cyber Security
     if (skillLower.includes('security') || skillLower.includes('cyber')) return Shield;
-    if (skillLower.includes('hacking') || skillLower.includes('ethical')) return '🔓';
+    if (skillLower.includes('hacking') || skillLower.includes('ethical')) return ShieldAlert;
     if (skillLower.includes('penetration') || skillLower.includes('pentest')) return Target;
     if (skillLower.includes('firewall')) return Lock;
     if (skillLower.includes('encryption')) return Lock;
 
     // Programming Languages
-    if (skillLower.includes('java') && !skillLower.includes('javascript')) return '☕';
-    if (skillLower.includes('c++') || skillLower.includes('cpp')) return '⚙️';
-    if (skillLower.includes('c#') || skillLower.includes('csharp')) return '💎';
-    if (skillLower.includes('php')) return '🐘';
-    if (skillLower.includes('ruby')) return '💎';
-    if (skillLower.includes('go') || skillLower.includes('golang')) return '🐹';
-    if (skillLower.includes('rust')) return '🦀';
+    if (skillLower.includes('java') && !skillLower.includes('javascript')) return Coffee;
+    if (skillLower.includes('c++') || skillLower.includes('cpp')) return Wrench;
+    if (skillLower.includes('c#') || skillLower.includes('csharp')) return Code2;
+    if (skillLower.includes('php')) return Server;
+    if (skillLower.includes('ruby')) return Code2;
+    if (skillLower.includes('go') || skillLower.includes('golang')) return Zap;
+    if (skillLower.includes('rust')) return Settings;
 
     // Digital Marketing
-    if (skillLower.includes('seo')) return '🔍';
-    if (skillLower.includes('social media')) return '📱';
-    if (skillLower.includes('marketing')) return '📢';
+    if (skillLower.includes('seo')) return Search;
+    if (skillLower.includes('social media')) return Share2;
+    if (skillLower.includes('marketing')) return Megaphone;
     if (skillLower.includes('analytics')) return BarChart3;
-    if (skillLower.includes('ads') || skillLower.includes('ppc')) return '💰';
+    if (skillLower.includes('ads') || skillLower.includes('ppc')) return DollarSign;
 
     // General
     if (skillLower.includes('api')) return Globe;
@@ -108,24 +127,33 @@ const getTechnologyIcon = (skill: string) => {
 
 export default function TechnologiesGrid({ skills }: TechnologiesGridProps) {
     return (
-        <section className="relative py-20 md:py-32 px-5 md:px-6 overflow-hidden">
-            {/* Background Effects */}
-            <div className="absolute inset-0 opacity-30">
+        <section className="relative py-20 md:py-32 px-5 md:px-6 overflow-hidden bg-background">
+            {/* Ambient Glowing Orbs */}
+            <div className="absolute inset-0 opacity-20 pointer-events-none z-0">
                 <div
                     className="absolute top-20 left-20 w-96 h-96 rounded-full"
                     style={{
-                        background: 'radial-gradient(circle, rgba(199,24,56,0.15) 0%, transparent 70%)',
-                        filter: 'blur(80px)',
+                        background: 'radial-gradient(circle, rgba(199,24,56,0.2) 0%, transparent 70%)',
+                        filter: 'blur(100px)',
                     }}
                 />
                 <div
                     className="absolute bottom-20 right-20 w-96 h-96 rounded-full"
                     style={{
                         background: 'radial-gradient(circle, rgba(161,14,38,0.15) 0%, transparent 70%)',
-                        filter: 'blur(80px)',
+                        filter: 'blur(100px)',
                     }}
                 />
             </div>
+
+            {/* High-tech Engineering Dot Grid Background */}
+            <div 
+                className="absolute inset-0 opacity-[0.03] pointer-events-none z-0"
+                style={{
+                    backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+                    backgroundSize: '40px 40px',
+                }}
+            />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Section Header */}
@@ -134,10 +162,16 @@ export default function TechnologiesGrid({ skills }: TechnologiesGridProps) {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
+                    className="text-center mb-20 space-y-4"
                 >
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-primary/10 border border-primary/20 rounded-full">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                        <span className="text-[10px] md:text-xs font-bold text-primary uppercase tracking-widest">
+                            TECH STACK
+                        </span>
+                    </div>
                     <h2
-                        className="font-bold text-white mb-4"
+                        className="font-bold text-white tracking-tight"
                         style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)' }}
                     >
                         Technologies You&apos;ll{' '}
@@ -145,51 +179,75 @@ export default function TechnologiesGrid({ skills }: TechnologiesGridProps) {
                             Master
                         </span>
                     </h2>
-                    <p className="text-lg text-white/70 max-w-2xl mx-auto">
+                    <p className="text-base md:text-lg text-white/70 max-w-2xl mx-auto">
                         Build expertise in cutting-edge technologies and tools used by top companies
                     </p>
                 </motion.div>
 
                 {/* Technologies Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
                     {skills.map((skill, index) => {
                         const IconComponent = getTechnologyIcon(skill);
-                        const isEmoji = typeof IconComponent === 'string';
 
                         return (
                             <motion.div
                                 key={skill}
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.05 }}
-                                className="relative rounded-2xl p-6 text-center"
+                                initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                viewport={{ once: true, margin: '-50px' }}
+                                transition={{
+                                    type: 'spring',
+                                    stiffness: 80,
+                                    damping: 12,
+                                    delay: index * 0.03,
+                                }}
+                                whileHover={{ y: -6, scale: 1.025 }}
+                                className="group relative rounded-2xl p-6 text-center overflow-hidden transition-all duration-300 cursor-pointer"
                                 style={{
-                                    background: 'rgba(255, 255, 255, 0.03)',
-                                    backdropFilter: 'blur(20px)',
-                                    border: '1px solid rgba(255, 255, 255, 0.08)',
-                                    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
+                                    background: 'linear-gradient(135deg, rgba(20, 10, 15, 0.8) 0%, rgba(8, 4, 6, 0.9) 100%)',
+                                    border: '1px solid rgba(255, 255, 255, 0.05)',
+                                    boxShadow: '0 15px 35px rgba(0, 0, 0, 0.5)',
                                 }}
                             >
-                                {/* Technology Icon */}
-                                <div
-                                    className="relative w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center"
+                                {/* Diagonal Sweep Glow Effect on Hover */}
+                                <div className="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/[0.03] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
+
+                                {/* Glowing Orb on Hover */}
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                                     style={{
-                                        background: 'rgba(199, 24, 56, 0.15)',
-                                        border: '1px solid rgba(199, 24, 56, 0.3)',
+                                        background: 'radial-gradient(circle at center, rgba(199, 24, 56, 0.1) 0%, transparent 70%)',
+                                    }}
+                                />
+
+                                {/* Technology Icon Badge */}
+                                <div
+                                    className="relative w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center transition-all duration-500 z-10"
+                                    style={{
+                                        background: 'linear-gradient(135deg, rgba(199, 24, 56, 0.15) 0%, rgba(199, 24, 56, 0.04) 100%)',
+                                        border: '1px solid rgba(199, 24, 56, 0.35)',
+                                        boxShadow: '0 0 15px rgba(199, 24, 56, 0.12)',
                                     }}
                                 >
-                                    {isEmoji ? (
-                                        <span className="text-2xl">{IconComponent}</span>
-                                    ) : (
-                                        <IconComponent className="w-6 h-6 text-primary" />
-                                    )}
+                                    {/* Rotating dashed ring */}
+                                    <div className="absolute inset-[-3px] rounded-full border border-dashed border-primary/20 group-hover:border-primary/50 group-hover:animate-spin pointer-events-none" style={{ animationDuration: '8s' }} />
+
+                                    <IconComponent className="w-6 h-6 text-primary transition-transform duration-300 group-hover:scale-110" />
                                 </div>
 
                                 {/* Skill Name */}
-                                <p className="relative text-sm md:text-base font-semibold text-white">
+                                <p className="relative text-xs md:text-sm font-bold text-white group-hover:text-primary transition-colors duration-300 tracking-wider uppercase z-10">
                                     {skill}
                                 </p>
+
+                                {/* Bottom border hover light */}
+                                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center pointer-events-none" />
+
+                                {/* Border enhancement on hover */}
+                                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                                    style={{
+                                        border: '1px solid rgba(199, 24, 56, 0.3)',
+                                    }}
+                                />
                             </motion.div>
                         );
                     })}

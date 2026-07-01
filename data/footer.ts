@@ -21,11 +21,11 @@ export const footerData = {
         description:
             'Empowering the next generation of technology leaders through practical learning and industry expertise.',
         social: [
-            { id: 'linkedin', icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-            { id: 'instagram', icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
-            { id: 'facebook', icon: Facebook, href: 'https://facebook.com', label: 'Facebook' },
-            { id: 'youtube', icon: Youtube, href: 'https://youtube.com', label: 'YouTube' },
-            { id: 'github', icon: Github, href: 'https://github.com', label: 'GitHub' },
+            { id: 'linkedin', icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn', hoverColor: '#0077B5' },
+            { id: 'instagram', icon: Instagram, href: 'https://instagram.com', label: 'Instagram', hoverColor: '#E1306C' },
+            { id: 'facebook', icon: Facebook, href: 'https://facebook.com', label: 'Facebook', hoverColor: '#1877F2' },
+            { id: 'youtube', icon: Youtube, href: 'https://youtube.com', label: 'YouTube', hoverColor: '#FF0000' },
+            { id: 'github', icon: Github, href: 'https://github.com', label: 'GitHub', hoverColor: '#FFFFFF' },
         ],
     },
     quickLinks: [

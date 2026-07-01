@@ -45,6 +45,7 @@ export const liveCoursesData = {
             progress: 73,
             icon: Brain,
             gradient: 'from-primary/20 via-primary/10 to-transparent',
+            image: '/images/courses/ai-engineer.png',
         },
         {
             id: 'data-science',
@@ -61,6 +62,7 @@ export const liveCoursesData = {
             progress: 68,
             icon: Database,
             gradient: 'from-primary/20 via-primary/10 to-transparent',
+            image: '/images/courses/data-science.png',
         },
         {
             id: 'cloud-computing',
@@ -77,6 +79,7 @@ export const liveCoursesData = {
             progress: 65,
             icon: Cloud,
             gradient: 'from-primary/20 via-primary/10 to-transparent',
+            image: '/images/courses/cloud-computing.png',
         },
         {
             id: 'cyber-security',
@@ -93,6 +96,7 @@ export const liveCoursesData = {
             progress: 70,
             icon: Shield,
             gradient: 'from-primary/20 via-primary/10 to-transparent',
+            image: '/images/courses/cyber-security.png',
         },
         {
             id: 'full-stack-development',
@@ -109,6 +113,7 @@ export const liveCoursesData = {
             progress: 70,
             icon: Code2,
             gradient: 'from-primary/20 via-primary/10 to-transparent',
+            image: '/images/courses/full-stack.png',
         },
         {
             id: 'blockchain',
@@ -125,6 +130,7 @@ export const liveCoursesData = {
             progress: 64,
             icon: Lock,
             gradient: 'from-primary/20 via-primary/10 to-transparent',
+            image: '/images/courses/blockchain.png',
         },
         {
             id: 'ui-ux-design',
@@ -141,6 +147,7 @@ export const liveCoursesData = {
             progress: 75,
             icon: Palette,
             gradient: 'from-primary/20 via-primary/10 to-transparent',
+            image: '/images/courses/ui-ux.png',
         },
         {
             id: 'digital-marketing',
@@ -157,6 +164,7 @@ export const liveCoursesData = {
             progress: 71,
             icon: TrendingUp,
             gradient: 'from-primary/20 via-primary/10 to-transparent',
+            image: '/images/courses/digital-marketing.png',
         },
     ],
     bottomFeatures: [

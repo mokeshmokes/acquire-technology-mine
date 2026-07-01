@@ -5,6 +5,8 @@ import { ArrowRight, Download, ChevronDown, Brain, Database, Code2, Cloud, Shiel
 import Link from 'next/link';
 import { CourseIconName } from '@/data/courseData';
 
+const MotionLink = motion(Link);
+
 interface CourseHeroProps {
     title: string;
     subtitle: string;
@@ -112,41 +114,39 @@ export default function CourseHero({
                     transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
                     className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4"
                 >
-                    <Link href="/#contact">
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="group relative px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-white overflow-hidden w-full sm:w-auto"
-                            style={{
-                                background: 'linear-gradient(135deg, rgba(199, 24, 56, 0.9) 0%, rgba(161, 14, 38, 1) 100%)',
-                                boxShadow: '0 0 30px rgba(199, 24, 56, 0.4)',
-                            }}
-                        >
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                            <span className="relative flex items-center justify-center gap-2">
-                                Enroll Now
-                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </span>
-                        </motion.button>
-                    </Link>
+                    <MotionLink
+                        href="/#contact"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="group relative px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-white overflow-hidden w-full sm:w-auto text-center flex items-center justify-center"
+                        style={{
+                            background: 'linear-gradient(135deg, rgba(199, 24, 56, 0.9) 0%, rgba(161, 14, 38, 1) 100%)',
+                            boxShadow: '0 0 30px rgba(199, 24, 56, 0.4)',
+                        }}
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none" />
+                        <span className="relative flex items-center justify-center gap-2 pointer-events-none">
+                            Enroll Now
+                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        </span>
+                    </MotionLink>
 
-                    <Link href="#syllabus">
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="group px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-white w-full sm:w-auto"
-                            style={{
-                                background: 'rgba(255, 255, 255, 0.05)',
-                                backdropFilter: 'blur(10px)',
-                                border: '1px solid rgba(255, 255, 255, 0.1)',
-                            }}
-                        >
-                            <span className="flex items-center justify-center gap-2">
-                                <Download className="w-5 h-5" />
-                                Download Brochure
-                            </span>
-                        </motion.button>
-                    </Link>
+                    <MotionLink
+                        href="#syllabus"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="group px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-white w-full sm:w-auto text-center flex items-center justify-center"
+                        style={{
+                            background: 'rgba(255, 255, 255, 0.05)',
+                            backdropFilter: 'blur(10px)',
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                        }}
+                    >
+                        <span className="flex items-center justify-center gap-2 pointer-events-none">
+                            <Download className="w-5 h-5" />
+                            Download Brochure
+                        </span>
+                    </MotionLink>
                 </motion.div>
 
                 {/* Scroll Indicator */}
