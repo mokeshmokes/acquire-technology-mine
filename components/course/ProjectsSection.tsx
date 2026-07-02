@@ -11,7 +11,7 @@ interface ProjectsSectionProps {
 
 export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     return (
-        <section className="relative py-16 md:py-24 overflow-hidden">
+        <section className="relative py-12 md:py-16 lg:py-24 overflow-hidden">
             {/* Background with animated orbs */}
             <div className="absolute inset-0">
                 <div className="absolute inset-0 bg-[#0C080A]" />
@@ -59,7 +59,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: '-50px' }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="relative p-6 md:p-8 rounded-xl md:rounded-2xl"
+                                className="relative p-5 md:p-6 lg:p-8 rounded-xl md:rounded-2xl"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.05)',
                                     backdropFilter: 'blur(18px)',
@@ -70,29 +70,29 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                                 <div className="relative">
                                     {/* Icon */}
                                     <div
-                                        className="w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl flex items-center justify-center mb-4 md:mb-6"
+                                        className="w-11 h-11 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-lg md:rounded-xl flex items-center justify-center mb-4 md:mb-5 lg:mb-6"
                                         style={{
                                             background: 'rgba(199, 24, 56, 0.15)',
                                             border: '1px solid rgba(255, 255, 255, 0.1)',
                                         }}
                                     >
-                                        <Code2 className="w-6 h-6 md:w-7 md:h-7 text-primary" />
+                                        <Code2 className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-primary" />
                                     </div>
 
                                     {/* Title */}
-                                    <h3 className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3">
+                                    <h3 className="text-base md:text-lg lg:text-xl font-bold text-white mb-2 md:mb-3">
                                         {project.title}
                                     </h3>
 
                                     {/* Description */}
-                                    <p className="text-sm md:text-base text-white/70 mb-4 md:mb-6">{project.description}</p>
+                                    <p className="text-sm md:text-base text-white/70 mb-4 md:mb-5 lg:mb-6 leading-relaxed">{project.description}</p>
 
                                     {/* Technologies */}
                                     <div className="flex flex-wrap gap-2">
                                         {project.technologies.map((tech, techIndex) => (
                                             <span
                                                 key={techIndex}
-                                                className="px-3 py-1 text-xs rounded-full text-white/80"
+                                                className="px-2.5 md:px-3 py-1 text-[10px] md:text-xs rounded-full text-white/80"
                                                 style={{
                                                     background: 'rgba(255, 255, 255, 0.08)',
                                                     border: '1px solid rgba(255, 255, 255, 0.1)',

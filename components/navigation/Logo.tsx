@@ -3,10 +3,36 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 
 export default function Logo() {
+    const pathname = usePathname();
+    const isHomePage = pathname === '/';
+
+    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        if (isHomePage) {
+            e.preventDefault();
+            // Scroll to top smoothly
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const lenis = (window as any).lenis;
+
+            if (lenis) {
+                lenis.scrollTo(0, {
+                    duration: 1.5,
+                    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                });
+            } else {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth',
+                });
+            }
+        }
+        // If not on homepage, let Next.js Link handle the navigation to "/"
+    };
+
     return (
-        <Link href="/" className="flex items-center gap-3 group">
+        <Link href="/" onClick={handleClick} className="flex items-center gap-3 group cursor-pointer">
             <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -27,7 +53,7 @@ export default function Logo() {
 
             <div className="flex flex-col">
                 <motion.span
-                    className="text-xl font-bold tracking-tight transition-colors duration-300"
+                    className="text-lg sm:text-xl font-bold tracking-tight transition-colors duration-300"
                     style={{
                         color: '#E8192C',
                         textShadow: '0 0 20px rgba(220,25,50,0.5), 0 0 40px rgba(220,25,50,0.25)',

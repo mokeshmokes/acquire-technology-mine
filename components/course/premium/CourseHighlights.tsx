@@ -74,7 +74,7 @@ export default function CourseHighlights() {
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
                                 whileHover={{ y: -6 }}
-                                className="group relative rounded-3xl p-8"
+                                className="group relative rounded-2xl md:rounded-3xl p-6 md:p-8"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.03)',
                                     backdropFilter: 'blur(20px)',
@@ -86,18 +86,18 @@ export default function CourseHighlights() {
 
                                 {/* Icon */}
                                 <div
-                                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"
+                                    className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl flex items-center justify-center mb-5 md:mb-6 group-hover:scale-110 transition-transform duration-300"
                                     style={{
                                         background: 'rgba(199, 24, 56, 0.15)',
                                         border: '1px solid rgba(199, 24, 56, 0.3)',
                                     }}
                                 >
-                                    <Icon className="w-7 h-7 text-primary" />
+                                    <Icon className="w-6 h-6 md:w-7 md:h-7 text-primary" />
                                 </div>
 
                                 {/* Content */}
-                                <h3 className="text-xl font-bold text-white mb-3">{highlight.title}</h3>
-                                <p className="text-sm text-white/70 leading-relaxed">{highlight.description}</p>
+                                <h3 className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3">{highlight.title}</h3>
+                                <p className="text-sm md:text-base text-white/70 leading-relaxed">{highlight.description}</p>
                             </motion.div>
                         );
                     })}

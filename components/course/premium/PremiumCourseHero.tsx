@@ -123,40 +123,40 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
                         }}
                     >
                         {/* Trust Badges */}
-                        <div className="flex flex-wrap gap-3">
+                        <div className="flex flex-wrap gap-2 md:gap-3">
                             {/* Rating Badge */}
                             <div
-                                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl"
+                                className="inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 rounded-lg md:rounded-xl"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.05)',
                                     backdropFilter: 'blur(20px)',
                                     border: '1px solid rgba(255, 255, 255, 0.1)',
                                 }}
                             >
-                                <div className="flex items-center gap-1">
+                                <div className="flex items-center gap-0.5">
                                     {[...Array(5)].map((_, i) => (
-                                        <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                                        <Star key={i} className="w-2.5 h-2.5 md:w-3 md:h-3 fill-yellow-400 text-yellow-400" />
                                     ))}
                                 </div>
-                                <span className="text-xs md:text-sm text-white font-semibold">4.8 Rating</span>
+                                <span className="text-xs md:text-sm text-white font-semibold whitespace-nowrap">4.8 Rating</span>
                             </div>
 
                             {/* Students Badge */}
                             <div
-                                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl"
+                                className="inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 rounded-lg md:rounded-xl"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.05)',
                                     backdropFilter: 'blur(20px)',
                                     border: '1px solid rgba(255, 255, 255, 0.1)',
                                 }}
                             >
-                                <Users className="w-4 h-4 text-primary" />
-                                <span className="text-xs md:text-sm text-white font-semibold">5000+ Students</span>
+                                <Users className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
+                                <span className="text-xs md:text-sm text-white font-semibold whitespace-nowrap">5000+ Students</span>
                             </div>
 
                             {/* Placement Badge */}
                             <div
-                                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl"
+                                className="inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 rounded-lg md:rounded-xl"
                                 style={{
                                     background: 'rgba(199, 24, 56, 0.15)',
                                     backdropFilter: 'blur(20px)',
@@ -164,8 +164,8 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
                                     boxShadow: '0 0 20px rgba(199, 24, 56, 0.2)',
                                 }}
                             >
-                                <Award className="w-4 h-4 text-primary" />
-                                <span className="text-xs md:text-sm text-white font-semibold">Placement Support</span>
+                                <Award className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
+                                <span className="text-xs md:text-sm text-white font-semibold whitespace-nowrap">Placement Support</span>
                             </div>
                         </div>
 
@@ -197,15 +197,16 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
                         </p>
 
                         {/* CTA Buttons */}
-                        <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                        <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-4">
                             <motion.button
                                 onClick={handleEnrollClick}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="px-8 py-4 rounded-xl font-semibold text-white text-base relative overflow-hidden group"
+                                className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 rounded-lg md:rounded-xl font-semibold text-white text-sm md:text-base relative overflow-hidden group touch-manipulation"
                                 style={{
                                     background: 'linear-gradient(135deg, rgba(199,24,56,0.9) 0%, rgba(161,14,38,1) 100%)',
                                     boxShadow: '0 0 30px rgba(199,24,56,0.4)',
+                                    minHeight: '48px', // Better touch target
                                 }}
                             >
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
@@ -215,37 +216,38 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="px-8 py-4 rounded-xl font-semibold text-white text-base relative overflow-hidden group"
+                                className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 rounded-lg md:rounded-xl font-semibold text-white text-sm md:text-base relative overflow-hidden group touch-manipulation"
                                 style={{
                                     background: 'rgba(255,255,255,0.08)',
                                     border: '1px solid rgba(255,255,255,0.2)',
+                                    minHeight: '48px', // Better touch target
                                 }}
                             >
                                 <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                 <div className="relative flex items-center justify-center gap-2">
-                                    <Play className="w-5 h-5" />
+                                    <Play className="w-4 h-4 md:w-5 md:h-5" />
                                     <span>Download Brochure</span>
                                 </div>
                             </motion.button>
                         </div>
 
                         {/* Course Statistics */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6">
-                            <div className="space-y-1">
-                                <div className="text-3xl md:text-4xl font-bold text-primary">5000+</div>
-                                <div className="text-xs md:text-sm text-white/60 font-normal">Students</div>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-6">
+                            <div className="space-y-1 text-center md:text-left">
+                                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">5000+</div>
+                                <div className="text-xs md:text-sm text-white/70 font-normal">Students</div>
                             </div>
-                            <div className="space-y-1">
-                                <div className="text-3xl md:text-4xl font-bold text-primary">50+</div>
-                                <div className="text-xs md:text-sm text-white/60 font-normal">Projects</div>
+                            <div className="space-y-1 text-center md:text-left">
+                                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">50+</div>
+                                <div className="text-xs md:text-sm text-white/70 font-normal">Projects</div>
                             </div>
-                            <div className="space-y-1">
-                                <div className="text-3xl md:text-4xl font-bold text-primary">100%</div>
-                                <div className="text-xs md:text-sm text-white/60 font-normal">Certificate</div>
+                            <div className="space-y-1 text-center md:text-left">
+                                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">100%</div>
+                                <div className="text-xs md:text-sm text-white/70 font-normal">Certificate</div>
                             </div>
-                            <div className="space-y-1">
-                                <div className="text-3xl md:text-4xl font-bold text-primary">Live</div>
-                                <div className="text-xs md:text-sm text-white/60 font-normal">Internship</div>
+                            <div className="space-y-1 text-center md:text-left">
+                                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">Live</div>
+                                <div className="text-xs md:text-sm text-white/70 font-normal">Internship</div>
                             </div>
                         </div>
                     </motion.div>

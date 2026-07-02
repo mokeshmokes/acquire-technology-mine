@@ -37,27 +37,55 @@ export default function Footer() {
                         className="space-y-6"
                     >
                         {/* Logo */}
-                        <motion.div
-                            animate={{
-                                y: [0, -8, 0],
+                        <Link
+                            href="/"
+                            onClick={(e) => {
+                                const currentPath = window.location.pathname;
+                                const isHomePage = currentPath === '/';
+
+                                if (isHomePage) {
+                                    e.preventDefault();
+                                    // Scroll to top smoothly
+                                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                    const lenis = (window as any).lenis;
+
+                                    if (lenis) {
+                                        lenis.scrollTo(0, {
+                                            duration: 1.5,
+                                            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                                        });
+                                    } else {
+                                        window.scrollTo({
+                                            top: 0,
+                                            behavior: 'smooth',
+                                        });
+                                    }
+                                }
                             }}
-                            transition={{
-                                duration: 4,
-                                repeat: Infinity,
-                                ease: 'easeInOut',
-                            }}
-                            className="inline-flex items-center gap-3"
+                            className="cursor-pointer"
                         >
-                            <div className="relative w-12 h-12 rounded-xl overflow-hidden shadow-lg">
-                                <Image
-                                    src="/images/logo.png"
-                                    alt="Acquiring Technology Logo"
-                                    fill
-                                    className="object-contain"
-                                />
-                            </div>
-                            <span className="text-xl font-bold text-white">{company.name}</span>
-                        </motion.div>
+                            <motion.div
+                                animate={{
+                                    y: [0, -8, 0],
+                                }}
+                                transition={{
+                                    duration: 4,
+                                    repeat: Infinity,
+                                    ease: 'easeInOut',
+                                }}
+                                className="inline-flex items-center gap-3"
+                            >
+                                <div className="relative w-12 h-12 rounded-xl overflow-hidden shadow-lg">
+                                    <Image
+                                        src="/images/logo.png"
+                                        alt="Acquiring Technology Logo"
+                                        fill
+                                        className="object-contain"
+                                    />
+                                </div>
+                                <span className="text-xl font-bold text-white">{company.name}</span>
+                            </motion.div>
+                        </Link>
 
                         {/* Description */}
                         <p className="text-sm text-muted leading-relaxed">{company.description}</p>
@@ -102,10 +130,47 @@ export default function Footer() {
                         <ul className="space-y-3">
                             {quickLinks.map((link) => {
                                 const Icon = link.icon;
+                                const isAnchorLink = link.href.includes('#');
+
+                                const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+                                    if (isAnchorLink) {
+                                        e.preventDefault();
+                                        const sectionId = link.href.includes('/#') ? link.href.split('/#')[1] : link.href.substring(1);
+                                        const currentPath = window.location.pathname;
+                                        const isHomePage = currentPath === '/';
+
+                                        if (isHomePage) {
+                                            // Already on homepage, just scroll
+                                            const targetElement = document.getElementById(sectionId);
+                                            if (targetElement) {
+                                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                                const lenis = (window as any).lenis;
+
+                                                if (lenis) {
+                                                    lenis.scrollTo(targetElement, {
+                                                        offset: -100,
+                                                        duration: 1.5,
+                                                        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                                                    });
+                                                } else {
+                                                    targetElement.scrollIntoView({
+                                                        behavior: 'smooth',
+                                                        block: 'start',
+                                                    });
+                                                }
+                                            }
+                                        } else {
+                                            // Navigate to homepage with hash
+                                            window.location.href = `/#${sectionId}`;
+                                        }
+                                    }
+                                };
+
                                 return (
                                     <li key={link.label}>
                                         <Link
                                             href={link.href}
+                                            onClick={handleClick}
                                             className="group flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors duration-300"
                                         >
                                             <Icon className="w-4 h-4" />

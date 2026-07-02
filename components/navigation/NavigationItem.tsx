@@ -15,13 +15,14 @@ interface NavigationItemProps {
 export default function NavigationItem({ label, href, isActive }: NavigationItemProps) {
     const [isHovered, setIsHovered] = useState(false);
     const [showMegaMenu, setShowMegaMenu] = useState(false);
-    const isAnchorLink = href.startsWith('#');
+    const isAnchorLink = href.includes('#');
     const isCourseMenu = label === 'Course';
 
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         if (isAnchorLink && !isCourseMenu) {
             e.preventDefault();
-            const sectionId = href.substring(1);
+            // Extract section ID from href (handles both #section and /#section)
+            const sectionId = href.includes('/#') ? href.split('/#')[1] : href.substring(1);
             navigateToSection(sectionId);
         }
     };

@@ -53,14 +53,14 @@ export default function AboutCourse({ description, careers }: AboutCourseProps) 
                 </motion.div>
 
                 {/* Main Content Grid */}
-                <div className="grid lg:grid-cols-2 gap-8">
+                <div className="grid lg:grid-cols-2 gap-6 md:gap-8">
                     {/* LEFT SIDE - Career Opportunities Card */}
                     <motion.div
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="rounded-3xl p-8 md:p-10"
+                        className="rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-10"
                         style={{
                             background: 'rgba(255, 255, 255, 0.03)',
                             backdropFilter: 'blur(20px)',
@@ -68,20 +68,20 @@ export default function AboutCourse({ description, careers }: AboutCourseProps) 
                             boxShadow: '0 20px 60px rgba(0, 0, 0, 0.4)',
                         }}
                     >
-                        <div className="flex items-center gap-3 mb-6">
+                        <div className="flex items-center gap-2.5 md:gap-3 mb-5 md:mb-6">
                             <div
-                                className="w-12 h-12 rounded-xl flex items-center justify-center"
+                                className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0"
                                 style={{
                                     background: 'rgba(199, 24, 56, 0.15)',
                                     border: '1px solid rgba(199, 24, 56, 0.3)',
                                 }}
                             >
-                                <TrendingUp className="w-6 h-6 text-primary" />
+                                <TrendingUp className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                             </div>
-                            <h3 className="text-2xl font-bold text-white">Career Opportunities</h3>
+                            <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-white">Career Opportunities</h3>
                         </div>
 
-                        <div className="space-y-4">
+                        <div className="space-y-3 md:space-y-4">
                             {careers.slice(0, 4).map((career, index) => (
                                 <motion.div
                                     key={career.title}
@@ -89,17 +89,17 @@ export default function AboutCourse({ description, careers }: AboutCourseProps) 
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.1 }}
-                                    className="rounded-2xl p-5"
+                                    className="rounded-xl md:rounded-2xl p-4 md:p-5"
                                     style={{
                                         background: 'rgba(255, 255, 255, 0.04)',
                                         border: '1px solid rgba(255, 255, 255, 0.06)',
                                     }}
                                 >
-                                    <div className="flex items-start gap-3">
-                                        <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                                        <div className="flex-1">
-                                            <p className="text-white font-semibold mb-1">{career.title}</p>
-                                            <p className="text-sm text-primary font-medium">{career.salary}</p>
+                                    <div className="flex items-start gap-2.5 md:gap-3">
+                                        <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0 mt-0.5 md:mt-1" />
+                                        <div className="flex-1 min-w-0">
+                                            <p className="text-sm md:text-base text-white font-semibold mb-1">{career.title}</p>
+                                            <p className="text-xs md:text-sm text-primary font-medium">{career.salary}</p>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -117,7 +117,7 @@ export default function AboutCourse({ description, careers }: AboutCourseProps) 
                     >
                         {/* Who Should Join */}
                         <div
-                            className="rounded-3xl p-8 md:p-10"
+                            className="rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-10"
                             style={{
                                 background: 'rgba(255, 255, 255, 0.03)',
                                 backdropFilter: 'blur(20px)',
@@ -125,20 +125,20 @@ export default function AboutCourse({ description, careers }: AboutCourseProps) 
                                 boxShadow: '0 20px 60px rgba(0, 0, 0, 0.4)',
                             }}
                         >
-                            <div className="flex items-center gap-3 mb-6">
+                            <div className="flex items-center gap-2.5 md:gap-3 mb-5 md:mb-6">
                                 <div
-                                    className="w-12 h-12 rounded-xl flex items-center justify-center"
+                                    className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0"
                                     style={{
                                         background: 'rgba(199, 24, 56, 0.15)',
                                         border: '1px solid rgba(199, 24, 56, 0.3)',
                                     }}
                                 >
-                                    <Users2 className="w-6 h-6 text-primary" />
+                                    <Users2 className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                                 </div>
-                                <h3 className="text-2xl font-bold text-white">Who Should Join</h3>
+                                <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-white">Who Should Join</h3>
                             </div>
 
-                            <div className="space-y-3">
+                            <div className="space-y-2.5 md:space-y-3">
                                 {[
                                     'College students looking to build a tech career',
                                     'Working professionals seeking to upskill',
@@ -151,13 +151,13 @@ export default function AboutCourse({ description, careers }: AboutCourseProps) 
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: index * 0.1 }}
-                                        className="flex items-start gap-3"
+                                        className="flex items-start gap-2.5 md:gap-3"
                                     >
                                         <div
-                                            className="w-2 h-2 rounded-full flex-shrink-0 mt-2"
+                                            className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full flex-shrink-0 mt-1.5 md:mt-2"
                                             style={{ background: 'rgba(199, 24, 56, 0.8)' }}
                                         />
-                                        <p className="text-white/80 leading-relaxed">{item}</p>
+                                        <p className="text-sm md:text-base text-white/80 leading-relaxed">{item}</p>
                                     </motion.div>
                                 ))}
                             </div>
@@ -165,7 +165,7 @@ export default function AboutCourse({ description, careers }: AboutCourseProps) 
 
                         {/* What You'll Gain */}
                         <div
-                            className="rounded-3xl p-8 md:p-10"
+                            className="rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-10"
                             style={{
                                 background: 'linear-gradient(135deg, rgba(199, 24, 56, 0.08) 0%, rgba(161, 14, 38, 0.04) 100%)',
                                 backdropFilter: 'blur(20px)',
@@ -173,20 +173,20 @@ export default function AboutCourse({ description, careers }: AboutCourseProps) 
                                 boxShadow: '0 20px 60px rgba(199, 24, 56, 0.15)',
                             }}
                         >
-                            <div className="flex items-center gap-3 mb-6">
+                            <div className="flex items-center gap-2.5 md:gap-3 mb-5 md:mb-6">
                                 <div
-                                    className="w-12 h-12 rounded-xl flex items-center justify-center"
+                                    className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0"
                                     style={{
                                         background: 'rgba(199, 24, 56, 0.2)',
                                         border: '1px solid rgba(199, 24, 56, 0.4)',
                                     }}
                                 >
-                                    <Sparkles className="w-6 h-6 text-primary" />
+                                    <Sparkles className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                                 </div>
-                                <h3 className="text-2xl font-bold text-white">What You&apos;ll Gain</h3>
+                                <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-white">What You&apos;ll Gain</h3>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-2 gap-3 md:gap-4">
                                 {[
                                     { icon: Target, text: 'Industry Skills' },
                                     { icon: Briefcase, text: 'Real Projects' },
@@ -199,16 +199,16 @@ export default function AboutCourse({ description, careers }: AboutCourseProps) 
                                         whileInView={{ opacity: 1, scale: 1 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: index * 0.1 }}
-                                        className="text-center p-4 rounded-2xl"
+                                        className="text-center p-3 md:p-4 rounded-xl md:rounded-2xl"
                                         style={{
                                             background: 'rgba(255, 255, 255, 0.05)',
                                             border: '1px solid rgba(255, 255, 255, 0.1)',
                                         }}
                                     >
-                                        <div className="flex justify-center mb-3">
-                                            <item.icon className="w-8 h-8 text-primary" />
+                                        <div className="flex justify-center mb-2 md:mb-3">
+                                            <item.icon className="w-6 h-6 md:w-8 md:h-8 text-primary" />
                                         </div>
-                                        <p className="text-sm font-semibold text-white">{item.text}</p>
+                                        <p className="text-xs md:text-sm font-semibold text-white leading-tight">{item.text}</p>
                                     </motion.div>
                                 ))}
                             </div>

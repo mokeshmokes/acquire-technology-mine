@@ -22,7 +22,7 @@ const mobileCourses = [
     },
     {
         title: 'Full Stack Development',
-        href: '/courses/full-stack',
+        href: '/courses/full-stack-development',
         icon: Code2,
     },
     {
@@ -128,29 +128,39 @@ export default function MobileNavigation() {
     const handleLinkClick = (href: string) => {
         closeMenu();
 
-        if (href.startsWith('#')) {
-            setTimeout(() => {
-                const targetId = href.substring(1);
-                const targetElement = document.getElementById(targetId);
+        if (href.includes('#')) {
+            // Handle both #section and /#section formats
+            const sectionId = href.includes('/#') ? href.split('/#')[1] : href.substring(1);
+            const currentPath = window.location.pathname;
+            const isHomePage = currentPath === '/';
 
-                if (targetElement) {
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    const lenis = (window as any).lenis;
+            if (isHomePage) {
+                // Already on homepage, just scroll
+                setTimeout(() => {
+                    const targetElement = document.getElementById(sectionId);
 
-                    if (lenis) {
-                        lenis.scrollTo(targetElement, {
-                            offset: -100,
-                            duration: 1.5,
-                            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-                        });
-                    } else {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start',
-                        });
+                    if (targetElement) {
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        const lenis = (window as any).lenis;
+
+                        if (lenis) {
+                            lenis.scrollTo(targetElement, {
+                                offset: -100,
+                                duration: 1.5,
+                                easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                            });
+                        } else {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start',
+                            });
+                        }
                     }
-                }
-            }, 100);
+                }, 100);
+            } else {
+                // Navigate to homepage with hash
+                window.location.href = `/#${sectionId}`;
+            }
         }
     };
 

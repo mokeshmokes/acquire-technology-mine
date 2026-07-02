@@ -25,45 +25,8 @@ const nextConfig: NextConfig = {
     poweredByHeader: false,
     compress: true,
 
-    // Webpack optimizations
-    webpack: (config, { dev, isServer }) => {
-        // Production optimizations
-        if (!dev && !isServer) {
-            config.optimization = {
-                ...config.optimization,
-                moduleIds: 'deterministic',
-                runtimeChunk: 'single',
-                splitChunks: {
-                    chunks: 'all',
-                    cacheGroups: {
-                        default: false,
-                        vendors: false,
-                        framework: {
-                            name: 'framework',
-                            chunks: 'all',
-                            test: /[\\/]node_modules[\\/](react|react-dom|scheduler|prop-types)[\\/]/,
-                            priority: 40,
-                            enforce: true,
-                        },
-                        lib: {
-                            test: /[\\/]node_modules[\\/]/,
-                            name(module: any) {
-                                const packageName = module.context.match(
-                                    /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-                                )?.[1];
-                                return `npm.${packageName?.replace('@', '')}`;
-                            },
-                            priority: 30,
-                            minChunks: 1,
-                            reuseExistingChunk: true,
-                        },
-                    },
-                },
-            };
-        }
-
-        return config;
-    },
+    // Turbopack configuration (Next.js 16+)
+    turbopack: {},
 };
 
 export default nextConfig;

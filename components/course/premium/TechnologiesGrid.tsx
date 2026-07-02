@@ -151,7 +151,7 @@ export default function TechnologiesGrid({ skills }: TechnologiesGridProps) {
                 </motion.div>
 
                 {/* Simple Clean Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
                     {skills.map((skill, index) => {
                         const IconComponent = getTechnologyIcon(skill);
                         const isEmoji = typeof IconComponent === 'string';
@@ -163,31 +163,31 @@ export default function TechnologiesGrid({ skills }: TechnologiesGridProps) {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.4, delay: index * 0.03 }}
-                                className="group relative rounded-xl p-5 text-center"
+                                className="group relative rounded-lg md:rounded-xl p-4 md:p-5 text-center"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.03)',
                                     border: '1px solid rgba(255, 255, 255, 0.08)',
                                 }}
                             >
                                 {/* Icon */}
-                                <div className="flex justify-center mb-3">
+                                <div className="flex justify-center mb-2 md:mb-3">
                                     <div
-                                        className="w-14 h-14 rounded-xl flex items-center justify-center"
+                                        className="w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl flex items-center justify-center"
                                         style={{
                                             background: 'rgba(199, 24, 56, 0.12)',
                                             border: '1px solid rgba(199, 24, 56, 0.25)',
                                         }}
                                     >
                                         {isEmoji ? (
-                                            <span className="text-2xl">{IconComponent}</span>
+                                            <span className="text-xl md:text-2xl">{IconComponent}</span>
                                         ) : (
-                                            <IconComponent className="w-7 h-7 text-primary" />
+                                            <IconComponent className="w-6 h-6 md:w-7 md:h-7 text-primary" />
                                         )}
                                     </div>
                                 </div>
 
                                 {/* Skill Name */}
-                                <p className="text-sm font-semibold text-white leading-tight">
+                                <p className="text-xs md:text-sm font-semibold text-white leading-tight">
                                     {skill}
                                 </p>
                             </motion.div>

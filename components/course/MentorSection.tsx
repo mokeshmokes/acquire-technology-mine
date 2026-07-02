@@ -63,7 +63,7 @@ export default function MentorSection({ mentor }: MentorSectionProps) {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="rounded-3xl overflow-hidden"
+                    className="rounded-2xl md:rounded-3xl overflow-hidden"
                     style={{
                         background: 'rgba(255, 255, 255, 0.03)',
                         backdropFilter: 'blur(20px)',
@@ -71,20 +71,20 @@ export default function MentorSection({ mentor }: MentorSectionProps) {
                         boxShadow: '0 20px 60px rgba(0, 0, 0, 0.4)',
                     }}
                 >
-                    <div className="grid lg:grid-cols-2 gap-0">
+                    <div className="grid lg:grid-cols-2 gap-0 md:gap-0">
                         {/* LEFT - Mentor Image & Quick Stats */}
-                        <div className="relative p-8 md:p-12">
+                        <div className="relative p-6 md:p-8 lg:p-12">
                             {/* Mentor Image/Avatar */}
-                            <div className="relative mb-8">
+                            <div className="relative mb-6 md:mb-8">
                                 <div
-                                    className="aspect-square max-w-md mx-auto rounded-2xl overflow-hidden relative"
+                                    className="aspect-square max-w-md mx-auto rounded-xl md:rounded-2xl overflow-hidden relative"
                                     style={{
                                         background: 'linear-gradient(135deg, rgba(199,24,56,0.15) 0%, rgba(161,14,38,0.08) 100%)',
                                         border: '1px solid rgba(255, 255, 255, 0.1)',
                                     }}
                                 >
                                     <div className="absolute inset-0 flex items-center justify-center">
-                                        <Users className="w-32 h-32 text-white/20" />
+                                        <Users className="w-24 h-24 md:w-32 md:h-32 text-white/20" />
                                     </div>
 
                                     {/* Decorative corner accent */}
@@ -98,21 +98,21 @@ export default function MentorSection({ mentor }: MentorSectionProps) {
 
                                 {/* Floating badge */}
                                 <div
-                                    className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-full whitespace-nowrap"
+                                    className="absolute -bottom-3 md:-bottom-4 left-1/2 transform -translate-x-1/2 px-4 md:px-6 py-2 md:py-3 rounded-full whitespace-nowrap"
                                     style={{
                                         background: 'linear-gradient(135deg, rgba(199,24,56,0.9) 0%, rgba(161,14,38,1) 100%)',
                                         boxShadow: '0 10px 30px rgba(199,24,56,0.4)',
                                     }}
                                 >
-                                    <div className="flex items-center gap-2">
-                                        <Sparkles className="w-4 h-4 text-white" />
-                                        <span className="text-sm font-semibold text-white">Industry Expert</span>
+                                    <div className="flex items-center gap-1.5 md:gap-2">
+                                        <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4 text-white" />
+                                        <span className="text-xs md:text-sm font-semibold text-white">Industry Expert</span>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Quick Stats */}
-                            <div className="grid grid-cols-3 gap-4 mt-12">
+                            <div className="grid grid-cols-3 gap-3 md:gap-4 mt-8 md:mt-12">
                                 {[
                                     { icon: Award, label: 'Certified', sublabel: 'Expert' },
                                     { icon: BookOpen, label: '1000+', sublabel: 'Students' },
@@ -124,48 +124,48 @@ export default function MentorSection({ mentor }: MentorSectionProps) {
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: index * 0.1 }}
-                                        className="text-center p-4 rounded-xl"
+                                        className="text-center p-3 md:p-4 rounded-lg md:rounded-xl"
                                         style={{
                                             background: 'rgba(255, 255, 255, 0.04)',
                                             border: '1px solid rgba(255, 255, 255, 0.08)',
                                         }}
                                     >
-                                        <stat.icon className="w-6 h-6 text-primary mx-auto mb-2" />
-                                        <p className="text-sm font-bold text-white">{stat.label}</p>
-                                        <p className="text-xs text-white/60">{stat.sublabel}</p>
+                                        <stat.icon className="w-5 h-5 md:w-6 md:h-6 text-primary mx-auto mb-1.5 md:mb-2" />
+                                        <p className="text-xs md:text-sm font-bold text-white leading-tight">{stat.label}</p>
+                                        <p className="text-[10px] md:text-xs text-white/60">{stat.sublabel}</p>
                                     </motion.div>
                                 ))}
                             </div>
                         </div>
 
                         {/* RIGHT - Mentor Details */}
-                        <div className="p-8 md:p-12 flex flex-col justify-center">
+                        <div className="p-6 md:p-8 lg:p-12 flex flex-col justify-center">
                             {/* Name & Title */}
-                            <div className="mb-6">
+                            <div className="mb-5 md:mb-6">
                                 <h3
-                                    className="font-bold text-white mb-2"
-                                    style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)' }}
+                                    className="font-bold text-white mb-1 md:mb-2"
+                                    style={{ fontSize: 'clamp(1.25rem, 4vw, 2.5rem)' }}
                                 >
                                     {mentor.name}
                                 </h3>
-                                <p className="text-xl text-primary font-semibold mb-2">{mentor.title}</p>
-                                <p className="text-sm text-white/60">{mentor.experience}</p>
+                                <p className="text-lg md:text-xl text-primary font-semibold mb-1 md:mb-2">{mentor.title}</p>
+                                <p className="text-xs md:text-sm text-white/60">{mentor.experience}</p>
                             </div>
 
                             {/* Bio */}
                             <div
-                                className="p-6 rounded-2xl mb-6"
+                                className="p-5 md:p-6 rounded-xl md:rounded-2xl mb-5 md:mb-6"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.04)',
                                     border: '1px solid rgba(255, 255, 255, 0.08)',
                                 }}
                             >
-                                <p className="text-base text-white/80 leading-relaxed">{mentor.bio}</p>
+                                <p className="text-sm md:text-base text-white/80 leading-relaxed">{mentor.bio}</p>
                             </div>
 
                             {/* Expertise Highlights */}
-                            <div className="space-y-3">
-                                <p className="text-sm font-semibold text-white/70 uppercase tracking-wider mb-4">
+                            <div className="space-y-2.5 md:space-y-3">
+                                <p className="text-xs md:text-sm font-semibold text-white/70 uppercase tracking-wider mb-3 md:mb-4">
                                     What You&apos;ll Learn
                                 </p>
                                 {[
@@ -180,10 +180,10 @@ export default function MentorSection({ mentor }: MentorSectionProps) {
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: index * 0.1 }}
-                                        className="flex items-start gap-3"
+                                        className="flex items-start gap-2.5 md:gap-3"
                                     >
-                                        <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                                        <p className="text-sm text-white/70">{item}</p>
+                                        <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0 mt-0.5" />
+                                        <p className="text-xs md:text-sm text-white/70 leading-relaxed">{item}</p>
                                     </motion.div>
                                 ))}
                             </div>

@@ -54,7 +54,7 @@ export default function RegistrationForm({ courseTitle, isHighlight = false }: R
                 scale: [1, 1.02, 0.99, 1.02, 1]
             } : {}}
             transition={{ duration: 1.5, ease: 'easeInOut' }}
-            className="rounded-3xl p-8 relative overflow-hidden"
+            className="rounded-2xl md:rounded-3xl p-6 md:p-8 relative overflow-hidden"
             style={{
                 background: 'rgba(255, 255, 255, 0.05)',
                 backdropFilter: 'blur(30px)',
@@ -67,27 +67,27 @@ export default function RegistrationForm({ courseTitle, isHighlight = false }: R
             }}
         >
             {/* Top Badge */}
-            <div className="flex items-center justify-center mb-6">
+            <div className="flex items-center justify-center mb-4 md:mb-6">
                 <div
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full"
+                    className="inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full"
                     style={{
                         background: 'rgba(199, 24, 56, 0.2)',
                         border: '1px solid rgba(199, 24, 56, 0.4)',
                     }}
                 >
-                    <Calendar className="w-4 h-4 text-primary" />
-                    <span className="text-sm font-semibold text-white">Next Batch Starts Soon</span>
+                    <Calendar className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
+                    <span className="text-xs md:text-sm font-semibold text-white whitespace-nowrap">Next Batch Starts Soon</span>
                 </div>
             </div>
 
             {/* Form Header */}
-            <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-white mb-2">Register Now</h3>
-                <p className="text-sm text-white/70">Get a free career counselling session</p>
+            <div className="text-center mb-4 md:mb-6">
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">Register Now</h3>
+                <p className="text-xs md:text-sm text-white/70">Get a free career counselling session</p>
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4" style={{ width: '100%', boxSizing: 'border-box' }}>
+            <form onSubmit={handleSubmit} className="space-y-3 md:space-y-4" style={{ width: '100%', boxSizing: 'border-box' }}>
                 {/* Name */}
                 <div style={{ width: '100%', boxSizing: 'border-box' }}>
                     <input
@@ -97,7 +97,7 @@ export default function RegistrationForm({ courseTitle, isHighlight = false }: R
                         onChange={handleChange}
                         placeholder="Full Name *"
                         required
-                        className="px-4 py-3 rounded-xl text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-primary transition-all"
+                        className="px-4 py-3 md:py-3.5 rounded-lg md:rounded-xl text-sm md:text-base text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-primary transition-all touch-manipulation"
                         style={{
                             background: 'rgba(255, 255, 255, 0.08)',
                             border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -116,7 +116,7 @@ export default function RegistrationForm({ courseTitle, isHighlight = false }: R
                         onChange={handleChange}
                         placeholder="Phone Number *"
                         required
-                        className="px-4 py-3 rounded-xl text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-primary transition-all"
+                        className="px-4 py-3 md:py-3.5 rounded-lg md:rounded-xl text-sm md:text-base text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-primary transition-all touch-manipulation"
                         style={{
                             background: 'rgba(255, 255, 255, 0.08)',
                             border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -135,7 +135,7 @@ export default function RegistrationForm({ courseTitle, isHighlight = false }: R
                         onChange={handleChange}
                         placeholder="Email Address *"
                         required
-                        className="px-4 py-3 rounded-xl text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-primary transition-all"
+                        className="px-4 py-3 md:py-3.5 rounded-lg md:rounded-xl text-sm md:text-base text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-primary transition-all touch-manipulation"
                         style={{
                             background: 'rgba(255, 255, 255, 0.08)',
                             border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -154,7 +154,7 @@ export default function RegistrationForm({ courseTitle, isHighlight = false }: R
                         readOnly
                         placeholder="Course *"
                         required
-                        className="px-4 py-3 rounded-xl text-white placeholder-white/50 outline-none cursor-not-allowed"
+                        className="px-4 py-3 md:py-3.5 rounded-lg md:rounded-xl text-sm md:text-base text-white placeholder-white/50 outline-none cursor-not-allowed"
                         style={{
                             background: 'rgba(255, 255, 255, 0.05)',
                             border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -172,7 +172,7 @@ export default function RegistrationForm({ courseTitle, isHighlight = false }: R
                         value={formData.qualification}
                         onChange={handleChange}
                         required
-                        className="px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-primary transition-all"
+                        className="px-4 py-3 md:py-3.5 rounded-lg md:rounded-xl text-sm md:text-base outline-none focus:ring-2 focus:ring-primary transition-all touch-manipulation"
                         style={{
                             background: 'rgba(255, 255, 255, 0.08)',
                             border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -201,7 +201,7 @@ export default function RegistrationForm({ courseTitle, isHighlight = false }: R
                         onChange={handleChange}
                         placeholder="City *"
                         required
-                        className="px-4 py-3 rounded-xl text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-primary transition-all"
+                        className="px-4 py-3 md:py-3.5 rounded-lg md:rounded-xl text-sm md:text-base text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-primary transition-all touch-manipulation"
                         style={{
                             background: 'rgba(255, 255, 255, 0.08)',
                             border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -216,24 +216,25 @@ export default function RegistrationForm({ courseTitle, isHighlight = false }: R
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     type="submit"
-                    className="px-6 py-4 rounded-xl font-semibold text-white relative overflow-hidden group"
+                    className="px-6 py-3 md:py-4 rounded-lg md:rounded-xl font-semibold text-sm md:text-base text-white relative overflow-hidden group touch-manipulation"
                     style={{
                         background: 'linear-gradient(135deg, rgba(199,24,56,0.9) 0%, rgba(161,14,38,1) 100%)',
                         boxShadow: '0 0 30px rgba(199,24,56,0.4)',
                         width: '100%',
                         boxSizing: 'border-box',
+                        minHeight: '48px', // Better touch target
                     }}
                 >
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                     <div className="relative flex items-center justify-center gap-2">
                         <span>Submit Registration</span>
-                        <Send className="w-4 h-4" />
+                        <Send className="w-3.5 h-3.5 md:w-4 md:h-4" />
                     </div>
                 </motion.button>
             </form>
 
             {/* Privacy Note */}
-            <p className="text-xs text-white/50 text-center mt-4">
+            <p className="text-xs text-white/50 text-center mt-3 md:mt-4">
                 By submitting, you agree to our Terms & Conditions
             </p>
         </motion.div>
