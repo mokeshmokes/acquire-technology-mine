@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Star, Users, Award, Play } from 'lucide-react';
 import { CourseData } from '@/data/courseData';
@@ -10,6 +11,27 @@ interface PremiumCourseHeroProps {
 }
 
 export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
+    const [isHighlight, setIsHighlight] = useState(false);
+
+    const handleEnrollClick = () => {
+        setIsHighlight(true);
+        const formElement = document.getElementById('enroll-form-container');
+        if (formElement) {
+            formElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        setTimeout(() => {
+            setIsHighlight(false);
+        }, 1600);
+    };
+
+    useEffect(() => {
+        const handleTrigger = () => {
+            handleEnrollClick();
+        };
+        window.addEventListener('trigger-enroll-highlight', handleTrigger);
+        return () => window.removeEventListener('trigger-enroll-highlight', handleTrigger);
+    }, []);
+
     return (
         <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
             {/* Premium Static Background */}
@@ -177,6 +199,7 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
                         {/* CTA Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 pt-4">
                             <motion.button
+                                onClick={handleEnrollClick}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 className="px-8 py-4 rounded-xl font-semibold text-white text-base relative overflow-hidden group"
@@ -229,6 +252,7 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
 
                     {/* RIGHT SIDE - Registration Form */}
                     <motion.div
+                        id="enroll-form-container"
                         initial={{ opacity: 0, x: 30 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
@@ -239,7 +263,7 @@ export default function PremiumCourseHero({ course }: PremiumCourseHeroProps) {
                             maxWidth: '100%',
                         }}
                     >
-                        <RegistrationForm courseTitle={course.title} />
+                        <RegistrationForm courseTitle={course.title} isHighlight={isHighlight} />
                     </motion.div>
                 </div>
             </div>

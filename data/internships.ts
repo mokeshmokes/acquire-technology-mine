@@ -8,6 +8,7 @@ export interface Internship {
     certificate: string;
     liveProject: string;
     gradient: string;
+    image?: string;
 }
 
 export const internships: Internship[] = [
@@ -19,6 +20,7 @@ export const internships: Internship[] = [
         certificate: 'Industry Internship Certificate',
         liveProject: 'AI Automation Project',
         gradient: 'from-primary/20 to-primary/5',
+        image: '/images/courses/ai-internship.png',
     },
     {
         id: 'fullstack-internship',
@@ -28,6 +30,7 @@ export const internships: Internship[] = [
         certificate: 'Industry Internship Certificate',
         liveProject: 'Full Stack Web Application',
         gradient: 'from-primary/20 to-primary/5',
+        image: '/images/courses/fullstack-internship.png',
     },
     {
         id: 'datascience-internship',
@@ -37,6 +40,7 @@ export const internships: Internship[] = [
         certificate: 'Industry Internship Certificate',
         liveProject: 'Business Analytics Dashboard',
         gradient: 'from-primary/20 to-primary/5',
+        image: '/images/courses/datascience-internship.png',
     },
     {
         id: 'digitalmarketing-internship',
@@ -46,6 +50,7 @@ export const internships: Internship[] = [
         certificate: 'Industry Internship Certificate',
         liveProject: 'Live Marketing Campaign',
         gradient: 'from-primary/20 to-primary/5',
+        image: '/images/courses/digitalmarketing-internship.png',
     },
 ];
 

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 import { Internship, internshipIcons } from '@/data/internships';
 
 interface InternshipCardProps {
@@ -25,7 +26,7 @@ export default function InternshipCard({ internship, index }: InternshipCardProp
             style={{
                 background: 'rgba(18, 10, 14, 0.92)',
                 border: '1px solid rgba(255,255,255,0.07)',
-                boxShadow: '0 20px 50px rgba(0,0,0,0.45), 0 0 30px rgba(180,0,40,0.12)',
+                boxShadow: '0 20px 50px rgba(0, 0, 0, 0.45)',
                 minHeight: '520px',
             }}
         >
@@ -39,43 +40,63 @@ export default function InternshipCard({ internship, index }: InternshipCardProp
                 }}
             />
 
+            {/* Course/Internship Image */}
+            <div className="relative h-[180px] w-full overflow-hidden z-10 flex-shrink-0">
+                {internship.image ? (
+                    <>
+                        <Image
+                            src={internship.image}
+                            alt={internship.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 25vw"
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div
+                            className="absolute inset-0 z-10"
+                            style={{
+                                background:
+                                    'linear-gradient(180deg, transparent 0%, rgba(18,10,14,0.95) 100%)',
+                            }}
+                        />
+                    </>
+                ) : (
+                    <div
+                        className="relative w-full h-full flex items-center justify-center"
+                        style={{
+                            background: `linear-gradient(135deg, rgba(122,0,25,0.22) 0%, rgba(199,24,56,0.15) 50%, rgba(161,14,38,0.10) 100%)`,
+                        }}
+                    >
+                        <div
+                            className="w-24 h-24 rounded-full flex items-center justify-center"
+                            style={{
+                                background: 'rgba(199,24,56,0.15)',
+                                border: '2px solid rgba(199,24,56,0.3)',
+                            }}
+                        >
+                            <span className="text-4xl">💼</span>
+                        </div>
+                    </div>
+                )}
+            </div>
+
             {/* Top Badge */}
-            <div className="relative p-4 flex-shrink-0">
+            <div className="absolute top-4 left-4 z-20">
                 <div
                     className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full"
                     style={{
                         background: 'rgba(199,24,56,0.22)',
                         border: '1px solid rgba(199,24,56,0.35)',
                         boxShadow: '0 0 16px rgba(199,24,56,0.35)',
+                        backdropFilter: 'blur(8px)',
                     }}
                 >
                     <div
-                        className="w-2 h-2 bg-primary rounded-full animate-pulse"
+                        className="w-2.5 h-2.5 bg-primary rounded-full animate-pulse"
                         style={{ boxShadow: '0 0 6px rgba(199,24,56,0.8)' }}
                     />
                     <span className="text-[10px] md:text-xs font-bold text-white uppercase tracking-wider">
                         Internship
                     </span>
-                </div>
-            </div>
-
-            {/* Image Placeholder */}
-            <div
-                className="relative h-[180px] flex-shrink-0"
-                style={{
-                    background: `linear-gradient(135deg, rgba(122,0,25,0.22) 0%, rgba(199,24,56,0.15) 50%, rgba(161,14,38,0.10) 100%)`,
-                }}
-            >
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div
-                        className="w-24 h-24 rounded-full flex items-center justify-center"
-                        style={{
-                            background: 'rgba(199,24,56,0.15)',
-                            border: '2px solid rgba(199,24,56,0.3)',
-                        }}
-                    >
-                        <span className="text-4xl">💼</span>
-                    </div>
                 </div>
             </div>
 

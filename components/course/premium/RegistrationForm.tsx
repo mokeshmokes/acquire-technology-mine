@@ -6,9 +6,10 @@ import { Calendar, Send } from 'lucide-react';
 
 interface RegistrationFormProps {
     courseTitle: string;
+    isHighlight?: boolean;
 }
 
-export default function RegistrationForm({ courseTitle }: RegistrationFormProps) {
+export default function RegistrationForm({ courseTitle, isHighlight = false }: RegistrationFormProps) {
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -40,7 +41,19 @@ export default function RegistrationForm({ courseTitle }: RegistrationFormProps)
     };
 
     return (
-        <div
+        <motion.div
+            animate={isHighlight ? {
+                borderColor: ['rgba(255, 255, 255, 0.1)', 'rgba(199, 24, 56, 1)', 'rgba(255, 255, 255, 0.1)', 'rgba(199, 24, 56, 1)', 'rgba(255, 255, 255, 0.1)'],
+                boxShadow: [
+                    '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(199, 24, 56, 0.15)',
+                    '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 60px rgba(199, 24, 56, 0.8)',
+                    '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(199, 24, 56, 0.15)',
+                    '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 60px rgba(199, 24, 56, 0.8)',
+                    '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(199, 24, 56, 0.15)'
+                ],
+                scale: [1, 1.02, 0.99, 1.02, 1]
+            } : {}}
+            transition={{ duration: 1.5, ease: 'easeInOut' }}
             className="rounded-3xl p-8 relative overflow-hidden"
             style={{
                 background: 'rgba(255, 255, 255, 0.05)',
@@ -223,6 +236,6 @@ export default function RegistrationForm({ courseTitle }: RegistrationFormProps)
             <p className="text-xs text-white/50 text-center mt-4">
                 By submitting, you agree to our Terms & Conditions
             </p>
-        </div>
+        </motion.div>
     );
 }

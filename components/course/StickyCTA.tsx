@@ -3,13 +3,14 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, X } from 'lucide-react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface StickyCTAProps {
     courseTitle: string;
 }
 
 export default function StickyCTA({ courseTitle }: StickyCTAProps) {
+    const router = useRouter();
     const [isVisible, setIsVisible] = useState(false);
     const [isDismissed, setIsDismissed] = useState(false);
 
@@ -30,6 +31,15 @@ export default function StickyCTA({ courseTitle }: StickyCTAProps) {
     const handleDismiss = () => {
         setIsDismissed(true);
         setIsVisible(false);
+    };
+
+    const handleEnrollClick = () => {
+        const formElement = document.getElementById('enroll-form-container');
+        if (formElement) {
+            window.dispatchEvent(new CustomEvent('trigger-enroll-highlight'));
+        } else {
+            router.push('/#contact');
+        }
     };
 
     return (
@@ -71,23 +81,22 @@ export default function StickyCTA({ courseTitle }: StickyCTAProps) {
                             </div>
 
                             {/* CTA Button */}
-                            <Link href="/#contact">
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="group relative px-6 md:px-8 py-2.5 md:py-3 rounded-xl font-semibold text-white overflow-hidden whitespace-nowrap text-sm md:text-base w-full sm:w-auto"
-                                    style={{
-                                        background: 'linear-gradient(135deg, rgba(199, 24, 56, 0.9) 0%, rgba(161, 14, 38, 1) 100%)',
-                                        boxShadow: '0 0 30px rgba(199, 24, 56, 0.4)',
-                                    }}
-                                >
-                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                                    <span className="relative flex items-center justify-center gap-2">
-                                        Enroll Now
-                                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
-                                    </span>
-                                </motion.button>
-                            </Link>
+                            <motion.button
+                                onClick={handleEnrollClick}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="group relative px-6 md:px-8 py-2.5 md:py-3 rounded-xl font-semibold text-white overflow-hidden whitespace-nowrap text-sm md:text-base w-full sm:w-auto"
+                                style={{
+                                    background: 'linear-gradient(135deg, rgba(199, 24, 56, 0.9) 0%, rgba(161, 14, 38, 1) 100%)',
+                                    boxShadow: '0 0 30px rgba(199, 24, 56, 0.4)',
+                                }}
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                                <span className="relative flex items-center justify-center gap-2">
+                                    Enroll Now
+                                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
+                                </span>
+                            </motion.button>
 
                             {/* Dismiss Button */}
                             <button

@@ -137,9 +137,15 @@ export default function ContactSection() {
                                             href={social.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            whileHover={{ scale: 1.1, rotate: 5 }}
+                                            whileHover={{
+                                                scale: 1.1,
+                                                rotate: 5,
+                                                color: social.hoverColor,
+                                                borderColor: social.hoverColor + '80',
+                                                backgroundColor: social.hoverColor + '1A',
+                                            }}
                                             whileTap={{ scale: 0.95 }}
-                                            className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center text-muted hover:text-primary hover:border-primary/50 transition-all duration-300"
+                                            className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center text-muted transition-all duration-300"
                                             style={{
                                                 boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
                                             }}

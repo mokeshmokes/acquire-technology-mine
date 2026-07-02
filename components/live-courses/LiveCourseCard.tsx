@@ -3,8 +3,11 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Clock, ArrowRight, Play } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import Course3DAnimation from './Course3DAnimation';
 import { useRef, useCallback } from 'react';
+
+const MotionLink = motion(Link);
 
 interface LiveCourseCardProps {
     course: {
@@ -20,11 +23,12 @@ interface LiveCourseCardProps {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         icon: any;
         gradient: string;
+        image?: string;
     };
     index: number;
 }
 
-export default function LiveCourseCard({ course }: LiveCourseCardProps) {
+export default function LiveCourseCard({ course, index }: LiveCourseCardProps) {
     const cardRef = useRef<HTMLDivElement>(null);
 
     /*
@@ -86,7 +90,7 @@ export default function LiveCourseCard({ course }: LiveCourseCardProps) {
                 style={{
                     background: 'rgba(18, 10, 14, 0.92)',
                     border: '1px solid rgba(255,255,255,0.07)',
-                    boxShadow: '0 20px 50px rgba(0,0,0,0.45), 0 0 30px rgba(180,0,40,0.12), inset 0 1px 0 rgba(255,255,255,0.06)',
+                    boxShadow: '0 20px 50px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06)',
                     transformStyle: 'preserve-3d',
                     rotateX,
                     rotateY,
@@ -117,32 +121,45 @@ export default function LiveCourseCard({ course }: LiveCourseCardProps) {
 
 
                 {/* Background particles — CSS only, lightweight */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-15">
-                    <div className="absolute w-28 h-28 bg-primary/10 rounded-full blur-2xl animate-float-slow" style={{ top: '10%', left: '20%' }} />
-                    <div className="absolute w-20 h-20 bg-primary/8 rounded-full blur-xl animate-float-slower" style={{ top: '60%', right: '15%' }} />
+                <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-10">
+                    <div className="absolute w-28 h-28 bg-white/5 rounded-full blur-2xl animate-float-slow" style={{ top: '10%', left: '20%' }} />
+                    <div className="absolute w-20 h-20 bg-white/3 rounded-full blur-xl animate-float-slower" style={{ top: '60%', right: '15%' }} />
                 </div>
 
-                {/* Holographic Top Panel */}
-                <div
-                    className="absolute top-0 left-0 right-0 h-48 z-10"
-                    style={{
-                        background: 'linear-gradient(135deg, rgba(122,0,25,0.22) 0%, rgba(199,24,56,0.15) 50%, rgba(161,14,38,0.10) 100%)',
-                        borderBottom: '1px solid rgba(255,255,255,0.04)',
-                    }}
-                >
-                    <div className="absolute inset-0 opacity-30 animate-gradient-move"
-                        style={{ background: 'linear-gradient(45deg, transparent 30%, rgba(199,24,56,0.1) 50%, transparent 70%)' }}
-                    />
+                {/* Course Image */}
+                <div className="relative h-[180px] w-full overflow-hidden z-10 flex-shrink-0">
+                    {course.image ? (
+                        <>
+                            <Image
+                                src={course.image}
+                                alt={course.title}
+                                fill
+                                sizes="(max-width: 768px) 100vw, 33vw"
+                                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                priority={index < 3}
+                            />
+                            <div
+                                className="absolute inset-0 z-10"
+                                style={{
+                                    background:
+                                        'linear-gradient(180deg, transparent 0%, rgba(18,10,14,0.95) 100%)',
+                                }}
+                            />
+                        </>
+                    ) : (
+                        <Course3DAnimation courseId={course.id} />
+                    )}
                 </div>
 
                 {/* Live Badge */}
-                <div className="relative p-3 md:p-4 z-20 flex-shrink-0">
+                <div className="absolute top-4 left-4 z-20">
                     <div
                         className="inline-flex items-center gap-2 px-2.5 md:px-3 py-1 md:py-1.5 rounded-full"
                         style={{
                             background: 'rgba(199,24,56,0.22)',
                             border: '1px solid rgba(199,24,56,0.35)',
                             boxShadow: '0 0 16px rgba(199,24,56,0.35)',
+                            backdropFilter: 'blur(8px)',
                         }}
                     >
                         {/* Pulse dot — CSS animation, single element */}
@@ -151,11 +168,6 @@ export default function LiveCourseCard({ course }: LiveCourseCardProps) {
                         />
                         <span className="text-[10px] md:text-xs font-bold text-white uppercase tracking-wider">Live Now</span>
                     </div>
-                </div>
-
-                {/* 3D Animation */}
-                <div className="relative h-[140px] z-20 flex-shrink-0">
-                    <Course3DAnimation courseId={course.id} />
                 </div>
 
                 {/* Content */}
@@ -217,26 +229,25 @@ export default function LiveCourseCard({ course }: LiveCourseCardProps) {
                             </div>
                         </motion.button>
 
-                        <Link href="/#contact" className="w-full">
-                            <motion.button
-                                whileHover={{ scale: 1.04 }}
-                                whileTap={{ scale: 0.96 }}
-                                className="relative w-full px-3 py-2.5 md:py-2.5 text-white text-xs md:text-xs font-semibold rounded-xl overflow-hidden group/btn"
-                                style={{
-                                    background: 'rgba(255,255,255,0.04)',
-                                    border: '1px solid rgba(255,255,255,0.09)',
-                                    willChange: 'transform',
-                                }}
-                            >
-                                <div className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
-                                    style={{ background: 'linear-gradient(135deg, rgba(199,24,56,1) 0%, rgba(161,14,38,1) 100%)' }}
-                                />
-                                <div className="relative flex items-center justify-center gap-1.5">
-                                    <span>Enroll</span>
-                                    <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform duration-200" />
-                                </div>
-                            </motion.button>
-                        </Link>
+                        <MotionLink
+                            href="/#contact"
+                            whileHover={{ scale: 1.04 }}
+                            whileTap={{ scale: 0.96 }}
+                            className="relative w-full px-3 py-2.5 md:py-2.5 text-white text-xs md:text-xs font-semibold rounded-xl overflow-hidden group/btn text-center flex items-center justify-center"
+                            style={{
+                                background: 'rgba(255,255,255,0.04)',
+                                border: '1px solid rgba(255,255,255,0.09)',
+                                willChange: 'transform',
+                            }}
+                        >
+                            <div className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 pointer-events-none"
+                                style={{ background: 'linear-gradient(135deg, rgba(199,24,56,1) 0%, rgba(161,14,38,1) 100%)' }}
+                            />
+                            <div className="relative flex items-center justify-center gap-1.5 pointer-events-none">
+                                <span>Enroll</span>
+                                <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform duration-200" />
+                            </div>
+                        </MotionLink>
                     </div>
                 </div>
 

@@ -24,9 +24,6 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
                 minHeight: '450px',
             }}
         >
-            {/* Hover Glow Effect */}
-            <div className="absolute -inset-[1px] rounded-[28px] bg-gradient-to-r from-primary/0 via-primary/30 to-primary/0 opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl -z-10" />
-
             {/* Brighter Background on Hover */}
             <div className="absolute inset-0 rounded-[28px] bg-white/0 group-hover:bg-white/[0.02] transition-all duration-500" />
 
